@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LD50", "Kee5Engine\LD50.csproj", "{5C8E8DF9-C87C-433F-BECE-F1AF4602A650}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LD50", "LD50\LD50.csproj", "{5C8E8DF9-C87C-433F-BECE-F1AF4602A650}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
