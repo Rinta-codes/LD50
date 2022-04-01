@@ -15,7 +15,7 @@ namespace LD50
         /// </summary>
         public Game()
         {
-            gameWindow = new Window(1920, 1080, "game");
+            gameWindow = new Window(Globals.ScreenResolutionX, Globals.ScreenResolutionY, "game");
             gameWindow.Run();
         }
     }

@@ -15,6 +15,9 @@ namespace LD50
     /// </summary>
     public static class Globals
     {
+        public static readonly int ScreenResolutionX = 1920;
+        public static readonly int ScreenResolutionY = 1080;
+
         public static Vector2 windowSize;
         public static int currentScene;
         public static List<Scene> scenes = new List<Scene>();

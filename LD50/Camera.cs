@@ -14,7 +14,7 @@ namespace LD50
         private Vector3 _up = Vector3.UnitY;
         private Vector3 _right = Vector3.UnitX;
 
-        private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
+        private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight, _hkRotateRight, _hkRotateLeft;
 
         // Rotation around the X axis
         private float _pitch;
@@ -24,6 +24,10 @@ namespace LD50
 
         // FOV
         private float _fov = MathHelper.PiOver2;
+
+        // Camera rotation
+        private float _cameraRotationAngle;
+        private float _cameraRotationSpeed = .01f;
 
         /// <summary>
         /// Create a new Camera
@@ -43,6 +47,8 @@ namespace LD50
             _hkDown = new Hotkey(true).AddKeys(Keys.S, Keys.Down);
             _hkLeft = new Hotkey(true).AddKeys(Keys.A, Keys.Left);
             _hkRight = new Hotkey(true).AddKeys(Keys.D, Keys.Right);
+            _hkRotateRight = new Hotkey(true).AddKeys(Keys.E);
+            _hkRotateLeft = new Hotkey(true).AddKeys(Keys.Q);
         }
 
         public float Speed { get; set; }
@@ -87,6 +93,7 @@ namespace LD50
             {
                 var angle = MathHelper.Clamp(value, 1f, 45f);
                 _fov = MathHelper.DegreesToRadians(angle);
+                UpdateVectors();
             }
         }
 
@@ -96,7 +103,11 @@ namespace LD50
         /// <returns><code>Matrix4</code> view Matrix</returns>
         public Matrix4 GetViewMatrix()
         {
-            return Matrix4.LookAt(Position, Position + _front, _up);
+            var rotationMatrix = Matrix4.CreateRotationZ(_cameraRotationAngle);
+            var translationMatrixTo = Matrix4.CreateTranslation(Globals.ScreenResolutionX / 2, Globals.ScreenResolutionY / 2, 0);
+            var translationMatrixBack = Matrix4.CreateTranslation(-Globals.ScreenResolutionX / 2, -Globals.ScreenResolutionY / 2, 0);
+            return Matrix4.LookAt(Position, Position + _front, _up) * translationMatrixBack * rotationMatrix * translationMatrixTo;
+            
         }
 
         /// <summary>
@@ -144,6 +155,16 @@ namespace LD50
             if (_hkRight.IsPressed())
             {
                 Position += Right * Speed * (float)Globals.deltaTime;
+            }
+
+            if (_hkRotateLeft.IsPressed())
+            {
+                _cameraRotationAngle += _cameraRotationSpeed;
+            }
+
+            if (_hkRotateRight.IsPressed())
+            {
+                _cameraRotationAngle -= _cameraRotationSpeed;
             }
         }
     }
