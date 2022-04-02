@@ -6,15 +6,8 @@ namespace LD50.UI
     {
         public Resources() : base()
         {
-            int posX = Globals.ScreenResolutionX - 600;
-
-            SetPosition(new Vector2(posX, 50));
-        }
-
-        public override void Update()
-        {
-            SetText($"Food: {Globals.player.car.TotalFood} / Fuel: {Globals.player.car.TotalFuel}", TextAlignment.LEFT, fontSize);
-            base.Update();
+            int posX = Globals.ScreenResolutionX - 200;
+            Add(new Label("Food: 5 / Fuel: 10", TextAlignment.LEFT, new Vector4(.5f, .5f, 0, .5f), new Vector2(posX, 100), new Vector2(200, 100), true));
         }
     }
 }
