@@ -23,9 +23,13 @@ namespace LD50.Logic
         private bool _amIPlayer;
 
         public Vector2 Size { get { return _sprite.size; } }
+        public string Name { get; }
+        public string WeaponName => _weapon == null ? "no weapon" : _weapon.Name;
+        public string WeaponDescription => _weapon == null ? "no weapon" : _weapon.FullDescription;
 
-        public Person(TexName texture, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
+        public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
+            Name = name;
             _weapon = new BaseGun();
             _health = health;
             _amIPlayer = player;
