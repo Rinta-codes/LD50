@@ -57,6 +57,13 @@ namespace LD50
         public const int baseGunMinCost = 3;
         public const int baseGunMaxCost = 7;
 
+        public const int betterGunDamage = 8;
+        public const float betterGunRange = 400.0f;
+        public const float betterGunCooldown = 0.75f;
+
+        public const int betterGunMinCost = 5;
+        public const int betterGunMaxCost = 10;
+
         // Enemies
         public const int SlimeAggroRange = 500;
         public const float SlimeMovementSpeed = 100.0f;
