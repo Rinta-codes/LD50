@@ -11,9 +11,9 @@ namespace LD50.Scenes.Events
         public FuelPile() : base(new Vector2(Globals.windowSize.X / 2, Globals.windowSize.Y - 200), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
 
-            for (int i = 0; i < Globals.rng.Next(Balance.maxFoodInFoodPile - Balance.minFoodInFoodPile) + Balance.minFoodInFoodPile; i++)
+            for (int i = 0; i < Globals.rng.Next(Balance.minFuelInFuelPile, Balance.maxFuelInFuelPile); i++)
             {
-                gameObjects.Add(new FuelItem(Globals.windowSize / 2 + new Vector2(Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius), Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius))));
+                gameObjects.Add(new FuelItem(Globals.windowSize / 2 + new Vector2(Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius), Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius)), Globals.rng.Next(Balance.minFuelInFuelItem, Balance.maxFuelInFuelItem)));
             }
 
         }

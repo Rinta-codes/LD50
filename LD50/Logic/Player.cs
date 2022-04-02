@@ -11,23 +11,28 @@ namespace LD50.Logic
     public class Player : GameObject
     {
 
-        private Car _car;
+        public Car car;
         private Person _person;
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 
-        public Vector2 CarPosition { get { return _car.Position; } }
+        public Vector2 CarPosition { get { return car.Position; } }
         public Vector2 Position { get { return _person.Position; } set { _person.Position = value; } }
         public Vector2 Size { get { return _person.Size; } }
 
         public Player()
         {
-            _car = new Car(new Vector2(1300, 925), new Vector2(800, 200));
+            car = new Car(new Vector2(1300, 925), new Vector2(800, 200));
             _person = new Person(TexName.PLAYER_IDLE, Balance.playerHealth);
 
             _hkUp = new Hotkey(true).AddKeys(Keys.W, Keys.Up);
             _hkDown = new Hotkey(true).AddKeys(Keys.S, Keys.Down);
             _hkLeft = new Hotkey(true).AddKeys(Keys.A, Keys.Left);
             _hkRight = new Hotkey(true).AddKeys(Keys.D, Keys.Right);
+        }
+
+        public void Attack(Vector2 direction)
+        {
+            _person.Attack(direction);
         }
 
         public override void Draw()
@@ -38,7 +43,7 @@ namespace LD50.Logic
             }
             else
             {
-                _car.Draw();
+                car.Draw();
             }
         }
 
@@ -65,7 +70,7 @@ namespace LD50.Logic
             }
             else
             {
-                _car.Update();
+                car.Update();
             }
             return true;
         }

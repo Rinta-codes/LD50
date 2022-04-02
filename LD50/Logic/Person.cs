@@ -16,13 +16,13 @@ namespace LD50.Logic
         
         public Person(TexName texture, int health) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
-            _weapon = new Weapon(TexName.PIXEL, new Vector2(50, 50), 5, "Stick");
+            _weapon = new Weapon(TexName.PIXEL, new Vector2(50, 50), 5, "Gun", 1000, 8);
             _health = health;
         }
 
-        public void Attack(Enemy enemy)
+        public void Attack(Vector2 direction)
         {
-            _weapon.Attack(enemy);
+            _weapon.Attack(this, direction, Position);
         }
 
         public void TakeDamage(int damage)

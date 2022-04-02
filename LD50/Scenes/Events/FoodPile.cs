@@ -13,9 +13,8 @@ namespace LD50.Scenes.Events
 
             for (int i = 0; i < Globals.rng.Next(Balance.maxFoodInFoodPile - Balance.minFoodInFoodPile) + Balance.minFoodInFoodPile; i++)
             {
-                gameObjects.Add(new FoodItem(Globals.windowSize / 2 + new Vector2(Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius), Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius))));
+                gameObjects.Add(new FoodItem(Globals.windowSize / 2 + new Vector2(Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius), Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius)), Globals.rng.Next(Balance.minFoodInFoodItem, Balance.maxFoodInFoodItem)));
             }
-
         }
     }
 }

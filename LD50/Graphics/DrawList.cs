@@ -14,6 +14,7 @@ namespace LD50.Graphics
         GROUNDITEM,
         CAR,
         ROOMS,
+        PROJECTILE,
         ENEMY,
         PLAYER,
         WEAPON,
