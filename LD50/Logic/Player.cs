@@ -11,19 +11,19 @@ namespace LD50.Logic
 {
     public class Player : GameObject
     {
-
         public Car car;
         public List<Blueprint> blueprints = new List<Blueprint>();
         public Person person;
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 
         public Vector2 CarPosition { get { return car.Position; } set { car.Position = value; } }
+        public Vector2 DefaultCarPosition => new Vector2(1300, 825);
         public Vector2 Size { get { return person.Size; } }
         public override Vector2 Position { get { return person.Position; } set { person.Position = value; } }
 
         public Player()
         {
-            car = new Car(new Vector2(1300, 925), new Vector2(800, 200));
+            car = new Car(DefaultCarPosition, new Vector2(800, 200));
             person = new Person(TexName.PLAYER_IDLE, "Me", Balance.playerHealth, true);
 
             _hkUp = new Hotkey(true).AddKeys(Keys.W, Keys.Up);

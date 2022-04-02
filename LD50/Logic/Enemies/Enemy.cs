@@ -6,20 +6,29 @@ using OpenTK.Mathematics;
 
 namespace LD50.Logic
 {
+    public enum EnemyList
+    {
+        SLIME,
+        SHEEP,
+        FISH,
+        JUSTAROCK,
+        GUYONABIKE,
+        last
+    }
     public class Enemy : GameObject
     {
 
-        protected int _damage, _health, _maxHealth;
+        protected int _health, _maxHealth;
         protected Weapon _weapon;
         protected Vector2 _moveTarget;
+        protected GameObject _target;
 
         private Slider _hpBar;
 
         public Vector2 Size { get { return _sprite.size; } }
 
-        public Enemy(TexName texture, Vector2 size, int damage, int health, Weapon weapon) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.ENEMY, false))
+        public Enemy(TexName texture, Vector2 size, int health, Weapon weapon) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.ENEMY, false))
         {
-            _damage = damage;
             _health = health;
             _maxHealth = health;
             _weapon = weapon;

@@ -70,6 +70,27 @@ namespace LD50
         public const int SlimeAggroRange = 500;
         public const float SlimeMovementSpeed = 100.0f;
         public const float SlimeWanderRadius = 150.0f;
+        public const int SlimeMaxHP = 10;
+
+        public const int RockAggroRange = 500;
+        public const float RockMovementSpeed = 10.0f;
+        public const float RockWanderRadius = 500.0f;
+        public const int RockMaxHP = 50;
+
+        public const int SheepAggroRange = 250;
+        public const float SheepMovementSpeed = 100.0f;
+        public const float SheepWanderRadius = 800.0f;
+        public const int SheepMaxHP = 15;
+
+        public const int FishAggroRange = 400;
+        public const float FishMovementSpeed = 25.0f;
+        public const float FishWanderRadius = 50.0f;
+        public const int FishMaxHP = 3;
+
+        public const int BikeGuyAggroRange = 750;
+        public const float BikeGuyMovementSpeed = 250.0f;
+        public const float BikeGuyWanderRadius = 200.0f;
+        public const int BikeGuyMaxHP = 25;
 
         // Person encounter
         public const int maxFuelOnPerson = 5;

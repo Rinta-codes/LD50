@@ -36,16 +36,23 @@ namespace LD50.Scenes.Events
             }
 
             // Randomize enemy type
-            // Spawn enemies
-            // Create rewards
-
-            for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+            switch ((EnemyList)Globals.rng.Next((int)EnemyList.last))
             {
-                var slime = new Slime
-                {
-                    Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                };
-                gameObjects.Add(slime);
+                case EnemyList.SLIME:
+                    CreateEnemy<Slime>();
+                    break;
+                case EnemyList.FISH:
+                    CreateEnemy<Fish>();
+                    break;
+                case EnemyList.SHEEP:
+                    CreateEnemy<Sheep>();
+                    break;
+                case EnemyList.JUSTAROCK:
+                    CreateEnemy<JustARock>();
+                    break;
+                case EnemyList.GUYONABIKE:
+                    CreateEnemy<GuyOnABike>();
+                    break;
             }
         }
 
@@ -75,5 +82,16 @@ namespace LD50.Scenes.Events
             }
         }
 
+        private void CreateEnemy<T>() where T : Enemy, new()
+        {
+            for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+            {
+                T enemy = new T()
+                {
+                    Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                };
+                gameObjects.Add(enemy);
+            }
+        }
     }
 }

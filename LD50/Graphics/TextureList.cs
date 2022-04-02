@@ -21,6 +21,7 @@ namespace LD50
         ROOM_WORKSHOP,
         CAR_BASE,
         BUTTON,
+        DRIVING_BG,
     }
     public class TextureList
     {
@@ -49,6 +50,7 @@ namespace LD50
             LoadTexture("Sprites/Rooms/FuelStorage.png", TexName.ROOM_FUELSTORAGE);
             LoadTexture("Sprites/Rooms/Workshop.png", TexName.ROOM_WORKSHOP);
             LoadTexture("Sprites/CarBase.png", TexName.CAR_BASE);
+            LoadTexture("Sprites/Backgrounds/DrivingSceneBG.png", TexName.DRIVING_BG);
         }
 
         /// <summary>
