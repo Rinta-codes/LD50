@@ -15,7 +15,7 @@ namespace LD50.Logic
         private Person _person;
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 
-        public Vector2 CarPosition { get { return car.Position; } }
+        public Vector2 CarPosition { get { return car.Position; } set { car.Position = value; } }
         public Vector2 Size { get { return _person.Size; } }
         public override Vector2 Position { get { return _person.Position; } set { _person.Position = value; } }
 
@@ -33,6 +33,11 @@ namespace LD50.Logic
         public void Attack(Vector2 direction)
         {
             _person.Attack(direction);
+        }
+
+        public override void Move(Vector2 movement)
+        {
+            car.Move(movement);
         }
 
         public override void Draw()

@@ -1,4 +1,4 @@
-﻿using LD50.IO;
+using LD50.IO;
 using LD50.Logic.Rooms;
 using LD50.Scenes;
 using OpenTK.Mathematics;
@@ -33,10 +33,12 @@ namespace LD50.Logic
             new Vector2(0, 0)
         });
 
+        public override Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
         public int TotalFuelStored => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.StoredAmount);
         public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
         public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
         public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
+        public int TotalRooms { get { return _rooms.Count; } }
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {

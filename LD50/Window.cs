@@ -17,6 +17,7 @@ using System.Runtime.InteropServices;
 using LD50.utils;
 using LD50.Scenes.Events;
 using LD50.Logic;
+using LD50.Scenes.Menus;
 
 namespace LD50
 {
@@ -84,7 +85,9 @@ namespace LD50
 
             // Create a Scene
             Globals.player = new Player();
-            Globals.scenes.Add(new DrivingScene(new Vector2(0, 0))); //(new Ambush(false));
+            Globals.scenes.Add(new MainMenu());
+            Globals.scenes.Add(new DrivingScene(Vector2.Zero));
+            Globals.scenes.Add(new MainMenu());
 
             // Remove mouse from screen :)
             CursorGrabbed = false;
