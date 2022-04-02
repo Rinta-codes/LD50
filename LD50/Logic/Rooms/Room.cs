@@ -9,8 +9,6 @@ namespace LD50.Logic.Rooms
 
         public string description;
 
-        private Vector2 _roomPosition;
-        
         protected Label label;
         protected readonly int _fontSize = 16;
 
@@ -23,7 +21,7 @@ namespace LD50.Logic.Rooms
 
         public override void Draw()
         {
-            var roomPosition = OnCarPosition * new Vector2(300, 150) + Globals.player.CarPosition - new Vector2(900, 480);
+            var roomPosition = CalculateRoomPosition();
 
             _sprite.Position = roomPosition;
             _sprite.Draw();
@@ -31,5 +29,11 @@ namespace LD50.Logic.Rooms
             label.SetPosition(roomPosition);
             label.Draw();
         }
+
+        public Vector2 CalculateRoomPosition()
+        {
+            return OnCarPosition * new Vector2(300, 150) + Globals.player.CarPosition - new Vector2(900, 480);
+        }
+
     }
 }

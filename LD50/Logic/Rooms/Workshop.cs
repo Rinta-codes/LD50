@@ -15,6 +15,8 @@ namespace LD50.Logic.Rooms
     public class Workshop : Room
     {
         private Weapon _craftedWeapon = null;
+
+        //TODO: move to the base class or find another approach
         protected List<UIElement> uiElements = new List<UIElement>();
 
         public WorkshopState State { get; private set; } = WorkshopState.Idle;
@@ -24,6 +26,7 @@ namespace LD50.Logic.Rooms
         public Workshop(Vector2 onCarPosition) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, "Workshop: Allows you to create weapons.")
         {
             _sprite.SetColour(new Vector4(1, 1, 0, 1));
+            SetState(WorkshopState.Idle);
         }
 
         public void StartCrafting()
@@ -73,13 +76,14 @@ namespace LD50.Logic.Rooms
 
         private bool AssignWeapon()
         {
-            //TODO: assign current weapon to a person or a weapon storage, or cancel (do not change state)
-            var success = false; //Cancel for now
+            //TODO: assign _craftedWeapon to a person or a weapon storage by clicking on them
+            var weaponAssigned = false; //Cancel for now
+            if (!weaponAssigned)
+                return false;
 
-            if (success)
-                _craftedWeapon = null;
+            _craftedWeapon = null;
 
-            return success;
+            return true;
         }
 
         private void SetState(WorkshopState newState)
@@ -91,30 +95,18 @@ namespace LD50.Logic.Rooms
             switch (State)
             {
                 case WorkshopState.Idle:
-                    var craftButton = new Button(
-                        colour: new Vector4(0.8f, 0.8f, 0.8f, 1),
-                        borderColour: new Vector4(0.5f, 0.5f, 0.5f, 1),
-                        position: new Vector2(0, 0),
-                        size: new Vector2(200, 100),
-                        borderWidth: 10,
-                        Graphics.DrawLayer.UI,
-                        isStatic: true);
+                    var craftButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     craftButton.SetText("Craft", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
                     craftButton.OnClickAction = () => StartCrafting();
                     uiElements.Add(craftButton);
                     break;
                 case WorkshopState.Crafting:
+                    var craftingLabel = new Label($"Crafting: {AssignedBlueprint.Name}", TextAlignment.LEFT, new Vector4(.5f, .5f, 0, .5f), new Vector2(0, 0), _fontSize, true);
+                    uiElements.Add(craftingLabel);
                     break;
                 case WorkshopState.WeaponReady:
-                    //TODO: turn this button into an actual weapon's sprite
-                    var pickButton = new Button(
-                        colour: new Vector4(0.8f, 0.8f, 0.8f, 1),
-                        borderColour: new Vector4(0.5f, 0.5f, 0.5f, 1),
-                        position: new Vector2(0, 0),
-                        size: new Vector2(200, 100),
-                        borderWidth: 10,
-                        Graphics.DrawLayer.UI,
-                        isStatic: true);
+                    //TODO: turn this button into an actual weapon's image
+                    var pickButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     pickButton.SetText("Pick", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
                     pickButton.OnClickAction = () => StartCrafting();
                     uiElements.Add(pickButton);
@@ -128,6 +120,7 @@ namespace LD50.Logic.Rooms
 
             foreach (var uiElement in uiElements)
             {
+                uiElement.SetPosition(CalculateRoomPosition());
                 uiElement.Draw();
             }
         }

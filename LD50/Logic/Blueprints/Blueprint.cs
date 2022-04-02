@@ -8,12 +8,14 @@ namespace LD50.Logic.Blueprints
         private readonly Label _label;
 
         public int Cost { get; }
+        public string Name { get; }
         public string Description { get; }
         public int CraftTime { get; }
 
-        public Blueprint(int cost, string description, int craftTime)
+        public Blueprint(int cost, string name, string description, int craftTime)
         {
             Cost = cost;
+            Name = name;
             Description = description;
             CraftTime = craftTime;
 

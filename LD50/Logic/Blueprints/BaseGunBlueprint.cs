@@ -10,6 +10,7 @@ namespace LD50.Logic.Blueprints
 
         public BaseGunBlueprint()
             : base(Globals.rng.Next(Balance.baseGunMinCost, Balance.baseGunMaxCost),
+                  "Basic gun",
                   $"Basic gun. Damage: {Balance.baseGunDamage}, Range: {Balance.baseGunRange}, Cooldown: {Balance.baseGunCooldown}",
                   Balance.baseGunCraftTime)
         {
