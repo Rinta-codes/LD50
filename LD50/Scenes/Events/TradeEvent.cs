@@ -65,7 +65,7 @@ namespace LD50.Scenes.Events
         {
             if (_costsFuel)
             {
-                if (Globals.player.car.TotalFuel >= _cost)
+                if (Globals.player.car.TotalFuelStored >= _cost)
                 {
                     MoveOn();
                     Globals.player.car.ConsumeFuel(_cost);
@@ -74,7 +74,7 @@ namespace LD50.Scenes.Events
             } 
             else
             {
-                if (Globals.player.car.TotalFood >= _cost)
+                if (Globals.player.car.TotalFoodStored >= _cost)
                 {
                     MoveOn();
                     Globals.player.car.ConsumeFood(_cost);
