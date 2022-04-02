@@ -208,7 +208,7 @@ namespace LD50.Logic
             if (_hkRoom.IsPressed())
             {
                 Random rnd = new Random();
-                int randomizeRoom = rnd.Next(4);
+                int randomizeRoom = rnd.Next(5);
                 switch (randomizeRoom)
                 {
                     case 0:
@@ -229,6 +229,11 @@ namespace LD50.Logic
                     case 3:
                         {
                             AddRoom(new WeaponStorage(Vector2.Zero, 5));
+                            break;
+                        }
+                    case 4:
+                        {
+                            AddRoom(new Workshop(Vector2.Zero));
                             break;
                         }
                 }
