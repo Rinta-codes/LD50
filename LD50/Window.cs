@@ -193,10 +193,10 @@ namespace LD50
         protected override void OnResize(ResizeEventArgs e)
         {
             // Call GL.viewport to resize OpenGL's viewport to match the new size
-            GL.Viewport(0, 0, Size.X, Size.Y);
+            GL.Viewport(0, 0, e.Size.X, e.Size.Y);
             foreach (Scene scene in Globals.scenes)
             {
-                scene.Camera.AspectRatio = Size.X / (float)Size.Y;
+                scene.Camera.AspectRatio = e.Size.X / (float)e.Size.Y;
             }
             base.OnResize(e);
         }
