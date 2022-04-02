@@ -2,9 +2,7 @@
 using LD50.UI;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LD50.Scenes
 {
@@ -48,13 +46,13 @@ namespace LD50.Scenes
         /// <summary>
         /// Draw all objects in the scene
         /// </summary>
-        public virtual void Draw() 
+        public virtual void Draw()
         {
-            foreach(GameObject gameObject in gameObjects) 
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw();
             }
-            foreach(UIElement b in uiElements) 
+            foreach (UIElement b in uiElements)
             {
                 b.Draw();
             }
@@ -63,7 +61,7 @@ namespace LD50.Scenes
         /// <summary>
         /// Handle the OnClick of scene objects
         /// </summary>
-        public virtual void OnClick(MouseButtonEventArgs e, Vector2 mousePosition) 
+        public virtual void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
             Globals.selectedElement = null;
             for (int i = uiElements.Count - 1; i >= 0; i--)

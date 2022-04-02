@@ -12,6 +12,8 @@ namespace LD50.Scenes
 
         public DrivingScene(Vector2 cameraStartPosition) : base(cameraStartPosition)
         {
+            uiElements.Add(new UI.Resources());
+
             _player = new Player();
             
             Globals.player = _player;
