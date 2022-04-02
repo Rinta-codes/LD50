@@ -1,4 +1,5 @@
 ﻿using LD50.Logic.Blueprints;
+using LD50.Scenes;
 using LD50.UI;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -62,27 +63,19 @@ namespace LD50.Logic.Rooms
             }
         }
 
-        public void PickCraftedWeapon()
+        public void InitiateWeaponAssignment()
         {
             if (State != WorkshopState.WeaponReady)
                 return;
 
-            if (!AssignWeapon())
-                return;
+            _ = new WeaponAssignment(_craftedWeapon, this);
 
-            SetState(WorkshopState.Idle);
         }
 
-        private bool AssignWeapon()
+        public void OnWeaponAssigned()
         {
-            //TODO: assign _craftedWeapon to a person or a weapon storage by clicking on them
-            var weaponAssigned = false; //Cancel for now
-            if (!weaponAssigned)
-                return false;
-
             _craftedWeapon = null;
-
-            return true;
+            SetState(WorkshopState.Idle);
         }
 
         private void SetState(WorkshopState newState)
@@ -107,7 +100,7 @@ namespace LD50.Logic.Rooms
                     //TODO: turn this button into an actual weapon's image
                     var pickButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     pickButton.SetText("Pick", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-                    pickButton.OnClickAction = () => PickCraftedWeapon();
+                    pickButton.OnClickAction = () => InitiateWeaponAssignment();
                     workshopUiElements.Add(pickButton);
                     break;
             }
@@ -131,10 +124,8 @@ namespace LD50.Logic.Rooms
                 if (workshopUiElements[i].IsInElement(mousePosition))
                 {
                     workshopUiElements[i].OnClick(e, mousePosition);
-                    return;
                 }
             }
-            return;
         }
 
     }

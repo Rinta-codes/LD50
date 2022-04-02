@@ -10,13 +10,15 @@ namespace LD50.Logic
 
         protected int _damage, _projectileSpeed, _projectileSize;
         public float projectileRange;
-        protected string _name;
         protected float _cooldown, _baseCooldown;
+
+        public string Name { get; }
+        public string FullDescription => $"{Name}.Damage: {_damage}, Range: {projectileRange}, Cooldown: {_cooldown}";
 
         public Weapon(TexName texture, Vector2 size, int damage, string name, int projectileSpeed, int projectileSize, float projectileRange) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
         {
             _damage = damage;
-            _name = name;
+            Name = name;
             _projectileSpeed = projectileSpeed;
             _projectileSize = projectileSize;
             this.projectileRange = projectileRange;

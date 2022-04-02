@@ -18,7 +18,7 @@ namespace LD50.Scenes.Events
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
             uiElements.Add(new Resources());
-            var occupants = Globals.player.car.GetOccupants();
+            var occupants = Globals.player.car.MoveOutOccupants();
 
             foreach (Person person in occupants)
             {
@@ -58,14 +58,14 @@ namespace LD50.Scenes.Events
 
         public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
-            
+
             Globals.player.Attack(mousePosition - Globals.player.Position);
             base.OnClick(e, mousePosition);
         }
 
         public override void OnExit()
         {
-            foreach(Person p in gameObjects.OfType<Person>())
+            foreach (Person p in gameObjects.OfType<Person>())
             {
                 Globals.player.car.AddOccupant(p);
             }

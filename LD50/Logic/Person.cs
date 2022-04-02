@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LD50.Logic.Weapons;
+﻿using LD50.Logic.Weapons;
 using LD50.UI;
 using LD50.utils;
 using OpenTK.Mathematics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LD50.Logic
 {
@@ -23,9 +22,14 @@ namespace LD50.Logic
         private bool _amIPlayer;
 
         public Vector2 Size { get { return _sprite.size; } }
+        public string Name { get; }
+        public bool HasWeapon => _weapon != null;
+        public string WeaponName => _weapon == null ? "no weapon" : _weapon.Name;
+        public string WeaponDescription => _weapon == null ? "no weapon" : _weapon.FullDescription;
 
-        public Person(TexName texture, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
+        public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
+            Name = name;
             _weapon = new BaseGun();
             _health = health;
             _amIPlayer = player;
@@ -46,6 +50,13 @@ namespace LD50.Logic
         {
             _health -= damage;
             _hpBar.Value = (float)_health / _maxHealth;
+        }
+
+        public Weapon GiveWeapon(Weapon weapon)
+        {
+            var oldWeapon = _weapon;
+            _weapon = weapon;
+            return oldWeapon;
         }
 
         public bool IsAlive()

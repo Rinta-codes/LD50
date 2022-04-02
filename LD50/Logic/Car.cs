@@ -42,6 +42,7 @@ namespace LD50.Logic
         public int OccupiedBedroomSpace => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Persons.Count);
         public int TotalWeaponsStored => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Stored);
         public int TotalWeaponsCapacity => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Capacity);
+        public bool HasAFreeWeaponSlot => _rooms.OfType<WeaponStorage>().Any(weaponStorage => weaponStorage.HasCapacity);
         public int TotalRooms { get { return _rooms.Count; } }
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.CAR_BASE, position, size, Graphics.DrawLayer.CAR, false))
@@ -71,16 +72,6 @@ namespace LD50.Logic
             {
                 room.OnCarPosition = _carPositions[_rooms.Count];
                 _rooms.Add(room);
-
-                if (room is FuelTank)
-                {
-                    AddFuel(1);
-                }
-
-                if (room is FoodStorage)
-                {
-                    AddFood(1);
-                }
             }
             else
             {
@@ -88,8 +79,9 @@ namespace LD50.Logic
             }
         }
 
-        public List<Person> GetOccupants()
+        public List<Person> MoveOutOccupants()
         {
+
             var temp = new List<Person>();
             foreach (Bedroom room in _rooms.OfType<Bedroom>())
             {
@@ -98,8 +90,9 @@ namespace LD50.Logic
             }
 
             return temp;
-        
         }
+
+        public Person[] GetOccupantList() => _rooms.OfType<Bedroom>().SelectMany(bedroom => bedroom.Persons).ToArray();
 
         public void ChangeRoom(Vector2 roomPosition, Room room)
         {
@@ -179,7 +172,7 @@ namespace LD50.Logic
             return amountToConsume == 0;
         }
 
-        public bool AddOccupant()
+        public bool AddOccupant(string name)
         {
             if (TotalBedroomSpace <= OccupiedBedroomSpace)
                 return false;
@@ -188,7 +181,7 @@ namespace LD50.Logic
             {
                 if (bedroom.HasCapacity)
                 {
-                    bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, Balance.personHP));
+                    bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, name, Balance.personHP));
                     return true;
                 }
             }
@@ -215,9 +208,6 @@ namespace LD50.Logic
 
         public bool AddWeapon(Weapon weapon)
         {
-            if (TotalWeaponsCapacity <= TotalWeaponsStored)
-                return false;
-
             foreach (var weaponStorage in _rooms.OfType<WeaponStorage>())
             {
                 if (weaponStorage.HasCapacity)
