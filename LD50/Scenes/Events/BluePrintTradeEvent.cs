@@ -20,11 +20,14 @@ namespace LD50.Scenes.Events
         {
             uiElements.Add(new Resources());
 
-            int randNum = Globals.rng.Next(1);
+            int randNum = Globals.rng.Next(2);
             switch (randNum)
             {
                 case 0:
                     _toTrade = new BaseGunBlueprint();
+                    break;
+                case 1:
+                    _toTrade = new BetterGunBlueprint();
                     break;
                 default:
                     _toTrade = new BaseGunBlueprint();

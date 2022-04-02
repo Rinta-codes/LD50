@@ -64,6 +64,7 @@ namespace LD50
 
         public const int betterGunMinCost = 5;
         public const int betterGunMaxCost = 10;
+        public const int betterGunCraftTime = 2;
 
         // Enemies
         public const int SlimeAggroRange = 500;
