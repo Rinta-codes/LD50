@@ -14,7 +14,13 @@ namespace LD50
         TEST,
         PIXEL,
         PLAYER_IDLE,
-        BUTTON
+        ROOM_FOODSTORAGE,
+        ROOM_BEDROOM,
+        ROOM_FUELSTORAGE,
+        ROOM_WEAPONSTORAGE,
+        ROOM_WORKSHOP,
+        CAR_BASE,
+        BUTTON,
     }
     public class TextureList
     {
@@ -37,6 +43,12 @@ namespace LD50
             LoadTexture("Sprites/Test/Test.png", TexName.TEST);
             LoadTexture("Sprites/Test/Pixel.png", TexName.PIXEL);
             LoadTexture("Sprites/Test/PlayerIdle.png", TexName.PLAYER_IDLE);
+            LoadTexture("Sprites/Rooms/FoodStorage.png", TexName.ROOM_FOODSTORAGE);
+            LoadTexture("Sprites/Rooms/WeaponStorage.png", TexName.ROOM_WEAPONSTORAGE);
+            LoadTexture("Sprites/Rooms/Bedroom.png", TexName.ROOM_BEDROOM);
+            LoadTexture("Sprites/Rooms/FuelStorage.png", TexName.ROOM_FUELSTORAGE);
+            LoadTexture("Sprites/Rooms/Workshop.png", TexName.ROOM_WORKSHOP);
+            LoadTexture("Sprites/CarBase.png", TexName.CAR_BASE);
         }
 
         /// <summary>

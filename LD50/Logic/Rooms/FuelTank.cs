@@ -16,10 +16,10 @@ namespace LD50.Logic.Rooms
                 label.SetText($"Fuel: {value} / {Capacity}", TextAlignment.CENTER, _fontSize);
             }
         }
-        public FuelTank(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, $"Fuel Tank: Can store {capacity} fuel.")
+        public FuelTank(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.ROOM_FUELSTORAGE, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, $"Fuel Tank: Can store {capacity} fuel.")
         {
             Capacity = capacity;
-            _sprite.SetColour(new Vector4(1, 0, 0, 1));
+            // _sprite.SetColour(new Vector4(1, 0, 0, 1));
             
             StoredAmount = 0;
         }

@@ -119,6 +119,8 @@ namespace LD50.UI
                 }
                 _textRender.Position = textPos;
             }
+            if (_backgroundRect != null)
+                _backgroundRect.SetPosition(position);
         }
 
         public override void SetSize(Vector2 size)
