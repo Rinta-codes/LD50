@@ -55,5 +55,9 @@ namespace LD50
         public const int SlimeAggroRange = 500;
         public const float SlimeMovementSpeed = 100.0f;
         public const float SlimeWanderRadius = 150.0f;
+
+        // Person encounter
+        public const int maxFuelOnPerson = 5;
+        public const int maxFoodOnPerson = 5;
     }
 }

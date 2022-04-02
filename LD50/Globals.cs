@@ -19,6 +19,14 @@ namespace LD50
         public static readonly int ScreenResolutionX = 1920;
         public static readonly int ScreenResolutionY = 1080;
 
+        public static Vector4 buttonFillColour = new Vector4(0.8f, 0.8f, 0.8f, 1);
+        public static Vector4 buttonBorderColour = new Vector4(0.5f, 0.5f, 0.5f, 1);
+        public static Vector2 buttonSizeMedium = new Vector2(300, 100);
+        public static Vector2 buttonSizeSmall = new Vector2(100, 50);
+        public static int buttonBorderMedium = 10;
+        public static int buttonBorderSmall = 5;
+
+
         public static Random rng = new Random();
 
         public static Vector2 windowSize;
