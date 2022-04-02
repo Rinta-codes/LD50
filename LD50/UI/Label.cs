@@ -106,7 +106,19 @@ namespace LD50.UI
         {
             base.SetPosition(position);
             if (_textRender != null)
-                _textRender.Position = position;
+            {
+                Vector2 textPos = _position;
+                switch (textAlignment)
+                {
+                    case TextAlignment.LEFT:
+                        textPos.X = _position.X + _textRender.texture.Size.X / 2;
+                        break;
+                    case TextAlignment.RIGHT:
+                        textPos.X = _position.X - _textRender.texture.Size.X / 2;
+                        break;
+                }
+                _textRender.Position = textPos;
+            }
         }
 
         public override void SetSize(Vector2 size)

@@ -4,6 +4,7 @@ using System.Text;
 using LD50.IO;
 using LD50.Scenes.Events;
 using OpenTK.Mathematics;
+using LD50.Logic.Blueprints;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace LD50.Logic
@@ -12,6 +13,7 @@ namespace LD50.Logic
     {
 
         public Car car;
+        public List<Blueprint> blueprints = new List<Blueprint>();
         private Person _person;
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 
