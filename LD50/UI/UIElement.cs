@@ -89,7 +89,8 @@ namespace LD50.UI
         public virtual void SetPosition(Vector2 position)
         {
             _position = position;
-            _background.Position = position;
+            if (_background != null)
+                _background.Position = position;
         }
 
         public virtual Vector2 GetPosition()
