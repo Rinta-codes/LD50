@@ -62,11 +62,11 @@ namespace LD50.UI
 
             if (size == -1) 
             {
-                _label = new Label(text, textAlignment, fontColour, _position, _size, _isStatic);
+                _label = new Label(text, textAlignment, fontColour, _position, _size, _isStatic, _drawLayer);
             }
             else
             {
-                _label = new Label(text, textAlignment, fontColour, _position, size, _isStatic);
+                _label = new Label(text, textAlignment, fontColour, _position, size, _isStatic, _drawLayer);
             }
         }
 

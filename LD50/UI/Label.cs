@@ -182,7 +182,7 @@ namespace LD50.UI
                     }
                     break;
             }
-            _textRender = new Sprite(tr, textPos, tr.Size, DrawLayer.UI, _isStatic);
+            _textRender = new Sprite(tr, textPos, tr.Size, _drawLayer, _isStatic);
 
             if (_backgroundRect == null)
             {
