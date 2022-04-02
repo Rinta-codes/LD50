@@ -44,7 +44,7 @@ namespace LD50.Logic
         public int TotalWeaponsCapacity => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Capacity);
         public int TotalRooms { get { return _rooms.Count; } }
 
-        public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
+        public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.CAR_BASE, position, size, Graphics.DrawLayer.CAR, false))
         {
             _hkRoom.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Space);
 

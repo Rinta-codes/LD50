@@ -22,12 +22,12 @@ namespace LD50.Logic.Rooms
 
         private List<Weapon> _weapons = new List<Weapon>();
 
-        public WeaponStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), Vector2.Zero, "Weapon Storage: can store {capacity} weapon(s).")
+        public WeaponStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.ROOM_WEAPONSTORAGE, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), Vector2.Zero, "Weapon Storage: can store {capacity} weapon(s).")
         {
             Capacity = capacity;
             Stored = 0;
 
-            _sprite.colour = new Vector4(0, 1, 1, 1); // Light Blue
+            // _sprite.colour = new Vector4(0, 1, 1, 1); // Light Blue
         }
 
         public void AddWeapon(Weapon weapon)

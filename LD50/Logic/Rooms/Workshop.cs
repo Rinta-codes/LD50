@@ -23,9 +23,8 @@ namespace LD50.Logic.Rooms
         public Blueprint AssignedBlueprint { get; private set; }
         public int CraftTurnsCompleted { get; private set; }
 
-        public Workshop(Vector2 onCarPosition) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, "Workshop: Allows you to create weapons.")
+        public Workshop(Vector2 onCarPosition) : base(new Sprite(TexName.ROOM_WORKSHOP, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, "Workshop: Allows you to create weapons.")
         {
-            _sprite.SetColour(new Vector4(1, 1, 0, 1));
             SetState(WorkshopState.Idle);
         }
 
