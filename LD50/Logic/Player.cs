@@ -24,7 +24,7 @@ namespace LD50.Logic
         public Player()
         {
             car = new Car(new Vector2(1300, 925), new Vector2(800, 200));
-            person = new Person(TexName.PLAYER_IDLE, Balance.playerHealth);
+            person = new Person(TexName.PLAYER_IDLE, Balance.playerHealth, true);
 
             _hkUp = new Hotkey(true).AddKeys(Keys.W, Keys.Up);
             _hkDown = new Hotkey(true).AddKeys(Keys.S, Keys.Down);

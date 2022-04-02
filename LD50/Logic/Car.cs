@@ -78,7 +78,19 @@ namespace LD50.Logic
             {
                 _ = new ChangeRoomScene(this, room);
             }
+        }
 
+        public List<Person> GetOccupants()
+        {
+            var temp = new List<Person>();
+            foreach (Bedroom room in _rooms.OfType<Bedroom>())
+            {
+                temp.AddRange(room.Persons);
+                room.Persons.Clear();
+            }
+
+            return temp;
+        
         }
 
         public void ChangeRoom(Vector2 roomPosition, Room room)
@@ -169,6 +181,23 @@ namespace LD50.Logic
                 if (bedroom.HasCapacity)
                 {
                     bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, Balance.personHP));
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool AddOccupant(Person p)
+        {
+            if (TotalBedroomSpace <= OccupiedBedroomSpace)
+                return false;
+
+            foreach (var bedroom in _rooms.OfType<Bedroom>())
+            {
+                if (bedroom.HasCapacity)
+                {
+                    bedroom.AddPerson(p);
                     return true;
                 }
             }
