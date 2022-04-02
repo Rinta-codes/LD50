@@ -1,17 +1,23 @@
 ﻿using LD50.Logic;
 using LD50.Logic.Enemies;
+using LD50.UI;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LD50.Scenes.Events
 {
     public class Ambush : Event
     {
+
+        private bool _rewarded = false;
+
         public Ambush(bool isDragon) : base(new Vector2(Globals.windowSize.X / 2, Globals.windowSize.Y - 200), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
+            uiElements.Add(new Resources());
             if (isDragon)
             {
                 // TODO:
@@ -40,5 +46,17 @@ namespace LD50.Scenes.Events
             Globals.player.Attack(mousePosition - Globals.player.Position);
             base.OnClick(e, mousePosition);
         }
+
+        public override void Update()
+        {
+            base.Update();
+            if (!_rewarded && gameObjects.OfType<Enemy>().Count() <= 0)
+            {
+                _rewarded = true;
+                Globals.player.car.AddFood(Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward));
+                Globals.player.car.AddFuel(Globals.rng.Next(Balance.minFuelAmbushReward, Balance.maxFuelAmbushReward));
+            }
+        }
+
     }
 }
