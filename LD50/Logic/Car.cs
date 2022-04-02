@@ -88,14 +88,10 @@ namespace LD50.Logic
             foreach (var fuelTank in _rooms.OfType<FuelTank>())
             {
                 amountLeft = fuelTank.AddFuel(amountLeft);
-
-                if (amountLeft == 0)
-                    return 0;
             }
 
-            TotalFuel += amount;
+            TotalFuel += amount - amountLeft;
 
-            int x = 1;
             return amountLeft;
         }
 
@@ -121,12 +117,10 @@ namespace LD50.Logic
             foreach (var foodStorage in _rooms.OfType<FoodStorage>())
             {
                 amountLeft = foodStorage.AddFood(amountLeft);
-
-                if (amountLeft == 0)
-                    return 0;
             }
 
-            TotalFood += amount;
+            TotalFood += amount - amountLeft;
+
             return amountLeft;
         }
 
