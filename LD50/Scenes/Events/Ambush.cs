@@ -39,57 +39,21 @@ namespace LD50.Scenes.Events
             switch ((EnemyList)Globals.rng.Next((int)EnemyList.last))
             {
                 case EnemyList.SLIME:
-                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
-                    {
-                        var slime = new Slime
-                        {
-                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                        };
-                        gameObjects.Add(slime);
-                    }
+                    CreateEnemy<Slime>();
                     break;
                 case EnemyList.FISH:
-                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
-                    {
-                        var fish = new Fish
-                        {
-                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                        };
-                        gameObjects.Add(fish);
-                    }
+                    CreateEnemy<Fish>();
                     break;
                 case EnemyList.SHEEP:
-                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
-                    {
-                        var sheep = new Sheep
-                        {
-                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                        };
-                        gameObjects.Add(sheep);
-                    }
+                    CreateEnemy<Sheep>();
                     break;
                 case EnemyList.JUSTAROCK:
-                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
-                    {
-                        var rock = new JustARock
-                        {
-                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                        };
-                        gameObjects.Add(rock);
-                    }
+                    CreateEnemy<JustARock>();
                     break;
                 case EnemyList.GUYONABIKE:
-                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
-                    {
-                        var bike = new GuyOnABike
-                        {
-                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                        };
-                        gameObjects.Add(bike);
-                    }
+                    CreateEnemy<GuyOnABike>();
                     break;
             }
-
         }
 
         public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
@@ -118,5 +82,16 @@ namespace LD50.Scenes.Events
             }
         }
 
+        private void CreateEnemy<T>() where T : Enemy, new()
+        {
+            for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+            {
+                T enemy = new T()
+                {
+                    Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                };
+                gameObjects.Add(enemy);
+            }
+        }
     }
 }
