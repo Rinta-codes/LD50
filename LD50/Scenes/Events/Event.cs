@@ -11,6 +11,7 @@ namespace LD50.Scenes.Events
         AMBUSH = 0,
         FOODPILE = 1,
         FUELPILE = 2,
+        TRADING = 3,
         last
     }
 
@@ -41,13 +42,14 @@ namespace LD50.Scenes.Events
             base.Draw();
         }
 
-        public static Event GetRandomEvent()
+        public static Scene GetRandomEvent()
         {
             return (Events)Globals.rng.Next((int)Events.last) switch
             {
                 Events.AMBUSH => new Ambush(false),
                 Events.FOODPILE => new FoodPile(),
                 Events.FUELPILE => new FuelPile(),
+                Events.TRADING => new TradeEvent(),
                 _ => null,
             };
         }

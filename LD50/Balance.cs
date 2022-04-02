@@ -32,10 +32,16 @@ namespace LD50
 
         public const int minRoomCost = 4;
         public const int maxRoomCost = 25;
+
+        // Moving
+        public static int FuelCost()
+        {
+            return Globals.player.car.TotalRooms;
+        }
+
         // Weapons
         public const float baseGunRange = 300.0f;
         public const float baseGunCooldown = 1.0f;
-
 
         // Enemies
         public const int SlimeAggroRange = 500;

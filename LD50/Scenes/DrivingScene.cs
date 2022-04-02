@@ -33,8 +33,16 @@ namespace LD50.Scenes
         {
             if (!_isDriving)
             {
+                if (!Globals.player.car.ConsumeFuel(Balance.FuelCost()))
+                {
+                    // Out of fuel, dragon time
+                    Scene dragon = new Ambush(true);
+                    Globals.scenes[(int)Scenes.EVENT] = dragon;
+                    Globals.currentScene = (int)Scenes.EVENT;
+                    return;
+                }
                 // Randomize an event
-                Event nextEvent = Event.GetRandomEvent();
+                Scene nextEvent = Event.GetRandomEvent();
                 // Create event
                 Globals.scenes[(int)Scenes.EVENT] = nextEvent;
                 // Move Car
