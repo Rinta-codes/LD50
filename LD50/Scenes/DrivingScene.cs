@@ -19,5 +19,6 @@ namespace LD50.Scenes
             Globals.player = _player;
             gameObjects.Add(_player);
         }
+
     }
 }
