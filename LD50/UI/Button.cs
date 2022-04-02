@@ -76,8 +76,8 @@ namespace LD50.UI
         public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
             if (_hidden) return;
-            if (e.Button == MouseButton.Left) OnClickAction();
-            if (e.Button == MouseButton.Right) OnRightClickAction();
+            if (e.Button == MouseButton.Left && OnClickAction != null) OnClickAction();
+            if (e.Button == MouseButton.Right && OnRightClickAction != null) OnRightClickAction();
 
             base.OnClick(e, mousePosition);
         }

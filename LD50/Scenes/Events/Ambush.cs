@@ -26,17 +26,19 @@ namespace LD50.Scenes.Events
 
             for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
             {
-                var slime = new Slime();
-                slime.Position = Globals.windowSize / 2 + new Vector2(Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius), Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius));
+                var slime = new Slime
+                {
+                    Position = Globals.windowSize / 2 + new Vector2(Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius), Globals.rng.Next(-Balance.maxPickupSpawnRadius, Balance.maxPickupSpawnRadius))
+                };
                 gameObjects.Add(slime);
             }
         }
 
         public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
-            base.OnClick(e, mousePosition);
-
+            
             Globals.player.Attack(mousePosition - Globals.player.Position);
+            base.OnClick(e, mousePosition);
         }
     }
 }

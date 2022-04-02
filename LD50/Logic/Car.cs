@@ -33,7 +33,7 @@ namespace LD50.Logic
             new Vector2(0, 0)
         });
 
-        public Vector2 Position { get { return _sprite.Position; } }
+        public override Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
 
         public int TotalFuel { get; private set; } = 0;
         public int TotalFood { get; private set; } = 0;
