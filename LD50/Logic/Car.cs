@@ -35,6 +35,22 @@ namespace LD50.Logic
 
         public Vector2 Position { get { return _sprite.Position; } }
 
+        public int TotalBedroomSpace
+        {
+            get
+            {
+                return _rooms.Where(room => room is Bedroom).Sum(room => (room as Bedroom).Capacity);
+            }
+        }
+
+        public int OccupiedBedroomSpace
+        {
+            get
+            {
+                return _rooms.Where(room => room is Bedroom).Sum(room => (room as Bedroom).Persons.Count);
+            }
+        }
+
         public int TotalFuelStored
         {
             get
@@ -196,13 +212,24 @@ namespace LD50.Logic
             if (_hkRoom.IsPressed())
             {
                 Random rnd = new Random();
-                if (rnd.Next(2) == 0)
+                int randomizeRoom = rnd.Next(3);
+                switch (randomizeRoom)
                 {
-                    AddRoom(new FoodStorage(Vector2.Zero, 10));
-                }
-                else
-                {
-                    AddRoom(new FuelTank(Vector2.Zero, 10));
+                    case 0:
+                        {
+                            AddRoom(new FoodStorage(Vector2.Zero, 10));
+                            break;
+                        }
+                    case 1:
+                        {
+                            AddRoom(new FuelTank(Vector2.Zero, 10));
+                            break;
+                        }
+                    case 2:
+                        {
+                            AddRoom(new Bedroom(Vector2.Zero));
+                            break;
+                        }
                 }
             }
             return base.Update();

@@ -84,7 +84,7 @@ namespace LD50
 
             // Create a Scene
             Globals.player = new Player();
-            Globals.scenes.Add(new DrivingScene(new Vector2(0, 0))); //(new Ambush(false));
+            Globals.scenes.Add(new DrivingScene(Vector2.Zero)); //(new Ambush(false));
 
             // Remove mouse from screen :)
             CursorGrabbed = false;
