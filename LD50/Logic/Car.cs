@@ -3,6 +3,7 @@ using LD50.Logic.Rooms;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LD50.Logic
@@ -36,13 +37,29 @@ namespace LD50.Logic
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
             _hkRoom.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Space);
-            _rooms.Add(new FuelTank(_carPositions[_rooms.Count], 10));
+
+            var fuelTank = new FuelTank(_carPositions[_rooms.Count], 10);
+            fuelTank.AddFuel(Balance.initialFuel);
+            _rooms.Add(fuelTank);
+            
             _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], 10));
         }
 
         public void AddRoom()
         {
             _rooms.Add(new FuelTank(_carPositions[_rooms.Count], 10));
+        }
+
+        public void AddFuel(int amount)
+        {
+            var amountLeft = amount;
+            foreach(var fuelTank in _rooms.OfType<FuelTank>())
+            {
+                amountLeft = fuelTank.AddFuel(amountLeft);
+
+                if (amountLeft == 0)
+                    break;
+            }
         }
 
         public override bool Update()
