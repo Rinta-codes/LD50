@@ -36,7 +36,7 @@ namespace LD50.Logic
 
             foreach (Person p in Globals.CurrentScene.gameObjects.OfType<Person>())
             {
-                if (utils.Utility.Collides(_position, _size, p.Position, p.Size))
+                if (p != shooter && utils.Utility.Collides(_position, _size, p.Position, p.Size))
                 {
                     Globals.Logger.Log($"{p} took {_damage} damage!", utils.LogType.INFO);
                     p.TakeDamage(_damage);
@@ -46,7 +46,7 @@ namespace LD50.Logic
 
             foreach (Enemy e in Globals.CurrentScene.gameObjects.OfType<Enemy>())
             {
-                if (utils.Utility.Collides(_position, _size, e.Position, e.Size))
+                if (e != shooter && utils.Utility.Collides(_position, _size, e.Position, e.Size))
                 {
                     Globals.Logger.Log($"{e} took {_damage} damage!", utils.LogType.INFO);
                     e.TakeDamage(_damage);

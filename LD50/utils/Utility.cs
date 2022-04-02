@@ -23,5 +23,12 @@ namespace LD50.utils
             Vector2 rect2BR = pos2 + size2 / 2;
             return rect1TL.X <= rect2BR.X && rect1BR.X >= rect2TL.X && rect1TL.Y <= rect2BR.Y && rect1BR.Y >= rect2TL.Y;
         }
+
+        public static Vector2 GetRandomPositionInRange(Vector2 position, float range)
+        {
+            var dir = new Vector2(Globals.rng.Next(-(int)range, (int)range), Globals.rng.Next(-(int)range, (int)range)).Normalized();
+            var target = position + range * dir;
+            return new Vector2(Math.Clamp(target.X, 0, Globals.windowSize.X), Math.Clamp(target.Y, 0, Globals.windowSize.Y));
+        }
     }
 }
