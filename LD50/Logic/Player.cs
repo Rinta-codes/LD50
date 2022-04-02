@@ -35,6 +35,11 @@ namespace LD50.Logic
             _person.Attack(direction);
         }
 
+        public void TakeDamage(int damage)
+        {
+            _person.TakeDamage(damage);
+        }
+
         public override void Move(Vector2 movement)
         {
             car.Move(movement);
