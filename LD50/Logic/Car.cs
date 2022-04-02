@@ -2,10 +2,10 @@ using LD50.IO;
 using LD50.Logic.Rooms;
 using LD50.Scenes;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LD50.Logic
 {
@@ -55,6 +55,14 @@ namespace LD50.Logic
             // Add base resources
             AddFood(Balance.initialFood);
             AddFuel(Balance.initialFuel);
+        }
+
+        public void OnNextTurn()
+        {
+            foreach (var workshop in _rooms.OfType<Workshop>())
+            {
+                workshop.OnNextTurn();
+            }
         }
 
         public void AddRoom(Room room)
@@ -237,7 +245,7 @@ namespace LD50.Logic
             if (_hkRoom.IsPressed())
             {
                 Random rnd = new Random();
-                int randomizeRoom = rnd.Next(4);
+                int randomizeRoom = rnd.Next(5);
                 switch (randomizeRoom)
                 {
                     case 0:
@@ -260,9 +268,22 @@ namespace LD50.Logic
                             AddRoom(new WeaponStorage(Vector2.Zero, 5));
                             break;
                         }
+                    case 4:
+                        {
+                            AddRoom(new Workshop(Vector2.Zero));
+                            break;
+                        }
                 }
             }
             return base.Update();
+        }
+
+        public void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
+        {
+            foreach (var room in _rooms)
+            {
+                room.OnClick(e, mousePosition);
+            }
         }
 
         public override void Draw()

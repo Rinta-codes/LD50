@@ -56,6 +56,7 @@ namespace LD50
 
         public const int baseGunMinCost = 3;
         public const int baseGunMaxCost = 7;
+        public const int baseGunCraftTime = 1;
 
         public const int betterGunDamage = 8;
         public const float betterGunRange = 400.0f;

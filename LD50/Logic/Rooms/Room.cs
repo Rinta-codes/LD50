@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using LD50.UI;
+using OpenTK.Windowing.Common;
 
 namespace LD50.Logic.Rooms
 {
@@ -12,7 +13,7 @@ namespace LD50.Logic.Rooms
         public Vector2 OnCarPosition { get; set; }
 
         public string description;
-        
+
         protected Label label;
         protected readonly int _fontSize = 16;
 
@@ -33,6 +34,11 @@ namespace LD50.Logic.Rooms
 
             label.SetPosition(roomPosition);
             label.Draw();
+        }
+
+        public virtual void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
+        {
+
         }
     }
 }

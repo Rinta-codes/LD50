@@ -2,9 +2,7 @@
 using LD50.Scenes.Events;
 using LD50.UI;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using OpenTK.Windowing.Common;
 
 namespace LD50.Scenes
 {
@@ -39,6 +37,7 @@ namespace LD50.Scenes
                     // Out of fuel, dragon time
                     Scene dragon = new Ambush(true);
                     Globals.scenes[(int)Scenes.EVENT] = dragon;
+                    Globals.player.car.OnNextTurn();
                     Globals.currentScene = (int)Scenes.EVENT;
                     return;
                 }
@@ -60,10 +59,17 @@ namespace LD50.Scenes
                 {
                     _isDriving = false;
                     _player.CarPosition = new Vector2(1300, 925);
+                    Globals.player.car.OnNextTurn();
                     Globals.currentScene = (int) Scenes.EVENT;
                 }
             }
             base.Update();
+        }
+
+        public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
+        {
+            base.OnClick(e, mousePosition);
+            Globals.player.car.OnClick(e, mousePosition);
         }
     }
 }

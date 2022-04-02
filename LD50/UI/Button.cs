@@ -93,6 +93,13 @@ namespace LD50.UI
             }
         }
 
+        public override void SetPosition(Vector2 position)
+        {
+            _backgroundRect.SetPosition(position);
+            if (_label != null) _label.SetPosition(position);
+            base.SetPosition(position);
+        }
+
         public override bool OnHover(Vector2 mousePosition)
         {
             if (base.OnHover(mousePosition))

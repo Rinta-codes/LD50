@@ -30,10 +30,10 @@ namespace LD50.Scenes.Events
                     _toTrade = new BaseGunBlueprint();
                     break;
             }
-            uiElements.Add(_toTrade.GetDescription(new Vector2(5, 100)));
+            uiElements.Add(_toTrade.GetLabel(new Vector2(5, 100)));
             uiElements.Add(new Label("Offering: ", TextAlignment.LEFT, new Vector4(1, 1, 1, 1), new Vector2(5, 50), 25, true, Graphics.DrawLayer.BACKGROUND));
 
-            _cost = _toTrade.cost;
+            _cost = _toTrade.Cost;
             _costsFuel = Globals.rng.Next(2) == 0;
 
             uiElements.Add(new Label($"Costs {_cost} " + (_costsFuel ? "Fuel" : "Food"), TextAlignment.LEFT, new Vector4(1, 1, 1, 1), new Vector2(5, 275), 25, true, Graphics.DrawLayer.BACKGROUND));
