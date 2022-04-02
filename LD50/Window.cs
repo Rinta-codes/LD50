@@ -81,7 +81,7 @@ namespace LD50
             spriteRenderer = new SpriteRenderer(_shader);
 
             // Create a Scene
-            Globals.scenes.Add(new TestScene());
+            Globals.scenes.Add(new DrivingScene(new Vector2(0, 0)));
 
             // Remove mouse from screen :)
             CursorGrabbed = false;

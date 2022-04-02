@@ -1,5 +1,6 @@
 ﻿using LD50.Audio;
 using LD50.IO;
+using LD50.Logic;
 using LD50.Scenes;
 using LD50.UI;
 using LD50.utils;
@@ -32,6 +33,8 @@ namespace LD50
         public static InputHandler inputHandler;
 
         public static int unloaded;
+
+        public static Player player;
 
         public static Logger GLlogger = new Logger("OpenGL");
         public static Logger Logger = new Logger("Game");
