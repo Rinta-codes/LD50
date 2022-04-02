@@ -35,67 +35,10 @@ namespace LD50.Logic
 
         public Vector2 Position { get { return _sprite.Position; } }
 
-        public int TotalFuelStored
-        {
-            get
-            {
-                int result = 0;
-
-                foreach (Room room in _rooms)
-                {
-                    if (room is FuelTank fuelTank)
-                        result += fuelTank.StoredAmount;
-                }
-                return result;
-            }
-        }
-
-        public int TotalFoodStored 
-        {
-            get
-            {
-                int result = 0;
-
-                foreach (Room room in _rooms)
-                {
-                    if (room is FoodStorage foodStorage)
-                        result += foodStorage.StoredAmount;
-                }
-                return result;
-            } 
-        }
-
-        public int TotalFuelCapacity
-        {
-            get
-            {
-                int result = 0;
-
-                foreach (Room room in _rooms)
-                {
-                    if (room is FuelTank fuelTank)
-                        result += fuelTank.Capacity;
-                }
-                return result;
-            }
-        }
-
-        public int TotalFoodCapacity
-        {
-            get
-            {
-                int result = 0;
-
-                foreach (Room room in _rooms)
-                {
-                    if (room is FoodStorage foodStorage)
-                        result += foodStorage.Capacity;
-                }
-                return result;
-            }
-        }
-
-
+        public int TotalFuelStored => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.StoredAmount);
+        public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
+        public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
+        public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
@@ -131,7 +74,7 @@ namespace LD50.Logic
             {
                 _ = new ChangeRoomScene(this, room);
             }
-            
+
         }
 
         public void ChangeRoom(Vector2 roomPosition, Room room)
