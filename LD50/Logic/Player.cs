@@ -16,8 +16,8 @@ namespace LD50.Logic
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 
         public Vector2 CarPosition { get { return car.Position; } }
-        public Vector2 Position { get { return _person.Position; } set { _person.Position = value; } }
         public Vector2 Size { get { return _person.Size; } }
+        public override Vector2 Position { get { return _person.Position; } set { _person.Position = value; } }
 
         public Player()
         {
@@ -67,6 +67,7 @@ namespace LD50.Logic
                 {
                     _person.Move(new Vector2((float)(Balance.playerMovementSpeed * Globals.deltaTime), 0));
                 }
+                _person.Update();
             }
             else
             {
