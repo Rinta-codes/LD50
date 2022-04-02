@@ -26,5 +26,11 @@ namespace LD50
 
         public const int minEnemySpawns = 2;
         public const int maxEnemySpawns = 15;
+
+        public const float baseGunRange = 300.0f;
+
+
+        // Enemies
+        public const int SlimeAggroRange = 200;
     }
 }

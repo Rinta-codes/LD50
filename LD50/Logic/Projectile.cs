@@ -10,11 +10,11 @@ namespace LD50.Logic
     {
 
         private Vector2 _position, _size, _direction;
-        private float _speed;
+        private float _speed, _distance, _maxDistance;
         private int _damage;
         private GameObject shooter;
 
-        public Projectile(GameObject shooter, Vector2 position, Vector2 size, Vector2 direction, float speed, int damage) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.PROJECTILE, false))
+        public Projectile(GameObject shooter, Vector2 position, Vector2 size, Vector2 direction, float speed, int damage, float maxDistance) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.PROJECTILE, false))
         {
             this.shooter = shooter;
             this._position = position;
@@ -22,12 +22,15 @@ namespace LD50.Logic
             this._direction = direction.Normalized();
             this._speed = speed;
             this._damage = damage;
+            _maxDistance = maxDistance;
+            _distance = 0;
             _sprite.SetColour(new Vector4(0, 0, 1, 1));
         }
 
         public override bool Update()
         {
             _position += _direction * _speed * (float)Globals.deltaTime;
+            _distance += (_direction * _speed * (float)Globals.deltaTime).Length;
 
             _sprite.Position = _position;
 
@@ -49,6 +52,11 @@ namespace LD50.Logic
                     e.TakeDamage(_damage);
                     return false;
                 }
+            }
+
+            if (_distance > _maxDistance)
+            {
+                return false;
             }
 
             return base.Update();
