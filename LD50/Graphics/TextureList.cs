@@ -14,7 +14,6 @@ namespace LD50
         TEST,
         PIXEL,
         PLAYER_IDLE,
-        BUTTON
     }
     public class TextureList
     {

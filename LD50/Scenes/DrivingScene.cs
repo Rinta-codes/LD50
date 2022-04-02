@@ -33,6 +33,7 @@ namespace LD50.Scenes
         {
             if (!_isDriving)
             {
+                Globals.player.HealToFull();
                 if (!Globals.player.car.ConsumeFuel(Balance.FuelCost()) || !Globals.player.car.ConsumeFood(Balance.FoodCost()))
                 {
                     // Out of fuel, dragon time

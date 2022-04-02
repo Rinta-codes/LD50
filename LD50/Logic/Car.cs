@@ -202,6 +202,14 @@ namespace LD50.Logic
         }
 
 
+        public void HealParty()
+        {
+            foreach (Person person in _rooms.OfType<Person>())
+            {
+                person.HealToFull();
+            }
+        }
+
 
         public override bool Update()
         {
