@@ -18,7 +18,7 @@ namespace LD50.Logic.Blueprints
             this.cost = cost;
             this.description = description;
 
-            _label = new Label(description, TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Vector2.Zero, 14, true);
+            _label = new Label(description, TextAlignment.LEFT, new Vector4(1, 1, 1, 1), Vector2.Zero, 25, true);
 
         }
 
@@ -27,7 +27,7 @@ namespace LD50.Logic.Blueprints
             return null;
         }
 
-        public Label GetDescrition(Vector2 position)
+        public Label GetDescription(Vector2 position)
         {
             _label.SetPosition(position);
             return _label;
