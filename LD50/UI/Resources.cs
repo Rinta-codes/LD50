@@ -14,7 +14,8 @@ namespace LD50.UI
 
         public override void Update()
         {
-            SetText($"Food: {Globals.player.car.TotalFood} / Fuel: {Globals.player.car.TotalFuel}", TextAlignment.LEFT, fontSize);
+            SetText($"Food: {Globals.player.car.TotalFoodStored} / {Globals.player.car.TotalFoodCapacity} " +
+                $"|| Fuel: {Globals.player.car.TotalFuelStored}  / {Globals.player.car.TotalFuelCapacity} ", TextAlignment.LEFT, fontSize);
             base.Update();
         }
     }
