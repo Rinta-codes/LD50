@@ -36,17 +36,60 @@ namespace LD50.Scenes.Events
             }
 
             // Randomize enemy type
-            // Spawn enemies
-            // Create rewards
-
-            for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+            switch ((EnemyList)Globals.rng.Next((int)EnemyList.last))
             {
-                var slime = new Slime
-                {
-                    Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
-                };
-                gameObjects.Add(slime);
+                case EnemyList.SLIME:
+                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+                    {
+                        var slime = new Slime
+                        {
+                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                        };
+                        gameObjects.Add(slime);
+                    }
+                    break;
+                case EnemyList.FISH:
+                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+                    {
+                        var fish = new Fish
+                        {
+                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                        };
+                        gameObjects.Add(fish);
+                    }
+                    break;
+                case EnemyList.SHEEP:
+                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+                    {
+                        var sheep = new Sheep
+                        {
+                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                        };
+                        gameObjects.Add(sheep);
+                    }
+                    break;
+                case EnemyList.JUSTAROCK:
+                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+                    {
+                        var rock = new JustARock
+                        {
+                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                        };
+                        gameObjects.Add(rock);
+                    }
+                    break;
+                case EnemyList.GUYONABIKE:
+                    for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+                    {
+                        var bike = new GuyOnABike
+                        {
+                            Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
+                        };
+                        gameObjects.Add(bike);
+                    }
+                    break;
             }
+
         }
 
         public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
