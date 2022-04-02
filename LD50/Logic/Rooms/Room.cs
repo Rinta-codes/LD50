@@ -8,7 +8,7 @@ namespace LD50.Logic.Rooms
 {
     public class Room : GameObject
     {
-        public Vector2 OnCarPosition { get; private set; }
+        public Vector2 OnCarPosition { get; set; }
         
         protected UIElement label;
         private Vector2 _roomPosition;
