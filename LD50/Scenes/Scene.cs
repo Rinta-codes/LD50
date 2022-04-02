@@ -6,6 +6,12 @@ using System.Collections.Generic;
 
 namespace LD50.Scenes
 {
+    public enum Scenes
+    {
+        MAINMENU = 0,
+        DRIVING = 1,
+        EVENT = 2,
+    }
     public abstract class Scene
     {
         public List<GameObject> gameObjects;

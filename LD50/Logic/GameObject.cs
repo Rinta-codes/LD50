@@ -20,7 +20,7 @@ namespace LD50.Logic
 
         }
 
-        public void Move(Vector2 movement)
+        public virtual void Move(Vector2 movement)
         {
             _sprite.Position += movement;
         }

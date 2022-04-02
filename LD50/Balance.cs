@@ -32,10 +32,22 @@ namespace LD50
 
         public const int minRoomCost = 4;
         public const int maxRoomCost = 25;
+
+        // Moving
+        public static int FuelCost()
+        {
+            return Globals.player.car.TotalRooms;
+        }
+        public static int FoodCost()
+        {
+            return Globals.player.car.TotalPopulation;
+        }
+
         // Weapons
         public const int baseGunDamage = 5;
         public const float baseGunRange = 300.0f;
         public const float baseGunCooldown = 1.0f;
+
         public const int baseGunMinCost = 3;
         public const int baseGunMaxCost = 7;
 
