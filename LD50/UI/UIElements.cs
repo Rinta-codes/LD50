@@ -1,14 +1,12 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LD50.UI
 {
     public class UIElements : UIElement
     {
-        protected List<UIElement> elements;
+        protected List<UIElement> elements = new List<UIElement>();
 
         /// <summary>
         /// Creates a list of UIElements
@@ -21,6 +19,14 @@ namespace LD50.UI
         public void Add(UIElement element)
         {
             elements.Add(element);
+        }
+
+        public void Add(UIElements elementsToAdd)
+        {
+            foreach (var element in elementsToAdd.elements)
+            {
+                elements.Add(element);
+            }
         }
 
         public void AddRange(IEnumerable<UIElement> elements)
