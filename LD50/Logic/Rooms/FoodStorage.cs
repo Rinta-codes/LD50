@@ -14,7 +14,7 @@ namespace LD50.Logic.Rooms
             private set
             {
                 _storedAmount = value;
-                label.SetText($"Food: {value} / {Capacity}", TextAlignment.LEFT, _fontSize);
+                label.SetText($"Food: {value} / {Capacity}", TextAlignment.CENTER, _fontSize);
             }
         }
         public FoodStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, $"Food Storage: Can store {capacity} food.")

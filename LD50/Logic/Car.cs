@@ -38,8 +38,10 @@ namespace LD50.Logic
         public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
         public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
         public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
-        public int TotalBedroomSpace => _rooms.OfType<Bedroom>().Sum(room => (room as Bedroom).Capacity);
-        public int OccupiedBedroomSpace => _rooms.OfType<Bedroom>().Sum(room => (room as Bedroom).Persons.Count);
+        public int TotalBedroomSpace => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Capacity);
+        public int OccupiedBedroomSpace => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Persons.Count);
+        public int TotalWeaponsStored => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Stored);
+        public int TotalWeaponsCapacity => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Capacity);
         public int TotalRooms { get { return _rooms.Count; } }
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
@@ -174,12 +176,31 @@ namespace LD50.Logic
             return false;
         }
 
+        public bool AddWeapon(Weapon weapon)
+        {
+            if (TotalWeaponsCapacity <= TotalWeaponsStored)
+                return false;
+
+            foreach (var weaponStorage in _rooms.OfType<WeaponStorage>())
+            {
+                if (weaponStorage.HasCapacity)
+                {
+                    weaponStorage.AddWeapon(weapon);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+
         public override bool Update()
         {
             if (_hkRoom.IsPressed())
             {
                 Random rnd = new Random();
-                int randomizeRoom = rnd.Next(3);
+                int randomizeRoom = rnd.Next(4);
                 switch (randomizeRoom)
                 {
                     case 0:
@@ -195,6 +216,11 @@ namespace LD50.Logic
                     case 2:
                         {
                             AddRoom(new Bedroom(Vector2.Zero));
+                            break;
+                        }
+                    case 3:
+                        {
+                            AddRoom(new WeaponStorage(Vector2.Zero, 5));
                             break;
                         }
                 }

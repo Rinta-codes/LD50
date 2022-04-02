@@ -19,6 +19,8 @@ namespace LD50.Logic.Rooms
 
             _persons = new List<Person>();
             _sprite.SetColour(new Vector4(0, 0, 1, 1));
+
+            label.SetText("Bedroom", TextAlignment.CENTER, _fontSize);
         }
 
         public void AddPerson(Person person)

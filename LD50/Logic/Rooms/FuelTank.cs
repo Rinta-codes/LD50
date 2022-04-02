@@ -13,7 +13,7 @@ namespace LD50.Logic.Rooms
             private set
             {
                 _storedAmount = value;
-                label.SetText($"Fuel: {value} / {Capacity}", TextAlignment.LEFT, _fontSize);
+                label.SetText($"Fuel: {value} / {Capacity}", TextAlignment.CENTER, _fontSize);
             }
         }
         public FuelTank(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, $"Fuel Tank: Can store {capacity} fuel.")
