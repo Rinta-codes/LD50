@@ -88,7 +88,7 @@ namespace LD50.UI
             {
                 _backgroundRect.Update();
             }
-            if (_textRender != null)
+            if (_textRender != null && IsDraggable)
             {
                 _textRender.Position = _position;
             }
@@ -182,7 +182,7 @@ namespace LD50.UI
                     }
                     break;
             }
-            _textRender = new Sprite(tr, textPos, tr.Size, DrawLayer.UI, _isStatic);
+            _textRender = new Sprite(tr, textPos, tr.Size, _drawLayer, _isStatic);
 
             if (_backgroundRect == null)
             {

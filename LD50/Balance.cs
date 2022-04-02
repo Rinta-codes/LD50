@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,6 +27,11 @@ namespace LD50
         public const int minEnemySpawns = 2;
         public const int maxEnemySpawns = 15;
 
+        public const int foodStorageCap = 10;
+        public const int fuelStorageCap = 10;
+
+        public const int minRoomCost = 4;
+        public const int maxRoomCost = 25;
         // Weapons
         public const float baseGunRange = 300.0f;
         public const float baseGunCooldown = 1.0f;

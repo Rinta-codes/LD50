@@ -35,8 +35,10 @@ namespace LD50.Logic
 
         public override Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
 
-        public int TotalFuel { get; private set; } = 0;
-        public int TotalFood { get; private set; } = 0;
+        public int TotalFuelStored => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.StoredAmount);
+        public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
+        public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
+        public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
@@ -72,7 +74,7 @@ namespace LD50.Logic
             {
                 _ = new ChangeRoomScene(this, room);
             }
-            
+
         }
 
         public void ChangeRoom(Vector2 roomPosition, Room room)
@@ -90,8 +92,6 @@ namespace LD50.Logic
                 amountLeft = fuelTank.AddFuel(amountLeft);
             }
 
-            TotalFuel += amount - amountLeft;
-
             return amountLeft;
         }
 
@@ -106,8 +106,6 @@ namespace LD50.Logic
                     break;
             }
 
-            TotalFuel -= amount;
-
             return amountToConsume == 0;
         }
 
@@ -118,8 +116,6 @@ namespace LD50.Logic
             {
                 amountLeft = foodStorage.AddFood(amountLeft);
             }
-
-            TotalFood += amount - amountLeft;
 
             return amountLeft;
         }
@@ -134,8 +130,6 @@ namespace LD50.Logic
                 if (amountToConsume == 0)
                     break;
             }
-
-            TotalFood -= amount;
 
             return amountToConsume == 0;
         }
