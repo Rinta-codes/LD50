@@ -1,4 +1,4 @@
-﻿using LD50.UI;
+using LD50.UI;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,8 @@ namespace LD50.Scenes.Events
         FOODPILE = 1,
         FUELPILE = 2,
         TRADING = 3,
-        PERSON = 4,
+        BLUEPRINTTRADING = 4,
+        PERSON = 5,
         last
     }
 
@@ -51,6 +52,7 @@ namespace LD50.Scenes.Events
                 Events.FOODPILE => new FoodPile(),
                 Events.FUELPILE => new FuelPile(),
                 Events.TRADING => new TradeEvent(),
+                Events.BLUEPRINTTRADING => new BluePrintTradeEvent(),
                 Events.PERSON => new PersonEvent(),
                 _ => null,
             };
