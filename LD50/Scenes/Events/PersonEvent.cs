@@ -8,7 +8,8 @@ namespace LD50.Scenes.Events
         private readonly int _fuel;
         private readonly int _food;
         private readonly int _fontSize = 20;
-        
+        private readonly Vector4 textColour = new Vector4(.5f, .5f, 0, .5f);
+
 
         public PersonEvent() : base(Vector2.Zero)
         {
@@ -16,8 +17,6 @@ namespace LD50.Scenes.Events
             _food = Globals.rng.Next(1, Balance.maxFoodOnPerson);
 
             string resources = $"{_fuel} Fuel and {_food} Food";
-
-            Vector4 textColour = new Vector4(.5f, .5f, 0, .5f);
             
             uiElements.Add(new Resources());
             uiElements.Add(new Label($"You see a person on the side of the road", TextAlignment.CENTER, textColour, new Vector2(Globals.ScreenResolutionX/2, 300), _fontSize, true));
@@ -36,16 +35,35 @@ namespace LD50.Scenes.Events
         }
 
         void Accept()
-        { 
-                    
+        {
+            if (Globals.player.car.AddOccupant())
+            {
+                Globals.player.car.AddFood(_food);
+                Globals.player.car.AddFuel(_fuel);
+                MoveOn();
+            }
+            else
+            {
+                Reject();
+            }
         }
 
         void Reject()
         {
+            uiElements.Clear();
+            uiElements.Add(new Label($"You don't have space for this person in your car,", TextAlignment.CENTER, textColour, new Vector2(Globals.ScreenResolutionX / 2, 350), _fontSize, true));
+            uiElements.Add(new Label($"so you speed away, leaving them to die a terrible death.", TextAlignment.CENTER, textColour, new Vector2(Globals.ScreenResolutionX / 2, 400), _fontSize, true));
 
+            Button moveOnButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX / 2 + 100, 450), Globals.buttonSizeSmall, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+            moveOnButton.SetText("Move On", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), 12);
+            moveOnButton.OnClickAction = () => MoveOn();
+            uiElements.Add(moveOnButton);
         }
 
-
+        private void MoveOn()
+        {
+            Globals.currentScene = (int)Scenes.DRIVING;
+        }
 
     }
 }

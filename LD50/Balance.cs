@@ -40,7 +40,7 @@ namespace LD50
         }
         public static int FoodCost()
         {
-            return Globals.player.car.TotalPopulation;
+            return Globals.player.car.OccupiedBedroomSpace + 1; // Include the driver in the food cost
         }
 
         // Weapons
@@ -59,5 +59,6 @@ namespace LD50
         // Person encounter
         public const int maxFuelOnPerson = 5;
         public const int maxFoodOnPerson = 5;
+        public const int personHP = 10;
     }
 }

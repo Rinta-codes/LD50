@@ -12,6 +12,7 @@ namespace LD50.Scenes.Events
         FOODPILE = 1,
         FUELPILE = 2,
         TRADING = 3,
+        PERSON = 4,
         last
     }
 
@@ -50,6 +51,7 @@ namespace LD50.Scenes.Events
                 Events.FOODPILE => new FoodPile(),
                 Events.FUELPILE => new FuelPile(),
                 Events.TRADING => new TradeEvent(),
+                Events.PERSON => new PersonEvent(),
                 _ => null,
             };
         }

@@ -33,45 +33,14 @@ namespace LD50.Logic
             new Vector2(0, 0)
         });
 
-        public Vector2 Position { get { return _sprite.Position; } }
-
-        public int TotalBedroomSpace
-        {
-            get
-            {
-                return _rooms.Where(room => room is Bedroom).Sum(room => (room as Bedroom).Capacity);
-            }
-        }
-
-        public int OccupiedBedroomSpace
-        {
-            get
-            {
-                return _rooms.Where(room => room is Bedroom).Sum(room => (room as Bedroom).Persons.Count);
-            }
-        }
-
-        public int TotalFuelStored
-        {
-            get
-            {
-                int result = 0;
-
-                foreach (Room room in _rooms)
-                {
-                    if (room is FuelTank fuelTank)
-                        result += fuelTank.StoredAmount;
-                }
-                return result;
-            }
-        }
         public override Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
         public int TotalFuelStored => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.StoredAmount);
         public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
         public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
         public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
+        public int TotalBedroomSpace => _rooms.OfType<Bedroom>().Sum(room => (room as Bedroom).Capacity);
+        public int OccupiedBedroomSpace => _rooms.OfType<Bedroom>().Sum(room => (room as Bedroom).Persons.Count);
         public int TotalRooms { get { return _rooms.Count; } }
-        public int TotalPopulation => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Persons.Count) + 1;
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
@@ -186,6 +155,23 @@ namespace LD50.Logic
             }
 
             return amountToConsume == 0;
+        }
+
+        public bool AddOccupant()
+        {
+            if (TotalBedroomSpace <= OccupiedBedroomSpace)
+                return false;
+
+            foreach (var bedroom in _rooms.OfType<Bedroom>())
+            {
+                if (bedroom.HasCapacity)
+                {
+                    bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, Balance.personHP));
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public override bool Update()
