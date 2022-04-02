@@ -44,6 +44,13 @@ namespace LD50.Logic
                 }
             }
 
+            if (Globals.player.person != shooter && utils.Utility.Collides(_position, _size, Globals.player.Position, Globals.player.Size))
+            {
+                Globals.Logger.Log($"{Globals.player} took {_damage} damage!", utils.LogType.INFO);
+                Globals.player.TakeDamage(_damage);
+                return false;
+            }
+
             foreach (Enemy e in Globals.CurrentScene.gameObjects.OfType<Enemy>())
             {
                 if (e != shooter && utils.Utility.Collides(_position, _size, e.Position, e.Size))

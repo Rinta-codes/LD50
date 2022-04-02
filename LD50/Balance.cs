@@ -22,6 +22,12 @@ namespace LD50
         public const int minFuelInFuelItem = 1;
         public const int maxFuelInFuelItem = 10;
 
+        public const int minFoodAmbushReward = 5;
+        public const int maxFoodAmbushReward = 20;
+
+        public const int minFuelAmbushReward = 5;
+        public const int maxFuelAmbushReward = 20;
+
         public const int maxPickupSpawnRadius = 350;
 
         public const int minEnemySpawns = 2;
@@ -50,6 +56,13 @@ namespace LD50
 
         public const int baseGunMinCost = 3;
         public const int baseGunMaxCost = 7;
+
+        public const int betterGunDamage = 8;
+        public const float betterGunRange = 400.0f;
+        public const float betterGunCooldown = 0.75f;
+
+        public const int betterGunMinCost = 5;
+        public const int betterGunMaxCost = 10;
 
         // Enemies
         public const int SlimeAggroRange = 500;
