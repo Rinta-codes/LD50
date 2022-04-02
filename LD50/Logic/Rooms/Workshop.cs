@@ -108,7 +108,7 @@ namespace LD50.Logic.Rooms
                     //TODO: turn this button into an actual weapon's image
                     var pickButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     pickButton.SetText("Pick", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-                    pickButton.OnClickAction = () => StartCrafting();
+                    pickButton.OnClickAction = () => PickCraftedWeapon();
                     uiElements.Add(pickButton);
                     break;
             }
