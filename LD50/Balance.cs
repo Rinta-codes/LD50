@@ -73,5 +73,8 @@ namespace LD50
         public const int maxFuelOnPerson = 5;
         public const int maxFoodOnPerson = 5;
         public const int personHP = 10;
+
+        // Ally
+        public const float runPercent = 0.2f;
     }
 }

@@ -18,6 +18,7 @@ namespace LD50.Logic.Enemies
 
         public override bool Update()
         {
+            if (!Globals.CurrentScene.gameObjects.Contains(_target)) _target = null;
             if (_target == null || (_target.Position - Position).Length > Balance.SlimeAggroRange)
             {
                 // Find a new target
