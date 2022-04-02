@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using LD50.UI;
+using OpenTK.Windowing.Common;
 
 namespace LD50.Logic.Rooms
 {
@@ -21,7 +22,7 @@ namespace LD50.Logic.Rooms
 
         public override void Draw()
         {
-            var roomPosition = CalculateRoomPosition();
+            var roomPosition = OnCarPosition * new Vector2(300, 150) + Globals.player.CarPosition - new Vector2(900, 480);
 
             _sprite.Position = roomPosition;
             _sprite.Draw();
@@ -30,10 +31,9 @@ namespace LD50.Logic.Rooms
             label.Draw();
         }
 
-        public Vector2 CalculateRoomPosition()
+        public virtual void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
-            return OnCarPosition * new Vector2(300, 150) + Globals.player.CarPosition - new Vector2(900, 480);
-        }
 
+        }
     }
 }

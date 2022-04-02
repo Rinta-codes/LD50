@@ -48,5 +48,14 @@ namespace LD50.UI
             }
             return false;
         }
+
+        public override void SetPosition(Vector2 position)
+        {
+            if(_innerRectangle != null)
+            {
+                _innerRectangle.Position = position;
+            }
+            base.SetPosition(position);
+        }
     }
 }

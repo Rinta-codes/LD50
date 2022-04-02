@@ -1,6 +1,7 @@
 ﻿using LD50.Logic.Blueprints;
 using LD50.UI;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 using System.Collections.Generic;
 
 namespace LD50.Logic.Rooms
@@ -16,8 +17,7 @@ namespace LD50.Logic.Rooms
     {
         private Weapon _craftedWeapon = null;
 
-        //TODO: move to the base class or find another approach
-        protected List<UIElement> uiElements = new List<UIElement>();
+        protected List<UIElement> workshopUiElements = new List<UIElement>();
 
         public WorkshopState State { get; private set; } = WorkshopState.Idle;
         public Blueprint AssignedBlueprint { get; private set; }
@@ -90,7 +90,7 @@ namespace LD50.Logic.Rooms
         {
             State = newState;
 
-            uiElements.Clear();
+            workshopUiElements.Clear();
 
             switch (State)
             {
@@ -98,18 +98,18 @@ namespace LD50.Logic.Rooms
                     var craftButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     craftButton.SetText("Craft", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
                     craftButton.OnClickAction = () => StartCrafting();
-                    uiElements.Add(craftButton);
+                    workshopUiElements.Add(craftButton);
                     break;
                 case WorkshopState.Crafting:
-                    var craftingLabel = new Label($"Crafting: {AssignedBlueprint.Name}", TextAlignment.LEFT, new Vector4(.5f, .5f, 0, .5f), new Vector2(0, 0), _fontSize, true);
-                    uiElements.Add(craftingLabel);
+                    var craftingLabel = new Label($"Crafting: {AssignedBlueprint.Name} | {CraftTurnsCompleted} / {AssignedBlueprint.CraftTime}", TextAlignment.CENTER, new Vector4(.5f, .5f, 0, .5f), new Vector2(0, 0), _fontSize, true);
+                    workshopUiElements.Add(craftingLabel);
                     break;
                 case WorkshopState.WeaponReady:
                     //TODO: turn this button into an actual weapon's image
                     var pickButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     pickButton.SetText("Pick", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
                     pickButton.OnClickAction = () => PickCraftedWeapon();
-                    uiElements.Add(pickButton);
+                    workshopUiElements.Add(pickButton);
                     break;
             }
         }
@@ -118,11 +118,25 @@ namespace LD50.Logic.Rooms
         {
             base.Draw();
 
-            foreach (var uiElement in uiElements)
+            foreach (var uiElement in workshopUiElements)
             {
-                uiElement.SetPosition(CalculateRoomPosition());
+                uiElement.SetPosition(_sprite.Position);
                 uiElement.Draw();
             }
         }
+
+        public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
+        {
+            for (int i = workshopUiElements.Count - 1; i >= 0; i--)
+            {
+                if (workshopUiElements[i].IsInElement(mousePosition))
+                {
+                    workshopUiElements[i].OnClick(e, mousePosition);
+                    return;
+                }
+            }
+            return;
+        }
+
     }
 }

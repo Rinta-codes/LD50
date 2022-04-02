@@ -2,9 +2,7 @@
 using LD50.Scenes.Events;
 using LD50.UI;
 using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using OpenTK.Windowing.Common;
 
 namespace LD50.Scenes
 {
@@ -66,6 +64,12 @@ namespace LD50.Scenes
                 }
             }
             base.Update();
+        }
+
+        public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
+        {
+            base.OnClick(e, mousePosition);
+            Globals.player.car.OnClick(e, mousePosition);
         }
     }
 }

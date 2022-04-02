@@ -2,10 +2,10 @@ using LD50.IO;
 using LD50.Logic.Rooms;
 using LD50.Scenes;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LD50.Logic
 {
@@ -247,6 +247,14 @@ namespace LD50.Logic
                 }
             }
             return base.Update();
+        }
+
+        public void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
+        {
+            foreach (var room in _rooms)
+            {
+                room.OnClick(e, mousePosition);
+            }
         }
 
         public override void Draw()
