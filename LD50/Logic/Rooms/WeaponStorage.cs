@@ -6,17 +6,8 @@ namespace LD50.Logic.Rooms
     class WeaponStorage : Room
     {
         public int Capacity { get; }
-        
-        private int _stored;
-        public int Stored 
-        {
-            get => _stored;
-            set
-            {
-                _stored = value;
-                label.SetText($"Weapons: {value} / {Capacity}", TextAlignment.CENTER, _fontSize);
-            }
-        }
+
+        public int Stored => _weapons.Count;
 
         public bool HasCapacity { get { return _weapons.Count < Capacity; } }
 
@@ -25,7 +16,7 @@ namespace LD50.Logic.Rooms
         public WeaponStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.ROOM_WEAPONSTORAGE, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), Vector2.Zero, "Weapon Storage: can store {capacity} weapon(s).")
         {
             Capacity = capacity;
-            Stored = 0;
+            label.SetText($"Weapons: 0 / {Capacity}", TextAlignment.CENTER, _fontSize);
 
             // _sprite.colour = new Vector4(0, 1, 1, 1); // Light Blue
         }
@@ -33,6 +24,12 @@ namespace LD50.Logic.Rooms
         public void AddWeapon(Weapon weapon)
         {
             _weapons.Add(weapon);
+            UpdateLabel();
+        }
+
+        public void UpdateLabel()
+        {
+            label.SetText($"Weapons: {_weapons.Count} / {Capacity}", TextAlignment.CENTER, _fontSize);
         }
     }
 }
