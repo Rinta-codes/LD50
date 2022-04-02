@@ -79,7 +79,7 @@ namespace LD50.Scenes.Events
 
         private void MoveOn()
         {
-            // TODO: this function
+            Globals.currentScene = (int)Scenes.DRIVING;
         }
 
         private void LookAtCar()

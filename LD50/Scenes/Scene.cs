@@ -1,4 +1,5 @@
-﻿using LD50.Logic;
+﻿using LD50.IO;
+using LD50.Logic;
 using LD50.UI;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -18,6 +19,8 @@ namespace LD50.Scenes
         protected List<UIElement> uiElements;
         public Camera Camera;
 
+        private Hotkey _hkDebug = new Hotkey(false);
+
         /// <summary>
         /// Base scene class
         /// </summary>
@@ -25,7 +28,9 @@ namespace LD50.Scenes
         public Scene(Vector2 cameraStartPosition)
         {
             gameObjects = new List<GameObject>();
-            uiElements = new List<UIElement>();
+            uiElements = new List<UIElement>() { new DebugUI() };
+            uiElements[0].IsHidden = true;
+            _hkDebug.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.GraveAccent);
             Camera = new Camera(new Vector3(cameraStartPosition.X, cameraStartPosition.Y, 10f), Window.WindowSize.X / Window.WindowSize.Y, 100f, 0.2f);
         }
 
@@ -41,6 +46,11 @@ namespace LD50.Scenes
                 {
                     gameObjects.RemoveAt(i);
                 }
+            }
+
+            if (_hkDebug.IsPressed())
+            {
+                uiElements[0].IsHidden = !uiElements[0].IsHidden;
             }
 
             for (int i = uiElements.Count - 1; i >= 0; i--)

@@ -38,8 +38,11 @@ namespace LD50.Logic
         public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
         public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
         public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
+        public int TotalBedroomSpace => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Capacity);
+        public int OccupiedBedroomSpace => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Persons.Count);
+        public int TotalWeaponsStored => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Stored);
+        public int TotalWeaponsCapacity => _rooms.OfType<WeaponStorage>().Sum(weaponStorage => weaponStorage.Capacity);
         public int TotalRooms { get { return _rooms.Count; } }
-        public int TotalPopulation => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Persons.Count) + 1;
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
@@ -164,18 +167,70 @@ namespace LD50.Logic
             return amountToConsume == 0;
         }
 
+        public bool AddOccupant()
+        {
+            if (TotalBedroomSpace <= OccupiedBedroomSpace)
+                return false;
+
+            foreach (var bedroom in _rooms.OfType<Bedroom>())
+            {
+                if (bedroom.HasCapacity)
+                {
+                    bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, Balance.personHP));
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool AddWeapon(Weapon weapon)
+        {
+            if (TotalWeaponsCapacity <= TotalWeaponsStored)
+                return false;
+
+            foreach (var weaponStorage in _rooms.OfType<WeaponStorage>())
+            {
+                if (weaponStorage.HasCapacity)
+                {
+                    weaponStorage.AddWeapon(weapon);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+
         public override bool Update()
         {
             if (_hkRoom.IsPressed())
             {
                 Random rnd = new Random();
-                if (rnd.Next(2) == 0)
+                int randomizeRoom = rnd.Next(4);
+                switch (randomizeRoom)
                 {
-                    AddRoom(new FoodStorage(Vector2.Zero, 10));
-                }
-                else
-                {
-                    AddRoom(new FuelTank(Vector2.Zero, 10));
+                    case 0:
+                        {
+                            AddRoom(new FoodStorage(Vector2.Zero, 10));
+                            break;
+                        }
+                    case 1:
+                        {
+                            AddRoom(new FuelTank(Vector2.Zero, 10));
+                            break;
+                        }
+                    case 2:
+                        {
+                            AddRoom(new Bedroom(Vector2.Zero));
+                            break;
+                        }
+                    case 3:
+                        {
+                            AddRoom(new WeaponStorage(Vector2.Zero, 5));
+                            break;
+                        }
                 }
             }
             return base.Update();
