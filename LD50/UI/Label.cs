@@ -88,7 +88,7 @@ namespace LD50.UI
             {
                 _backgroundRect.Update();
             }
-            if (_textRender != null)
+            if (_textRender != null && IsDraggable)
             {
                 _textRender.Position = _position;
             }
