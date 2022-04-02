@@ -14,17 +14,17 @@ namespace LD50.Logic
 
         public Car car;
         public List<Blueprint> blueprints = new List<Blueprint>();
-        private Person _person;
+        public Person person;
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 
         public Vector2 CarPosition { get { return car.Position; } set { car.Position = value; } }
-        public Vector2 Size { get { return _person.Size; } }
-        public override Vector2 Position { get { return _person.Position; } set { _person.Position = value; } }
+        public Vector2 Size { get { return person.Size; } }
+        public override Vector2 Position { get { return person.Position; } set { person.Position = value; } }
 
         public Player()
         {
             car = new Car(new Vector2(1300, 925), new Vector2(800, 200));
-            _person = new Person(TexName.PLAYER_IDLE, Balance.playerHealth);
+            person = new Person(TexName.PLAYER_IDLE, Balance.playerHealth);
 
             _hkUp = new Hotkey(true).AddKeys(Keys.W, Keys.Up);
             _hkDown = new Hotkey(true).AddKeys(Keys.S, Keys.Down);
@@ -34,12 +34,12 @@ namespace LD50.Logic
 
         public void Attack(Vector2 direction)
         {
-            _person.Attack(direction);
+            person.Attack(direction);
         }
 
         public void TakeDamage(int damage)
         {
-            _person.TakeDamage(damage);
+            person.TakeDamage(damage);
         }
 
         public override void Move(Vector2 movement)
@@ -51,7 +51,7 @@ namespace LD50.Logic
         {
             if (Globals.CurrentScene is Event)
             {
-                _person.Draw();
+                person.Draw();
             }
             else
             {
@@ -65,21 +65,21 @@ namespace LD50.Logic
             {
                 if (_hkUp.IsPressed())
                 {
-                    _person.Move(new Vector2(0, -(float)(Balance.playerMovementSpeed * Globals.deltaTime)));
+                    person.Move(new Vector2(0, -(float)(Balance.playerMovementSpeed * Globals.deltaTime)));
                 }
                 if (_hkDown.IsPressed())
                 {
-                    _person.Move(new Vector2(0, (float)(Balance.playerMovementSpeed * Globals.deltaTime)));
+                    person.Move(new Vector2(0, (float)(Balance.playerMovementSpeed * Globals.deltaTime)));
                 }
                 if (_hkLeft.IsPressed())
                 {
-                    _person.Move(new Vector2(-(float)(Balance.playerMovementSpeed * Globals.deltaTime), 0));
+                    person.Move(new Vector2(-(float)(Balance.playerMovementSpeed * Globals.deltaTime), 0));
                 }
                 if (_hkRight.IsPressed())
                 {
-                    _person.Move(new Vector2((float)(Balance.playerMovementSpeed * Globals.deltaTime), 0));
+                    person.Move(new Vector2((float)(Balance.playerMovementSpeed * Globals.deltaTime), 0));
                 }
-                _person.Update();
+                person.Update();
             }
             else
             {
