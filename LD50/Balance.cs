@@ -38,6 +38,10 @@ namespace LD50
         {
             return Globals.player.car.TotalRooms;
         }
+        public static int FoodCost()
+        {
+            return Globals.player.car.TotalPopulation;
+        }
 
         // Weapons
         public const float baseGunRange = 300.0f;

@@ -39,6 +39,7 @@ namespace LD50.Logic
         public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
         public int TotalFoodCapacity => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.Capacity);
         public int TotalRooms { get { return _rooms.Count; } }
+        public int TotalPopulation => _rooms.OfType<Bedroom>().Sum(bedroom => bedroom.Persons.Count) + 1;
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {

@@ -33,7 +33,7 @@ namespace LD50.Scenes
         {
             if (!_isDriving)
             {
-                if (!Globals.player.car.ConsumeFuel(Balance.FuelCost()))
+                if (!Globals.player.car.ConsumeFuel(Balance.FuelCost()) || !Globals.player.car.ConsumeFood(Balance.FoodCost()))
                 {
                     // Out of fuel, dragon time
                     Scene dragon = new Ambush(true);
