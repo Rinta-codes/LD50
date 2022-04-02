@@ -35,8 +35,67 @@ namespace LD50.Logic
 
         public Vector2 Position { get { return _sprite.Position; } }
 
-        public int TotalFuel { get; private set; } = 0;
-        public int TotalFood { get; private set; } = 0;
+        public int TotalFuelStored
+        {
+            get
+            {
+                int result = 0;
+
+                foreach (Room room in _rooms)
+                {
+                    if (room is FuelTank fuelTank)
+                        result += fuelTank.StoredAmount;
+                }
+                return result;
+            }
+        }
+
+        public int TotalFoodStored 
+        {
+            get
+            {
+                int result = 0;
+
+                foreach (Room room in _rooms)
+                {
+                    if (room is FoodStorage foodStorage)
+                        result += foodStorage.StoredAmount;
+                }
+                return result;
+            } 
+        }
+
+        public int TotalFuelCapacity
+        {
+            get
+            {
+                int result = 0;
+
+                foreach (Room room in _rooms)
+                {
+                    if (room is FuelTank fuelTank)
+                        result += fuelTank.Capacity;
+                }
+                return result;
+            }
+        }
+
+        public int TotalFoodCapacity
+        {
+            get
+            {
+                int result = 0;
+
+                foreach (Room room in _rooms)
+                {
+                    if (room is FoodStorage foodStorage)
+                        result += foodStorage.Capacity;
+                }
+                return result;
+            }
+        }
+
+
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
@@ -88,14 +147,8 @@ namespace LD50.Logic
             foreach (var fuelTank in _rooms.OfType<FuelTank>())
             {
                 amountLeft = fuelTank.AddFuel(amountLeft);
-
-                if (amountLeft == 0)
-                    return 0;
             }
 
-            TotalFuel += amount;
-
-            int x = 1;
             return amountLeft;
         }
 
@@ -110,8 +163,6 @@ namespace LD50.Logic
                     break;
             }
 
-            TotalFuel -= amount;
-
             return amountToConsume == 0;
         }
 
@@ -121,12 +172,8 @@ namespace LD50.Logic
             foreach (var foodStorage in _rooms.OfType<FoodStorage>())
             {
                 amountLeft = foodStorage.AddFood(amountLeft);
-
-                if (amountLeft == 0)
-                    return 0;
             }
 
-            TotalFood += amount;
             return amountLeft;
         }
 
@@ -140,8 +187,6 @@ namespace LD50.Logic
                 if (amountToConsume == 0)
                     break;
             }
-
-            TotalFood -= amount;
 
             return amountToConsume == 0;
         }

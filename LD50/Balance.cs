@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -32,5 +32,14 @@ namespace LD50
 
         public const int minRoomCost = 4;
         public const int maxRoomCost = 25;
+        // Weapons
+        public const float baseGunRange = 300.0f;
+        public const float baseGunCooldown = 1.0f;
+
+
+        // Enemies
+        public const int SlimeAggroRange = 500;
+        public const float SlimeMovementSpeed = 100.0f;
+        public const float SlimeWanderRadius = 150.0f;
     }
 }

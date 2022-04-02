@@ -9,13 +9,16 @@ namespace LD50.Logic
     {
 
         protected int _damage, _health;
-        public Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
+        protected Weapon _weapon;
+        protected Vector2 _moveTarget;
+        
         public Vector2 Size { get { return _sprite.size; } }
 
-        public Enemy(TexName texture, Vector2 size, int damage, int health) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.ENEMY, false))
+        public Enemy(TexName texture, Vector2 size, int damage, int health, Weapon weapon) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.ENEMY, false))
         {
             _damage = damage;
             _health = health;
+            _weapon = weapon;
         }
 
         public void TakeDamage(int damage)
@@ -34,6 +37,7 @@ namespace LD50.Logic
 
         public override bool Update()
         {
+            _weapon.Update();
             base.Update();
 
             return IsAlive();

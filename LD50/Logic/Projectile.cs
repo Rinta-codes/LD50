@@ -10,11 +10,11 @@ namespace LD50.Logic
     {
 
         private Vector2 _position, _size, _direction;
-        private float _speed;
+        private float _speed, _distance, _maxDistance;
         private int _damage;
         private GameObject shooter;
 
-        public Projectile(GameObject shooter, Vector2 position, Vector2 size, Vector2 direction, float speed, int damage) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.PROJECTILE, false))
+        public Projectile(GameObject shooter, Vector2 position, Vector2 size, Vector2 direction, float speed, int damage, float maxDistance) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.PROJECTILE, false))
         {
             this.shooter = shooter;
             this._position = position;
@@ -22,18 +22,21 @@ namespace LD50.Logic
             this._direction = direction.Normalized();
             this._speed = speed;
             this._damage = damage;
+            _maxDistance = maxDistance;
+            _distance = 0;
             _sprite.SetColour(new Vector4(0, 0, 1, 1));
         }
 
         public override bool Update()
         {
             _position += _direction * _speed * (float)Globals.deltaTime;
+            _distance += (_direction * _speed * (float)Globals.deltaTime).Length;
 
             _sprite.Position = _position;
 
             foreach (Person p in Globals.CurrentScene.gameObjects.OfType<Person>())
             {
-                if (utils.Utility.Collides(_position, _size, p.Position, p.Size))
+                if (p != shooter && utils.Utility.Collides(_position, _size, p.Position, p.Size))
                 {
                     Globals.Logger.Log($"{p} took {_damage} damage!", utils.LogType.INFO);
                     p.TakeDamage(_damage);
@@ -43,12 +46,17 @@ namespace LD50.Logic
 
             foreach (Enemy e in Globals.CurrentScene.gameObjects.OfType<Enemy>())
             {
-                if (utils.Utility.Collides(_position, _size, e.Position, e.Size))
+                if (e != shooter && utils.Utility.Collides(_position, _size, e.Position, e.Size))
                 {
                     Globals.Logger.Log($"{e} took {_damage} damage!", utils.LogType.INFO);
                     e.TakeDamage(_damage);
                     return false;
                 }
+            }
+
+            if (_distance > _maxDistance)
+            {
+                return false;
             }
 
             return base.Update();
