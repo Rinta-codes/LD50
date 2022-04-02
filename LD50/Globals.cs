@@ -19,6 +19,8 @@ namespace LD50
         public static readonly int ScreenResolutionX = 1920;
         public static readonly int ScreenResolutionY = 1080;
 
+        public static Random rng = new Random();
+
         public static Vector2 windowSize;
         public static int currentScene;
         public static List<Scene> scenes = new List<Scene>();

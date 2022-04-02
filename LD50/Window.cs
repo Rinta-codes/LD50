@@ -15,6 +15,8 @@ using LD50.Audio;
 using LD50.Scenes;
 using System.Runtime.InteropServices;
 using LD50.utils;
+using LD50.Scenes.Events;
+using LD50.Logic;
 
 namespace LD50
 {
@@ -81,7 +83,8 @@ namespace LD50
             spriteRenderer = new SpriteRenderer(_shader);
 
             // Create a Scene
-            Globals.scenes.Add(new DrivingScene(new Vector2(0, 0)));
+            Globals.player = new Player();
+            Globals.scenes.Add(new FuelPile());
 
             // Remove mouse from screen :)
             CursorGrabbed = false;

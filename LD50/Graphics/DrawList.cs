@@ -11,6 +11,7 @@ namespace LD50.Graphics
     public enum DrawLayer
     {
         BACKGROUND,
+        GROUNDITEM,
         CAR,
         ROOMS,
         ENEMY,

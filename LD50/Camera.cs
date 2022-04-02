@@ -137,35 +137,35 @@ namespace LD50
         /// </summary>
         public void Update()
         {
-            if (_hkUp.IsPressed())
-            { 
-                Position -= Up * Speed * (float)Globals.deltaTime;
-            }
+            //if (_hkUp.IsPressed())
+            //{ 
+            //    Position -= Up * Speed * (float)Globals.deltaTime;
+            //}
 
-            if (_hkDown.IsPressed())
-            {
-                Position += Up * Speed * (float)Globals.deltaTime;
-            }
+            //if (_hkDown.IsPressed())
+            //{
+            //    Position += Up * Speed * (float)Globals.deltaTime;
+            //}
 
-            if (_hkLeft.IsPressed())
-            {
-                Position -= Right * Speed * (float)Globals.deltaTime;
-            }
+            //if (_hkLeft.IsPressed())
+            //{
+            //    Position -= Right * Speed * (float)Globals.deltaTime;
+            //}
 
-            if (_hkRight.IsPressed())
-            {
-                Position += Right * Speed * (float)Globals.deltaTime;
-            }
+            //if (_hkRight.IsPressed())
+            //{
+            //    Position += Right * Speed * (float)Globals.deltaTime;
+            //}
 
-            if (_hkRotateLeft.IsPressed())
-            {
-                _cameraRotationAngle += _cameraRotationSpeed;
-            }
+            //if (_hkRotateLeft.IsPressed())
+            //{
+            //    _cameraRotationAngle += _cameraRotationSpeed;
+            //}
 
-            if (_hkRotateRight.IsPressed())
-            {
-                _cameraRotationAngle -= _cameraRotationSpeed;
-            }
+            //if (_hkRotateRight.IsPressed())
+            //{
+            //    _cameraRotationAngle -= _cameraRotationSpeed;
+            //}
         }
     }
 }

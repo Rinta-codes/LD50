@@ -14,12 +14,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Logic\PickupItems\Fueltem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="C:\Users\Tim\.nuget\packages\sharpfont.dependencies\2.6.0\build\..\bin\msvc10\x86\freetype6.dll" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Logic\Enemies\NewFile1.txt" />
     <None Remove="Logic\NewFile1.txt" />
+    <None Remove="Logic\PickupItems\NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>
