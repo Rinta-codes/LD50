@@ -58,5 +58,12 @@ namespace LD50.Logic
             _hpBar.Draw();
             base.Draw();
         }
+
+        public void HealToFull()
+        {
+            _health = _maxHealth;
+            _hpBar.Value = (float)_health / _maxHealth;
+        }
+
     }
 }
