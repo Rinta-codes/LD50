@@ -18,6 +18,7 @@ namespace LD50.UI
 
         protected bool _hidden;
 
+        public DrawLayer DrawLayerValue => _drawLayer;
         public bool IsDraggable { get; set; }
 
         /// <summary>
