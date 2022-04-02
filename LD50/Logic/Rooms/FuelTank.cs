@@ -14,7 +14,7 @@ namespace LD50.Logic.Rooms
         }
 
         /// <summary>
-        /// Adds fuel to the tank.
+        /// Add fuel to the tank.
         /// </summary>
         /// <returns>The amount of fuel that didn't fit.</returns>
         public int AddFuel(int amount)
@@ -23,6 +23,18 @@ namespace LD50.Logic.Rooms
             StoredAmount = Math.Min(StoredAmount + amount, Capacity);
 
             return fuelLeft;
+        }
+
+        /// <summary>
+        /// Remove fuel from the tank.
+        /// </summary>
+        /// <returns>The amount of fuel that couldn't be removed due to an empty tank.</returns>
+        public int RemoveFuel(int amount)
+        {
+            var missingFuel = Math.Max(amount - StoredAmount, 0);
+            StoredAmount = Math.Max(StoredAmount - amount, 0);
+
+            return missingFuel;
         }
     }
 }
