@@ -5,11 +5,13 @@ namespace LD50.Logic.Rooms
 {
     public class Room : GameObject
     {
+        private readonly Vector4 _labelTextColour = new Vector4(0, 0, 0, 1);
+        private readonly Vector4 _labelBGColour = new Vector4(1, 1, 1, .5f);
+        private readonly Vector2 _labelBGSize = new Vector2(200, 50);
+
         public Vector2 OnCarPosition { get; set; }
 
         public string description;
-
-        private Vector2 _roomPosition;
         
         protected Label label;
         protected readonly int _fontSize = 16;
@@ -18,7 +20,8 @@ namespace LD50.Logic.Rooms
         {
             this.description = description;
             OnCarPosition = onCarPosition;
-            label = new Label("", TextAlignment.LEFT, new Vector4(.5f, .5f, 0, .5f), new Vector2(0, 0), _fontSize, true);
+
+            label = new Label("", TextAlignment.LEFT, _labelTextColour, Vector2.Zero, _labelBGSize, _labelBGColour, TexName.PIXEL, true);
         }
 
         public override void Draw()
