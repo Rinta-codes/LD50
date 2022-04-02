@@ -1,4 +1,4 @@
-﻿using LD50.IO;
+using LD50.IO;
 using LD50.Logic.Rooms;
 using LD50.Scenes;
 using OpenTK.Mathematics;
@@ -34,7 +34,6 @@ namespace LD50.Logic
         });
 
         public override Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
-
         public int TotalFuelStored => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.StoredAmount);
         public int TotalFoodStored => _rooms.OfType<FoodStorage>().Sum(foodStorage => foodStorage.StoredAmount);
         public int TotalFuelCapacity => _rooms.OfType<FuelTank>().Sum(fuelTank => fuelTank.Capacity);
@@ -81,8 +80,29 @@ namespace LD50.Logic
         public void ChangeRoom(Vector2 roomPosition, Room room)
         {
             int index = _carPositions.IndexOf(roomPosition);
+
+            var oldRoom = _rooms[index];
+
             _rooms[index] = room;
             room.OnCarPosition = roomPosition;
+
+            RedistributeResources(oldRoom);
+        }
+
+        private void RedistributeResources(Room removedRoom)
+        {
+            if (removedRoom is FuelTank fuelTank)
+            {
+                AddFuel(fuelTank.StoredAmount);
+            }
+            else if (removedRoom is FoodStorage foodStorage)
+            {
+                AddFood(foodStorage.StoredAmount);
+            }
+            else if (removedRoom is Bedroom bedroom)
+            {
+                //TODO: reassign or dismiss people
+            }
         }
 
         public int AddFuel(int amount)
