@@ -14,6 +14,7 @@ namespace LD50.Scenes
         public DrivingScene(Vector2 cameraStartPosition) : base(cameraStartPosition)
         {
             uiElements.Add(new Resources());
+            uiElements.Add(new Rectangle(Vector4.One, new Vector2(Globals.ScreenResolutionX / 2, Globals.ScreenResolutionY / 2), new Vector2(Globals.ScreenResolutionX, Globals.ScreenResolutionY), true, TexName.DRIVING_BG, Graphics.DrawLayer.BACKGROUND));
 
             var nextEventButton = new Button(new Vector4(.8f, .8f, .8f, 1), new Vector4(.5f, .5f, .5f, 1), new Vector2(Globals.windowSize.X - 220, 500), new Vector2(400, 200), 5, Graphics.DrawLayer.UI, true);
             nextEventButton.SetText("=>", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
@@ -58,7 +59,7 @@ namespace LD50.Scenes
                 if (_player.CarPosition.X >= Globals.windowSize.X + _player.Size.X / 2 + 600)
                 {
                     _isDriving = false;
-                    _player.CarPosition = new Vector2(1300, 925);
+                    _player.CarPosition = _player.DefaultCarPosition;
                     Globals.player.car.OnNextTurn();
                     Globals.currentScene = (int) Scenes.EVENT;
                 }
