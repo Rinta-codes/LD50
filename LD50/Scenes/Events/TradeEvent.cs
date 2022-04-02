@@ -19,6 +19,8 @@ namespace LD50.Scenes.Events
         {
             int randNum = Globals.rng.Next(4);
 
+            uiElements.Add(new Resources());
+
             switch(randNum)
             {
                 case 0:
@@ -52,7 +54,7 @@ namespace LD50.Scenes.Events
             moveOnButton.OnClickAction = () => MoveOn();
             uiElements.Add(moveOnButton);
 
-            Button lookAtCarButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(1650, 100), new Vector2(300, 100), 10, Graphics.DrawLayer.UI, true);
+            Button lookAtCarButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(1650, 200), new Vector2(300, 100), 10, Graphics.DrawLayer.UI, true);
             lookAtCarButton.SetText("Look at car", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
             lookAtCarButton.OnClickAction = () => LookAtCar();
             uiElements.Add(lookAtCarButton);
@@ -61,19 +63,36 @@ namespace LD50.Scenes.Events
 
         private void Take()
         {
-
+            if (_costsFuel)
+            {
+                if (Globals.player.car.TotalFuel >= _cost)
+                {
+                    MoveOn();
+                    Globals.player.car.ConsumeFuel(_cost);
+                    Globals.player.car.AddRoom(_toTrade);
+                }
+            } 
+            else
+            {
+                if (Globals.player.car.TotalFood >= _cost)
+                {
+                    MoveOn();
+                    Globals.player.car.ConsumeFood(_cost);
+                    Globals.player.car.AddRoom(_toTrade);
+                }
+            }
         }
 
         private void MoveOn()
         {
-
+            // TODO: this function
         }
 
         private void LookAtCar()
         {
             Rectangle blockingBackground = new Rectangle(new Vector4(0, 0, 0, 0.9f), new Vector2(960, 540), new Vector2(1920, 1080), true, TexName.PIXEL);
             
-            Button backToTrade = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(1650, 100), new Vector2(300, 100), 10, Graphics.DrawLayer.UI, true);
+            Button backToTrade = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(1650, 200), new Vector2(300, 100), 10, Graphics.DrawLayer.UI, true);
             backToTrade.SetText("Back", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
             backToTrade.OnClickAction = () => BackToTrade();
             
