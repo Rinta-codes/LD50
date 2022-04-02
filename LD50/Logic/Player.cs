@@ -18,6 +18,12 @@ namespace LD50.Logic
         public Vector2 CarPosition { get { return car.Position; } }
         public Vector2 Position { get { return _person.Position; } set { _person.Position = value; } }
         public Vector2 Size { get { return _person.Size; } }
+        public Car Car
+        {
+            get { return _car; }
+            private set { _car = value;  }
+        }
+        public Vector2 CarPosition { get { return _car.Position; } }
 
         public Player()
         {

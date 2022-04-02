@@ -35,17 +35,20 @@ namespace LD50.Logic
 
         public Vector2 Position { get { return _sprite.Position; } }
 
+        public int TotalFuel { get; private set; } = 0;
+        public int TotalFood { get; private set; } = 0;
+
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
             _hkRoom.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Space);
 
-            var fuelTank = new FuelTank(_carPositions[_rooms.Count], 10);
-            fuelTank.AddFuel(Balance.initialFuel);
-            AddRoom(fuelTank);
+            // Add base rooms
+            _rooms.Add(new FuelTank(_carPositions[_rooms.Count], 10));
+            _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], 10));
 
-            var foodStorage = new FoodStorage(_carPositions[_rooms.Count], 10);
-            foodStorage.AddFood(Balance.initialFood);
-            AddRoom(foodStorage);
+            // Add base resources
+            AddFood(Balance.initialFood);
+            AddFuel(Balance.initialFuel);
         }
 
         public void AddRoom(Room room)
@@ -54,6 +57,16 @@ namespace LD50.Logic
             {
                 room.OnCarPosition = _carPositions[_rooms.Count];
                 _rooms.Add(room);
+
+                if (room is FuelTank)
+                {
+                    AddFuel(1);
+                }
+
+                if (room is FoodStorage)
+                {
+                    AddFood(1);
+                }
             }
             else
             {
@@ -79,6 +92,10 @@ namespace LD50.Logic
                 if (amountLeft == 0)
                     return 0;
             }
+
+            TotalFuel += amount;
+
+            int x = 1;
             return amountLeft;
         }
 
@@ -93,6 +110,8 @@ namespace LD50.Logic
                     break;
             }
 
+            TotalFuel -= amount;
+
             return amountToConsume == 0;
         }
 
@@ -106,6 +125,8 @@ namespace LD50.Logic
                 if (amountLeft == 0)
                     return 0;
             }
+
+            TotalFood += amount;
             return amountLeft;
         }
 
@@ -119,6 +140,8 @@ namespace LD50.Logic
                 if (amountToConsume == 0)
                     break;
             }
+
+            TotalFood -= amount;
 
             return amountToConsume == 0;
         }
