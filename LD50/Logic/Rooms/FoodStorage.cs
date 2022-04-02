@@ -7,7 +7,7 @@ namespace LD50.Logic.Rooms
     {
         public int Capacity { get; private set; }
         public int StoredAmount { get; private set; }
-        public FoodStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition)
+        public FoodStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, $"Food Storage: Can store {capacity} food.")
         {
             Capacity = capacity;
             _sprite.SetColour(new Vector4(0, 1, 0, 1));

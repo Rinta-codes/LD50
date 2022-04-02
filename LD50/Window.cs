@@ -84,7 +84,7 @@ namespace LD50
 
             // Create a Scene
             Globals.player = new Player();
-            Globals.scenes.Add(new Ambush(false));
+            Globals.scenes.Add(new TradeEvent());
 
             // Remove mouse from screen :)
             CursorGrabbed = false;

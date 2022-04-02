@@ -13,7 +13,7 @@ namespace LD50.Logic.Rooms
         public bool HasCapacity { get { return _persons.Count < _capacity; } }
 
 
-        public Bedroom(Vector2 onCarPosition) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition)
+        public Bedroom(Vector2 onCarPosition) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, "Bedroom: Can store a single person.")
         {
             _capacity = 1;
             _persons = new List<Person>();

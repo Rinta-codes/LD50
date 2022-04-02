@@ -7,7 +7,7 @@ namespace LD50.Logic.Rooms
     {
         public int Capacity { get; private set; }
         public int StoredAmount { get; private set; }
-        public FuelTank(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition)
+        public FuelTank(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.PIXEL, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, $"Fuel Tank: Can store {capacity} fuel.")
         {
             Capacity = capacity;
             _sprite.SetColour(new Vector4(1, 0, 0, 1));
