@@ -80,14 +80,19 @@ namespace LD50.Scenes
         public virtual void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
             Globals.selectedElement = null;
-            for (int i = uiElements.Count - 1; i >= 0; i--)
+            UIElement frontClickedElement = null;
+
+            foreach (var element in uiElements)
             {
-                if (uiElements[i].IsInElement(mousePosition))
+                if (element.IsInElement(mousePosition))
                 {
-                    uiElements[i].OnClick(e, mousePosition);
-                    return;
+                    if (frontClickedElement is null || frontClickedElement.DrawLayerValue < element.DrawLayerValue)
+                        frontClickedElement = element;
                 }
             }
+
+            if (frontClickedElement != null)
+                frontClickedElement.OnClick(e, mousePosition);
         }
 
         public virtual void OnMouseMove(MouseMoveEventArgs e)
