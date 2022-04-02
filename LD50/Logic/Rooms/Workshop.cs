@@ -1,5 +1,5 @@
 ﻿using LD50.Logic.Blueprints;
-using LD50.Scenes.Events;
+using LD50.Scenes;
 using LD50.UI;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;

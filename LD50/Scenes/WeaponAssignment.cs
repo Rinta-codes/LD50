@@ -4,7 +4,7 @@ using LD50.UI;
 using LD50.Logic;
 using LD50.Logic.Rooms;
 
-namespace LD50.Scenes.Events
+namespace LD50.Scenes
 {
     class WeaponAssignment : Scene
     {
@@ -105,11 +105,38 @@ namespace LD50.Scenes.Events
 
         private void GiveToPerson(Person person)
         {
-            //TODO decide where to put the person's current weapon
-            //TODO give weapon            
+            var oldWeapon = person.GiveWeapon(_weapon);
+
+            if (oldWeapon != null)
+                FindWhereToStoreWeapon(oldWeapon);
 
             _completedSuccessfully = true;
             Close();
+        }
+
+        /// <summary>
+        /// Find a place for the weapon being replaced.
+        /// Right now it finds an empty slot in this order: Weapon Storage, Player, Crew. If no empty slot found, the weapon is discarded.
+        /// </summary>
+        private void FindWhereToStoreWeapon(Weapon oldWeapon)
+        {
+            if (Globals.player.car.AddWeapon(oldWeapon))
+                return;
+
+            if (!Globals.player.person.HasWeapon)
+            {
+                Globals.player.person.GiveWeapon(oldWeapon);
+                return;
+            }
+
+            foreach (var person in Globals.player.car.GetOccupantList())
+            {
+                if (!person.HasWeapon)
+                {
+                    person.GiveWeapon(oldWeapon);
+                    return;
+                }
+            }
         }
 
         private void ThrowAway()
