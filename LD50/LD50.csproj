@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Logic\Enemies\NewFile1.txt" />
+    <None Remove="Logic\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="freetype6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
