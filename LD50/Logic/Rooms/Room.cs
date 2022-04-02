@@ -7,7 +7,7 @@ namespace LD50.Logic.Rooms
 {
     public class Room : GameObject
     {
-        public Vector2 OnCarPosition { get; private set; }
+        public Vector2 OnCarPosition { get; set; }
 
         public Room(Sprite sprite, Vector2 onCarPosition) : base(sprite)
         {

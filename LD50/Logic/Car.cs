@@ -1,8 +1,10 @@
 ﻿using LD50.IO;
 using LD50.Logic.Rooms;
+using LD50.Scenes;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LD50.Logic
@@ -11,7 +13,7 @@ namespace LD50.Logic
     {
         private List<Room> _rooms = new List<Room>();
         private Hotkey _hkRoom = new Hotkey(false);
-        private Vector2[] _carPositions = new Vector2[16]
+        private List<Vector2> _carPositions = new List<Vector2>(new Vector2[16]
         {
             new Vector2(3, 3),
             new Vector2(2, 3),
@@ -29,27 +31,109 @@ namespace LD50.Logic
             new Vector2(0, 1),
             new Vector2(1, 0),
             new Vector2(0, 0)
-        };
+        });
 
         public Vector2 Position { get { return _sprite.Position; } }
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.CAR, false))
         {
             _hkRoom.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Space);
-            _rooms.Add(new FuelTank(_carPositions[_rooms.Count], 10));
-            _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], 10));
+
+            var fuelTank = new FuelTank(_carPositions[_rooms.Count], 10);
+            fuelTank.AddFuel(Balance.initialFuel);
+            _rooms.Add(fuelTank);
+
+            var foodStorage = new FoodStorage(_carPositions[_rooms.Count], 10);
+            foodStorage.AddFood(Balance.initialFood);
+            _rooms.Add(foodStorage);
         }
 
-        public void AddRoom()
+        public void AddRoom(Room room)
         {
-            _rooms.Add(new FuelTank(_carPositions[_rooms.Count], 10));
+            if (_rooms.Count < 16)
+            {
+                room.OnCarPosition = _carPositions[_rooms.Count];
+                _rooms.Add(room);
+            }
+            else
+            {
+                _ = new ChangeRoomScene(this, room);
+            }
+            
+        }
+
+        public void ChangeRoom(Vector2 roomPosition, Room room)
+        {
+            int index = _carPositions.IndexOf(roomPosition);
+            _rooms[index] = room;
+            room.OnCarPosition = roomPosition;
+        }
+
+        public void AddFuel(int amount)
+        {
+            var amountLeft = amount;
+            foreach (var fuelTank in _rooms.OfType<FuelTank>())
+            {
+                amountLeft = fuelTank.AddFuel(amountLeft);
+
+                if (amountLeft == 0)
+                    break;
+            }
+        }
+
+        public bool ConsumeFuel(int amount)
+        {
+            var amountToConsume = amount;
+            foreach (var fuelTank in _rooms.OfType<FuelTank>())
+            {
+                amountToConsume = fuelTank.RemoveFuel(amountToConsume);
+
+                if (amountToConsume == 0)
+                    break;
+            }
+
+            return amountToConsume == 0;
+        }
+
+        public void AddFood(int amount)
+        {
+            var amountLeft = amount;
+            foreach (var foodStorage in _rooms.OfType<FoodStorage>())
+            {
+                amountLeft = foodStorage.AddFood(amountLeft);
+
+                if (amountLeft == 0)
+                    break;
+            }
+        }
+
+        public bool ConsumeFood(int amount)
+        {
+            var amountToConsume = amount;
+            foreach (var foodStorage in _rooms.OfType<FoodStorage>())
+            {
+                amountToConsume = foodStorage.RemoveFood(amountToConsume);
+
+                if (amountToConsume == 0)
+                    break;
+            }
+
+            return amountToConsume == 0;
         }
 
         public override bool Update()
         {
             if (_hkRoom.IsPressed())
             {
-                AddRoom();
+                Random rnd = new Random();
+                if (rnd.Next(2) == 0)
+                {
+                    AddRoom(new FoodStorage(Vector2.Zero, 10));
+                }
+                else
+                {
+                    AddRoom(new FuelTank(Vector2.Zero, 10));
+                }
             }
             return base.Update();
         }
