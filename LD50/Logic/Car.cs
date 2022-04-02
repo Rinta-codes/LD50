@@ -42,7 +42,7 @@ namespace LD50.Logic
             var fuelTank = new FuelTank(_carPositions[_rooms.Count], 10);
             fuelTank.AddFuel(Balance.initialFuel);
             _rooms.Add(fuelTank);
-            
+
             _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], 10));
         }
 
@@ -70,13 +70,27 @@ namespace LD50.Logic
         public void AddFuel(int amount)
         {
             var amountLeft = amount;
-            foreach(var fuelTank in _rooms.OfType<FuelTank>())
+            foreach (var fuelTank in _rooms.OfType<FuelTank>())
             {
                 amountLeft = fuelTank.AddFuel(amountLeft);
 
                 if (amountLeft == 0)
                     break;
             }
+        }
+
+        public bool ConsumeFuel(int amount)
+        {
+            var amountToConsume = amount;
+            foreach (var fuelTank in _rooms.OfType<FuelTank>())
+            {
+                amountToConsume = fuelTank.RemoveFuel(amountToConsume);
+
+                if (amountToConsume == 0)
+                    break;
+            }
+
+            return amountToConsume == 0;
         }
 
         public override bool Update()
