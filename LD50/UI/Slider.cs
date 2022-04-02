@@ -22,7 +22,7 @@ namespace LD50.UI
         private SliderLayout _layout;
         private Vector4 _frontColour;
 
-        public float Value { get { return _value; } private set { _value = value; } }
+        public float Value { get { return _value; } set { _value = value; SetInnerRect(); } }
 
         /// <summary>
         /// Create a slider object
@@ -126,6 +126,30 @@ namespace LD50.UI
             {
                 _label.Draw();
             }
+        }
+
+        public override void SetPosition(Vector2 position)
+        {
+            _backRect.SetPosition(position);
+
+            //Vector2 completionPosition = _position;
+
+            //switch (_layout)
+            //{
+            //    case SliderLayout.CENTER:
+            //        break;
+            //    case SliderLayout.LEFT:
+            //        completionPosition = new Vector2(_position.X - (_backRect.GetSize().X / 2) + (_backRect.GetSize().X / 2) * _value, _position.Y);
+            //        break;
+            //    case SliderLayout.RIGHT:
+            //        completionPosition = new Vector2(_position.X + (_backRect.GetSize().X / 2) - (_backRect.GetSize().X / 2) * _value, _position.Y);
+            //        break;
+            //}
+            _completionRect.SetPosition(position);
+
+            if (_divider != null) _divider.Position = position;
+            _label?.SetPosition(position);
+            base.SetPosition(position);
         }
 
         public override void Update()
