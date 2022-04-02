@@ -105,7 +105,8 @@ namespace LD50.UI
         public override void SetPosition(Vector2 position)
         {
             base.SetPosition(position);
-            _textRender.Position = position;
+            if (_textRender != null)
+                _textRender.Position = position;
         }
 
         public override void SetSize(Vector2 size)
