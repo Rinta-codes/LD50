@@ -38,6 +38,7 @@ namespace LD50.Scenes
                     // Out of fuel, dragon time
                     Scene dragon = new Ambush(true);
                     Globals.scenes[(int)Scenes.EVENT] = dragon;
+                    Globals.player.car.OnNextTurn();
                     Globals.currentScene = (int)Scenes.EVENT;
                     return;
                 }
@@ -59,6 +60,7 @@ namespace LD50.Scenes
                 {
                     _isDriving = false;
                     _player.CarPosition = new Vector2(1300, 925);
+                    Globals.player.car.OnNextTurn();
                     Globals.currentScene = (int) Scenes.EVENT;
                 }
             }

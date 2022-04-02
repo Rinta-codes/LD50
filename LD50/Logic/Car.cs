@@ -54,6 +54,14 @@ namespace LD50.Logic
             AddFuel(Balance.initialFuel);
         }
 
+        public void OnNextTurn()
+        {
+            foreach (var workshop in _rooms.OfType<Workshop>())
+            {
+                workshop.OnNextTurn();
+            }
+        }
+
         public void AddRoom(Room room)
         {
             if (_rooms.Count < 16)
