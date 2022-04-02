@@ -8,7 +8,7 @@ namespace LD50.Scenes
 {
     public abstract class Scene
     {
-        protected List<GameObject> gameObjects;
+        public List<GameObject> gameObjects;
         protected List<UIElement> uiElements;
         public Camera Camera;
 

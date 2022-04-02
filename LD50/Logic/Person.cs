@@ -10,16 +10,19 @@ namespace LD50.Logic
 
         private Weapon _weapon;
         private int _health;
+
+        public Vector2 Position { get { return _sprite.Position; } set { _sprite.Position = value; } }
+        public Vector2 Size { get { return _sprite.size; } }
         
-        public Person(TexName texture, int health) : base(new Sprite(texture, Vector2.Zero, new Vector2(250, 250), Graphics.DrawLayer.PLAYER, false))
+        public Person(TexName texture, int health) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
-            _weapon = new Weapon(TexName.PIXEL, new Vector2(50, 50), 5, "Stick");
+            _weapon = new Weapon(TexName.PIXEL, new Vector2(50, 50), 5, "Gun", 1000, 8);
             _health = health;
         }
 
-        public void Attack(Enemy enemy)
+        public void Attack(Vector2 direction)
         {
-            _weapon.Attack(enemy);
+            _weapon.Attack(this, direction, Position);
         }
 
         public void TakeDamage(int damage)
@@ -32,5 +35,9 @@ namespace LD50.Logic
             return _health > 0;
         }
 
+        public void Move(Vector2 movement)
+        {
+            _sprite.Position += movement;
+        }
     }
 }
