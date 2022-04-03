@@ -10,13 +10,15 @@ namespace LD50.Scenes
         private const int _fontSize = 12;
         private static readonly Vector4 _fontColour = new Vector4(0, 0, 0, 1);
 
-        private const int _buttonWidth = 250;
-        private const int _buttonHeight = 50;
-        private const int _buttonMargin = 10;
-        private const int _buttonsInARow = 4;
-        private const int _buttonsInAColumn = 4;
-        private const int _verticalOffset = 50;
-        private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _buttonWidth * _buttonsInARow - _buttonMargin * (_buttonsInARow - 1)) / 2;
+        private const int _tileWidth = 300;
+        private const int _tileHeight = 150;
+        private const int _tileMargin = 10;
+        private const int _tilesInARow = 4;
+        private const int _tilesInAColumn = 4;
+        private const int _tilesTopOffset = 150;
+        private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _tileWidth * _tilesInARow - _tileMargin * (_tilesInARow - 1)) / 2;
+        private const int _tile1stElementHeight = 100;
+        private const int _buttonVerticalMargin = 5;
 
         private readonly Workshop _source;
         private int _previousScene;
@@ -38,36 +40,31 @@ namespace LD50.Scenes
                 if (blueprintStorage[slot] == null)
                     continue;
 
-                var selectBlueprintButton = AddButton($"{blueprintStorage[slot].Description}", GetButtonPosition(slot));
+                var tilePosition = new Vector2(
+                    _horizontalOffset + (_tileWidth + _tileMargin) * (slot % _tilesInAColumn),
+                    _tilesTopOffset + (_tileHeight + _tileMargin) * (slot / _tilesInAColumn));
+
+                uiElements.Add(blueprintStorage[slot].GetFullDescriptionUI(tilePosition, new Vector2(_tileWidth, _tile1stElementHeight)));
+
+                var selectBlueprintButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(0, _tile1stElementHeight + _buttonVerticalMargin), new Vector2(_tileWidth, _tileHeight - _tile1stElementHeight - _buttonVerticalMargin), Globals.buttonBorderSmall, Graphics.DrawLayer.UI, false);
+                selectBlueprintButton.SetText("Pick", TextAlignment.CENTER, _fontColour, _fontSize);
                 var slotCopy = slot;
                 selectBlueprintButton.OnClickAction = () => SelectBlueprint(slotCopy);
+                uiElements.Add(selectBlueprintButton);
+
                 weHaveBlueprints = true;
             }
 
             if (!weHaveBlueprints)
             {
-                var noBlueprintsLabel = new Label($"Haven't found any blueprints yet", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(_horizontalOffset, 50), new Vector2(Globals.ScreenResolutionX - 2 * _horizontalOffset, 50), new Vector4(1, 1, 1, .5f), TexName.PIXEL, true);
+                var noBlueprintsLabel = new Label($"Haven't found any blueprints yet", TextAlignment.CENTER, _fontColour, new Vector2(_horizontalOffset, _tilesTopOffset), new Vector2(600, 50), new Vector4(1, 1, 1, .5f), TexName.PIXEL, false);
                 uiElements.Add(noBlueprintsLabel);
             }
 
-            var cancelButton = AddButton("Cancel", new Vector2(Globals.ScreenResolutionX - _horizontalOffset - _buttonWidth, Globals.ScreenResolutionY - _verticalOffset - _buttonHeight));
+            var cancelButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(1650, 200), new Vector2(300, 100), Globals.buttonBorderSmall, Graphics.DrawLayer.UI, false);
+            cancelButton.SetText("Cancel", TextAlignment.CENTER, _fontColour);
             cancelButton.OnClickAction = () => Close();
-        }
-
-        private Button AddButton(string text, Vector2 position)
-        {
-            var button = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, position, Globals.buttonSizeSmall, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
-            button.SetText(text, TextAlignment.CENTER, _fontColour, _fontSize);
-            uiElements.Add(button);
-
-            return button;
-        }
-
-        private Vector2 GetButtonPosition(int slot)
-        {
-            return new Vector2(
-                _horizontalOffset + (_buttonWidth + _buttonMargin) * (slot % _buttonsInAColumn),
-                _verticalOffset + (_buttonHeight + _buttonMargin) * (slot / _buttonsInAColumn));
+            uiElements.Add(cancelButton);
         }
 
         private void SelectBlueprint(int blueprintSlot)
