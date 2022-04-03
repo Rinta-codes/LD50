@@ -60,7 +60,7 @@ namespace LD50.Scenes.Events
                 Events.FOODPILE => new FoodPile(),
                 Events.FUELPILE => new FuelPile(),
                 Events.TRADING => new TradeEvent(),
-                Events.BLUEPRINTTRADING => new BluePrintTradeEvent(),
+                Events.BLUEPRINTTRADING => new BlueprintTradeEvent(),
                 Events.PERSON => new PersonEvent(),
                 _ => null,
             };

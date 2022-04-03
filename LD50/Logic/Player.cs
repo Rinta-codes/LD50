@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using LD50.IO;
+﻿using LD50.IO;
+using LD50.Logic.Blueprints;
 using LD50.Scenes.Events;
 using OpenTK.Mathematics;
-using LD50.Logic.Blueprints;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace LD50.Logic
@@ -12,7 +9,7 @@ namespace LD50.Logic
     public class Player : GameObject
     {
         public Car car;
-        public List<Blueprint> blueprints = new List<Blueprint>();
+        public BlueprintStorage BlueprintStorage { get; } = new BlueprintStorage();
         public Person person;
         private Hotkey _hkUp, _hkDown, _hkLeft, _hkRight;
 

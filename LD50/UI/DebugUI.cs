@@ -16,7 +16,7 @@ namespace LD50.UI
 
             var newBPTrade = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(55 + Globals.buttonSizeSmall.X + 5, 100), Globals.buttonSizeSmall, 5.0f, Graphics.DrawLayer.UI, true);
             newBPTrade.SetText("BPTrade", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-            newBPTrade.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.EVENT] = new BluePrintTradeEvent(); Globals.currentScene = (int)Scenes.Scenes.EVENT; };
+            newBPTrade.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.EVENT] = new BlueprintTradeEvent(); Globals.currentScene = (int)Scenes.Scenes.EVENT; };
 
             var newFoodPile = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(55 + (Globals.buttonSizeSmall.X + 5) * 2, 100), Globals.buttonSizeSmall, 5.0f, Graphics.DrawLayer.UI, true);
             newFoodPile.SetText("FoodPile", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
