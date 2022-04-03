@@ -52,6 +52,7 @@ namespace LD50.Logic
             // Add base rooms
             _rooms.Add(new FuelTank(_carPositions[_rooms.Count], Balance.initialFuel));
             _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], Balance.initialFood));
+            _rooms.Add(new Workshop(_carPositions[_rooms.Count]));
 
             // Add base resources
             AddFood(Balance.initialFood);
