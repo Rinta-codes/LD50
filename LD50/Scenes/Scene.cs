@@ -12,7 +12,8 @@ namespace LD50.Scenes
         MAINMENU = 0,
         DRIVING = 1,
         GAMEOVER = 2,
-        EVENT = 3,
+        YOUWON = 3,
+        EVENT = 4,
     }
     public abstract class Scene
     {

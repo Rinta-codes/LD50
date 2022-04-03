@@ -16,7 +16,7 @@ namespace LD50.Logic
 
         private Slider _hpBar;
 
-        private GameObject _target;
+        private Enemy _target;
         private Vector2 _moveTarget;
 
         private bool _amIPlayer;
@@ -50,7 +50,7 @@ namespace LD50.Logic
         {
             _health -= damage;
             _hpBar.Value = (float)_health / _maxHealth;
-            if (_health < 0 && _amIPlayer)
+            if (_health <= 0 && _amIPlayer)
             {
                 Globals.currentScene = (int)Scenes.Scenes.GAMEOVER;
             }
@@ -94,10 +94,10 @@ namespace LD50.Logic
 
                         potentialTargets.Sort();
 
-                        _target = potentialTargets.Count > 0 ? potentialTargets[0].Item2 : null;
+                        _target = potentialTargets.Count > 0 ? (Enemy)potentialTargets[0].Item2 : null;
                     }
 
-                    else if ((_target.Position - Position).Length <= _weapon.projectileRange)
+                    else if ((_target.Position - Position).Length - _target.Size.X*0.4 <= _weapon.projectileRange)
                     {
                         Attack(_target.Position - Position);
                     }

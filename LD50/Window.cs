@@ -88,6 +88,7 @@ namespace LD50
             Globals.scenes.Add(new MainMenu());
             Globals.scenes.Add(new DrivingScene(Vector2.Zero));
             Globals.scenes.Add(new GameoverScene());
+            Globals.scenes.Add(new YouWonMenu());
             Globals.scenes.Add(new MainMenu());
 
             // Remove mouse from screen :)
