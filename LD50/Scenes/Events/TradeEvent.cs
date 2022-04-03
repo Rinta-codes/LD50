@@ -84,6 +84,7 @@ namespace LD50.Scenes.Events
 
         private void MoveOn()
         {
+            Globals.hud.ToggleButtons();
             Globals.currentScene = (int)Scenes.DRIVING;
         }
 
