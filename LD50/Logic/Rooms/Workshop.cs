@@ -63,6 +63,10 @@ namespace LD50.Logic.Rooms
                 _assignedBlueprintSlot = null;
                 CraftTurnsCompleted = 0;
             }
+            else
+            {
+                DisplayCraftingInfo();
+            }
         }
 
         public void InitiateWeaponAssignment()
@@ -94,8 +98,7 @@ namespace LD50.Logic.Rooms
                     workshopUiElements.Add(craftButton);
                     break;
                 case WorkshopState.Crafting:
-                    var craftingLabel = new Label($"Crafting: {AssignedBlueprint.Name} | {CraftTurnsCompleted} / {AssignedBlueprint.CraftTime}", TextAlignment.CENTER, new Vector4(.5f, .5f, 0, .5f), new Vector2(0, 0), _fontSize, true);
-                    workshopUiElements.Add(craftingLabel);
+                    DisplayCraftingInfo();
                     break;
                 case WorkshopState.WeaponReady:
                     //TODO: turn this button into an actual weapon's image
@@ -105,6 +108,13 @@ namespace LD50.Logic.Rooms
                     workshopUiElements.Add(pickButton);
                     break;
             }
+        }
+
+        private void DisplayCraftingInfo()
+        {
+            workshopUiElements.Clear();
+            var craftingLabel = new Label($"Crafting: {AssignedBlueprint.Name} | {CraftTurnsCompleted} / {AssignedBlueprint.CraftTime}", TextAlignment.CENTER, new Vector4(.5f, .5f, 0, .5f), new Vector2(0, 0), _fontSize, true);
+            workshopUiElements.Add(craftingLabel);
         }
 
         public override void Draw()
