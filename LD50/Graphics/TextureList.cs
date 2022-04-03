@@ -19,6 +19,9 @@ namespace LD50
         BUTTON,
         // Car
         CAR_BASE,
+        // Loot
+        FUEL,
+        FOOD,
         // Rooms
         ROOM_FOODSTORAGE,
         ROOM_BEDROOM,
@@ -30,6 +33,7 @@ namespace LD50
         // Enemies
         DRAGON,
         FISHBOWL_IDLE,
+        FISHBOWL_WALK,
     }
     public class TextureList
     {
@@ -61,6 +65,9 @@ namespace LD50
             LoadTexture("Sprites/Backgrounds/DrivingSceneBG.png", TexName.DRIVING_BG);
             LoadTexture("Sprites/Enemies/DragonBW.png", TexName.DRAGON);
             LoadTexture("Sprites/Enemies/FishbowlIdleTwoFrames.png", TexName.FISHBOWL_IDLE);
+            LoadTexture("Sprites/Enemies/FishbowlWalkTwoFrames.png", TexName.FISHBOWL_WALK);
+            LoadTexture("Sprites/Loot/Fuel.png", TexName.FUEL);
+            LoadTexture("Sprites/Loot/Food.png", TexName.FOOD);
         }
 
         /// <summary>
