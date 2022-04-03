@@ -67,6 +67,8 @@ namespace LD50
             // Initiate Text Renderer
             textRenderer = new TextRenderer2D();
 
+            BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
+
             // Set TextRenderer Font
             // This needs to be called every time you want to change fonts (including italics and bold)
             textRenderer.SetFont("Fonts/arial.ttf");
