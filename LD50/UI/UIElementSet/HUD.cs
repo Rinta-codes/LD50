@@ -1,11 +1,12 @@
-﻿using OpenTK.Mathematics;
+﻿using LD50.Scenes;
+using OpenTK.Mathematics;
 
 namespace LD50.UI
 {
     public class HUD : UIElements
     {
         Label foodCount, fuelCount, popCount, dragonDistance;
-        Button manageCrewButton, manageRoomsButton, showBlueprintsButton, backToRoadButton;
+        Button manageCrewButton, manageRoomsButton, showBlueprintsButton, backToRoadButton, manageWeaponsButton;
 
         public HUD()
         {
@@ -52,6 +53,12 @@ namespace LD50.UI
             showBlueprintsButton.OnClickAction = () => { /*Do something*/ };
             elements.Add(showBlueprintsButton);
 
+            // Manage weapons
+            manageWeaponsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X * 3, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            manageWeaponsButton.SetText("Manage Weapons", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
+            manageWeaponsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGEWEAPONS] = new WeaponManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGEWEAPONS; Globals.hud.SetButtons(true); };
+            elements.Add(manageWeaponsButton);
+
             // Back
             // To return back to the Driving Scene for when in one of the Manage scenes above
             // Replaces Crew/Weapons btn as that will be hidden
@@ -67,8 +74,19 @@ namespace LD50.UI
             manageCrewButton.IsHidden = !manageCrewButton.IsHidden;
             manageRoomsButton.IsHidden = !manageRoomsButton.IsHidden;
             showBlueprintsButton.IsHidden = !showBlueprintsButton.IsHidden;
+            manageWeaponsButton.IsHidden = !manageWeaponsButton.IsHidden;
 
             backToRoadButton.IsHidden = !backToRoadButton.IsHidden;
+        }
+
+        public void SetButtons(bool hidden)
+        {
+            manageCrewButton.IsHidden = hidden;
+            manageRoomsButton.IsHidden = hidden;
+            showBlueprintsButton.IsHidden = hidden;
+            manageWeaponsButton.IsHidden = hidden;
+
+            backToRoadButton.IsHidden = !hidden;
         }
 
         public override void Draw()
