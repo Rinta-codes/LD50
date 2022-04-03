@@ -1,7 +1,6 @@
 ﻿
-using OpenTK.Mathematics;
 using LD50.UI;
-using System.Linq;
+using OpenTK.Mathematics;
 
 namespace LD50.Scenes.Events
 {
@@ -10,8 +9,8 @@ namespace LD50.Scenes.Events
         private readonly string _name;
         private readonly int _fuel;
         private readonly int _food;
-        private readonly int _fontSize = 20;
-        private readonly Vector4 textColour = new Vector4(.5f, .5f, 0, .5f);
+        private readonly int _fontSize = Globals.genericLabelFontSize;
+        private readonly Vector4 textColour = Globals.genericLabelTextColour;
 
 
         public PersonEvent() : base(Vector2.Zero)

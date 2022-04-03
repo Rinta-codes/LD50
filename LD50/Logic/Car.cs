@@ -106,6 +106,30 @@ namespace LD50.Logic
             RedistributeResources(oldRoom);
         }
 
+        public void RemoveRoom(Vector2 roomPosition)
+        {
+            int index = _carPositions.IndexOf(roomPosition);
+            int lastRoomIndex = _rooms.Count - 1;
+
+            // Bubble the removed room up to the end of the rooms list, to not disrupt other rooms order
+            // Otherwise we might end up with rooms hanging in the air, which is not ideal
+            Room tempRoom = null;
+            for (int i = index; i < lastRoomIndex; i++)
+            {
+                tempRoom = _rooms[i];
+                _rooms[i] = _rooms[i + 1];
+                _rooms[i + 1] = tempRoom;
+
+                _rooms[i].OnCarPosition = _carPositions[i];
+            }
+
+            // Redistribute resources from removed room that's now at the end of the list across earlier rooms
+            RedistributeResources(_rooms[lastRoomIndex]);
+
+            // Delete removed room from the list
+            _rooms.RemoveAt(lastRoomIndex);
+        }
+
         private void RedistributeResources(Room removedRoom)
         {
             if (removedRoom is FuelTank fuelTank)
