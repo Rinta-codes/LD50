@@ -91,6 +91,7 @@ namespace LD50
             Globals.scenes.Add(new GameoverScene());
             Globals.scenes.Add(new YouWonMenu());
             Globals.scenes.Add(new MainMenu());
+            Globals.scenes.Add(new RoomManagementScene());
 
             // Remove mouse from screen :)
             CursorGrabbed = false;

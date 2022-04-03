@@ -14,6 +14,7 @@ namespace LD50.Scenes
         GAMEOVER = 2,
         YOUWON = 3,
         EVENT = 4,
+        MANAGEROOMS = 5,
     }
     public abstract class Scene
     {
