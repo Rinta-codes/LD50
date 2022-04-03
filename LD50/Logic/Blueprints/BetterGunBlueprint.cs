@@ -4,10 +4,10 @@ namespace LD50.Logic.Blueprints
 {
     public class BetterGunBlueprint : Blueprint
     {
+        public override string Name => BetterGun.NAME;
         public override int CraftTime => Balance.betterGunCraftTime;
 
-        public BetterGunBlueprint()
-            : base(Globals.rng.Next(Balance.baseGunMinCost, Balance.baseGunMaxCost), new BetterGun())
+        public BetterGunBlueprint() : base(Globals.rng.Next(Balance.baseGunMinCost, Balance.baseGunMaxCost))
         {
         }
 
@@ -15,6 +15,5 @@ namespace LD50.Logic.Blueprints
         {
             return new BetterGun();
         }
-
     }
 }

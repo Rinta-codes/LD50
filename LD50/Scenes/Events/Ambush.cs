@@ -1,4 +1,4 @@
-﻿using LD50.Audio;
+using LD50.Audio;
 using LD50.Logic;
 using LD50.Logic.Enemies;
 using LD50.UI;
@@ -15,14 +15,109 @@ namespace LD50.Scenes.Events
     {
 
         private bool _rewarded = false, _isDragon;
+        private Vector2 _playerStartPosition;
         private int _foodLoot, _fuelLoot;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
-            var occupants = Globals.player.car.MoveOutOccupants();
-
             _isDragon = isDragon;
+            _playerStartPosition = Globals.player.Position;
 
+            SelectCrew();
+        }
+
+        private void SelectCrew()
+        {
+            var occupants = Globals.player.car.MoveOutOccupants();
+            List<Person> crew = new List<Person>();
+
+            // If it is the Dragon fight - use full crew regardless
+            if (_isDragon)
+                StartFight(occupants);
+
+            // HACKING WAY to hide the player from the screen; can still move but why?
+            Globals.player.Position = new Vector2(-1000, -1000);
+            
+            Rectangle blockingBackground = new Rectangle(new Vector4(0, 0, 0, 0.9f), new Vector2(960, 540), new Vector2(1920, 1080), true, TexName.PIXEL, Graphics.DrawLayer.BACKGROUND);
+
+            Label ambushInfo = new Label($"You've been ambushed! Select your crew.", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
+
+            Button backToAmbush = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX - 220, 300), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
+            backToAmbush.SetText("Back to the fight", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
+
+
+            var _selectAmbushCrew = new UIElements();
+            _selectAmbushCrew.Add(blockingBackground);
+            _selectAmbushCrew.Add(backToAmbush);
+            _selectAmbushCrew.Add(ambushInfo);
+
+            int buttonsAdded = 0;
+            foreach (var person in occupants)
+            {
+                var crewmateButtonWithLabel = AddCrewmemberButtonWithLabel(person, _selectAmbushCrew, ref buttonsAdded);
+                crewmateButtonWithLabel.Button.OnClickAction = () =>
+                {
+                    crew.Add(person);
+                    crewmateButtonWithLabel.Button.IsHidden = true;
+                    crewmateButtonWithLabel.Label.IsHidden = true;
+                    _selectAmbushCrew.Add(new Label($"{person.Name} is now part of your crew", TextAlignment.LEFT, Globals.genericLabelTextColour, crewmateButtonWithLabel.Item1.GetPosition(), Globals.genericLabelFontSize, true));
+                };
+            }
+           
+            uiElements.Add(_selectAmbushCrew);
+
+            backToAmbush.OnClickAction = () =>
+            {
+                uiElements.Remove(_selectAmbushCrew);
+                Globals.player.Position = _playerStartPosition; // Return player to the screen
+                foreach (var person in occupants)
+                {
+                    if (!crew.Contains(person))
+                        Globals.player.car.AddOccupant(person); // return unselected people back to their bedrooms
+                }
+                StartFight(crew);
+            };
+        }
+
+        /// <summary>
+        ///  Stolen from WeaponAssignment
+        /// </summary>
+        /// <returns></returns>
+        private (Button Button, Label Label) AddCrewmemberButtonWithLabel(Person person, UIElements addButtonToHere, ref int buttonsAdded)
+        {
+            var position = GetNextButtonPosition(buttonsAdded);
+            var button = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, position, Globals.buttonSizeSmall, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+            button.SetText($"{person.Name}", TextAlignment.CENTER, new Vector4(0,0,0,1), 12);
+            var label = new Label($"Weapon: {person.WeaponName}; Health: Who even knows", TextAlignment.LEFT, Globals.genericLabelTextColour, button.GetPosition() + new Vector2(100, 0), Globals.genericLabelFontSize, true);
+            addButtonToHere.Add(button);
+            addButtonToHere.Add(label);
+
+            buttonsAdded++;
+
+            return (button, label);
+        }
+
+        /// <summary>
+        ///  Stolen from WeaponAssignment
+        /// </summary>
+        private Vector2 GetNextButtonPosition(int buttonsAdded)
+        {
+            int buttonWidth = (int)Globals.buttonSizeSmall.Y;
+            int buttonHeight = (int)Globals.buttonSizeSmall.X;
+            int buttonMargin = (int)Globals.buttonBorderSmall;
+            int buttonsInAColumn = 15;
+            int topOffset = 250;
+            int horizontalOffset = 250;
+
+            return new Vector2(
+                horizontalOffset + (buttonWidth + buttonMargin) * (buttonsAdded / buttonsInAColumn),
+                topOffset + (buttonHeight + buttonMargin) * (buttonsAdded % buttonsInAColumn));
+        }
+
+
+        private void StartFight(List<Person> crew)
+        {
+            foreach (Person person in crew)
             if (_isDragon)
             {
                 BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Dragon.wav");
@@ -32,14 +127,14 @@ namespace LD50.Scenes.Events
                 BackgroundMusicManager.PlayMusic("Audio/Music/LD50.wav");
             }
 
-            foreach (Person person in occupants)
+            foreach (Person person in crew)
             {
                 person.Position = new Vector2(Globals.rng.Next(100, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(100, (int)Globals.windowSize.Y / 2 - (int)Globals.HUDLabelSize.Y));
             }
 
-            gameObjects.AddRange(occupants);
+            gameObjects.AddRange(crew);
 
-            if (isDragon)
+            if (_isDragon)
             {
                 Dragon dragon = new Dragon();
                 dragon.Position = new Vector2(Globals.windowSize.X * 0.75f, Globals.windowSize.Y * 0.5f);

@@ -29,7 +29,7 @@ namespace LD50.Scenes.Events
             gameObjects.Add(Globals.player);
             _background = background;
 
-            exitEventButton = new Button(new Vector4(.8f, .8f, .8f, 1), new Vector4(.5f, .5f, .5f, 1), new Vector2(Globals.windowSize.X - 220, 110), new Vector2(400, 200), 5, Graphics.DrawLayer.UI, true);
+            exitEventButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.windowSize.X - 220, 140), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
             exitEventButton.SetText("Exit", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
             exitEventButton.OnClickAction = () => { Globals.currentScene = (int)Scenes.DRIVING; OnExit(); };
 
