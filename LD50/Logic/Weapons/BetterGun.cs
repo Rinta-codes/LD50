@@ -1,15 +1,18 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LD50.Logic.Weapons
 {
     public class BetterGun : Weapon
     {
-        public BetterGun() : base(TexName.PIXEL, new Vector2(50, 50), Balance.betterGunDamage, "Better Gun", 1000, 8, Balance.betterGunRange)
+        public override string Name => "Better Gun";
+        public override int Damage => Balance.betterGunDamage;
+        public override float ProjectileRange => Balance.betterGunRange;
+        public override int ProjectileSpeed => 1000;
+        public override int ProjectileSize => 8;
+        public override float Cooldown => Balance.betterGunCooldown;
+
+        public BetterGun() : base(TexName.PIXEL, new Vector2(50, 50))
         {
-            _baseCooldown = Balance.betterGunCooldown;
         }
     }
 }

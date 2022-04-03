@@ -52,7 +52,7 @@ namespace LD50.Logic.Enemies
                 var dir = (_moveTarget - Position).Normalized();
                 Move(dir * Balance.BikeGuyMovementSpeed * (float)Globals.deltaTime);
             }
-            else if ((_target.Position - Position).Length <= _weapon.projectileRange)
+            else if ((_target.Position - Position).Length <= _weapon.ProjectileRange)
             {
                 // Target is in range, shoot him
                 _weapon.Attack(this, _target.Position - Position, Position);
