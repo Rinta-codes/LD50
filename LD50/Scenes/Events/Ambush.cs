@@ -13,25 +13,27 @@ namespace LD50.Scenes.Events
     public class Ambush : Event
     {
 
-        private bool _rewarded = false;
+        private bool _rewarded = false, _isDragon;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
-            uiElements.Add(new Resources());
             var occupants = Globals.player.car.MoveOutOccupants();
+
+            _isDragon = isDragon;
 
             foreach (Person person in occupants)
             {
-                person.Position = new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2));
+                person.Position = new Vector2(Globals.rng.Next(100, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(100, (int)Globals.windowSize.Y / 2 - (int)Globals.HUDLabelSize.Y));
             }
 
             gameObjects.AddRange(occupants);
 
             if (isDragon)
             {
-                // TODO:
-                // Make dragon enemy
-                // Start end fight
+                Dragon dragon = new Dragon();
+                dragon.Position = new Vector2(Globals.windowSize.X * 0.75f, Globals.windowSize.Y * 0.5f);
+                gameObjects.Add(dragon);
+                uiElements.Remove(exitEventButton);
                 return;
             }
 
@@ -65,6 +67,7 @@ namespace LD50.Scenes.Events
 
         public override void OnExit()
         {
+            Globals.hud.ToggleButtons();
             foreach (Person p in gameObjects.OfType<Person>())
             {
                 Globals.player.car.AddOccupant(p);
@@ -79,6 +82,10 @@ namespace LD50.Scenes.Events
                 _rewarded = true;
                 Globals.player.car.AddFood(Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward));
                 Globals.player.car.AddFuel(Globals.rng.Next(Balance.minFuelAmbushReward, Balance.maxFuelAmbushReward));
+            }
+            if (_isDragon && gameObjects.OfType<Dragon>().Count() == 0)
+            {
+                Globals.currentScene = (int)Scenes.YOUWON;
             }
         }
 

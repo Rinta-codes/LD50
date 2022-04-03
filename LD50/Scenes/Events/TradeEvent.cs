@@ -19,21 +19,19 @@ namespace LD50.Scenes.Events
         {
             int randNum = Globals.rng.Next(4);
 
-            uiElements.Add(new Resources());
-
             switch(randNum)
             {
                 case 0:
-                    _toTrade = new Bedroom(new Vector2(-0.8f, -1.9f));
+                    _toTrade = new Bedroom(new Vector2(-0.8f, -1.2f));
                     break;
                 case 1:
-                    _toTrade = new FoodStorage(new Vector2(-0.8f, -1.9f), Balance.foodStorageCap);
+                    _toTrade = new FoodStorage(new Vector2(-0.8f, -1.2f), Balance.foodStorageCap);
                     break;
                 case 2:
-                    _toTrade = new FuelTank(new Vector2(-0.8f, -1.9f), Balance.fuelStorageCap);
+                    _toTrade = new FuelTank(new Vector2(-0.8f, -1.2f), Balance.fuelStorageCap);
                     break;
                 default:
-                    _toTrade = new Workshop(new Vector2(-0.8f, -1.9f));
+                    _toTrade = new Workshop(new Vector2(-0.8f, -1.2f));
                     break;
             }
             gameObjects.Add(_toTrade);

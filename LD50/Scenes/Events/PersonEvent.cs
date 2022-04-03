@@ -22,7 +22,6 @@ namespace LD50.Scenes.Events
 
             string resources = $"{_fuel} Fuel and {_food} Food";
 
-            uiElements.Add(new Resources());
             uiElements.Add(new Label($"You see a person on the side of the road", TextAlignment.CENTER, textColour, new Vector2(Globals.ScreenResolutionX / 2, 300), _fontSize, true));
             uiElements.Add(new Label($"They carry {resources} with them", TextAlignment.CENTER, textColour, new Vector2(Globals.ScreenResolutionX / 2, 350), _fontSize, true));
             uiElements.Add(new Label($"and will happily share if you give them a ride.", TextAlignment.CENTER, textColour, new Vector2(Globals.ScreenResolutionX / 2, 400), _fontSize, true));
@@ -67,6 +66,7 @@ namespace LD50.Scenes.Events
 
         private void MoveOn()
         {
+            Globals.hud.ToggleButtons();
             Globals.currentScene = (int)Scenes.DRIVING;
         }
 

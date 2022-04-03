@@ -21,8 +21,6 @@ namespace LD50.Scenes.Events
 
         public BlueprintTradeEvent() : base(Vector2.Zero)
         {
-            uiElements.Add(new Resources());
-
             int randNum = Globals.rng.Next(2);
             switch (randNum)
             {
@@ -95,6 +93,7 @@ namespace LD50.Scenes.Events
 
         private void MoveOn()
         {
+            Globals.hud.ToggleButtons();
             Globals.currentScene = (int)Scenes.DRIVING;
         }
 

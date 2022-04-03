@@ -25,9 +25,14 @@ namespace LD50
         public static Vector2 buttonSizeSmall = new Vector2(100, 50);
         public static int buttonBorderMedium = 10;
         public static int buttonBorderSmall = 5;
+        public static Vector2 HUDLabelSize = new Vector2(150, 80);
+        public static float HUDTextSize = 16.0f;
+        public static Vector2 menuButtonSize = new Vector2(80, HUDLabelSize.Y);
+        public static Vector2 HUDButtonSize = new Vector2(300, HUDLabelSize.Y);
 
 
         public static Random rng = new Random();
+        public static HUD hud;
 
         public static Vector2 windowSize;
         public static int currentScene;

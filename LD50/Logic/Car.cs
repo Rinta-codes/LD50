@@ -118,7 +118,17 @@ namespace LD50.Logic
             }
             else if (removedRoom is Bedroom bedroom)
             {
-                //TODO: reassign or dismiss people
+                foreach(Person person in bedroom.Persons)
+                {
+                    AddOccupant(person);
+                }
+            }
+            else if (removedRoom is WeaponStorage weaponStorage)
+            {
+                foreach (Weapon weapon in weaponStorage._weapons)
+                {
+                    AddWeapon(weapon);
+                }
             }
         }
 
