@@ -23,6 +23,7 @@ namespace LD50.Logic
 
         public Vector2 Size { get { return _sprite.size; } }
         public string Name { get; }
+        public string WeaponName => _weapon.Name;
         public bool HasWeapon => _weapon != null;
 
         public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))

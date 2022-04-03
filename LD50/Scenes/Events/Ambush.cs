@@ -127,7 +127,7 @@ namespace LD50.Scenes.Events
                 BackgroundMusicManager.PlayMusic("Audio/Music/LD50.wav");
             }
 
-            foreach (Person person in occupants)
+            foreach (Person person in crew)
             {
                 person.Position = new Vector2(Globals.rng.Next(100, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(100, (int)Globals.windowSize.Y / 2 - (int)Globals.HUDLabelSize.Y));
             }
