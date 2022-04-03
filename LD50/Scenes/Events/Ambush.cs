@@ -77,6 +77,7 @@ namespace LD50.Scenes.Events
 
         public override void OnExit()
         {
+            BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
             Globals.hud.ToggleButtons();
             foreach (Person p in gameObjects.OfType<Person>())
             {
