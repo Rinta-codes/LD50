@@ -19,8 +19,6 @@ namespace LD50.Scenes.Events
         {
             int randNum = Globals.rng.Next(4);
 
-            uiElements.Add(new Resources());
-
             switch(randNum)
             {
                 case 0:

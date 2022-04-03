@@ -28,12 +28,12 @@ namespace LD50.utils
         {
             var dir = new Vector2(Globals.rng.Next(-(int)range, (int)range), Globals.rng.Next(-(int)range, (int)range)).Normalized();
             var target = position + range * dir;
-            return new Vector2(Math.Clamp(target.X, 0, Globals.windowSize.X), Math.Clamp(target.Y, 0, Globals.windowSize.Y));
+            return new Vector2(Math.Clamp(target.X, 0, Globals.windowSize.X), Math.Clamp(target.Y, 100, Globals.windowSize.Y - 100 - Globals.HUDLabelSize.Y));
         }
 
         public static Vector2 GetRandomPositionOnLeft()
         {
-            return new Vector2(Globals.rng.Next(50, 150), Globals.rng.Next(50, (int)Globals.windowSize.Y - 50));
+            return new Vector2(Globals.rng.Next(50, 150), Globals.rng.Next(100, (int)Globals.windowSize.Y - 100 - (int)Globals.HUDLabelSize.Y));
         }
     }
 }

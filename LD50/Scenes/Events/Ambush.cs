@@ -17,12 +17,11 @@ namespace LD50.Scenes.Events
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
-            uiElements.Add(new Resources());
             var occupants = Globals.player.car.MoveOutOccupants();
 
             foreach (Person person in occupants)
             {
-                person.Position = new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2));
+                person.Position = new Vector2(Globals.rng.Next(100, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(100, (int)Globals.windowSize.Y / 2 - (int)Globals.HUDLabelSize.Y));
             }
 
             gameObjects.AddRange(occupants);
@@ -65,6 +64,7 @@ namespace LD50.Scenes.Events
 
         public override void OnExit()
         {
+            Globals.hud.ToggleButtons();
             foreach (Person p in gameObjects.OfType<Person>())
             {
                 Globals.player.car.AddOccupant(p);

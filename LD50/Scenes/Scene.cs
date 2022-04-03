@@ -20,6 +20,7 @@ namespace LD50.Scenes
         public Camera Camera;
 
         private Hotkey _hkDebug = new Hotkey(false);
+        
 
         /// <summary>
         /// Base scene class
@@ -28,7 +29,7 @@ namespace LD50.Scenes
         public Scene(Vector2 cameraStartPosition)
         {
             gameObjects = new List<GameObject>();
-            uiElements = new List<UIElement>() { new DebugUI() };
+            uiElements = new List<UIElement>() { new DebugUI(), Globals.hud };
             uiElements[0].IsHidden = true;
             _hkDebug.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.GraveAccent);
             Camera = new Camera(new Vector3(cameraStartPosition.X, cameraStartPosition.Y, 10f), Window.WindowSize.X / Window.WindowSize.Y, 100f, 0.2f);

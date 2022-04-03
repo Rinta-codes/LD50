@@ -35,7 +35,7 @@ namespace LD50.Scenes.Events
 
         public virtual void OnExit()
         {
-
+            Globals.hud.ToggleButtons();
         }
 
         public override void Update()
