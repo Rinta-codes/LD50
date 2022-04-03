@@ -7,8 +7,8 @@ namespace LD50.Scenes
     {
         public RoomManagementScene() : base(Vector2.Zero)
         {
-            UIElement header1 = new Label($"Here you can get rid of some rooms in your car. This can ", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX/2, 200), Globals.genericLabelFontSize, true);
-            UIElement header2 = new Label($"save you fuel, however you will lose all content of removed room.", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 230), Globals.genericLabelFontSize, true);
+            UIElement header1 = new Label($"Here you can get rid of some rooms in your car. This can save you fuel,", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX/2, 200), Globals.genericLabelFontSize, true);
+            UIElement header2 = new Label($"however you may lose content of removed room if there's no more storage space.", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 230), Globals.genericLabelFontSize, true);
             uiElements.Add(header1);
             uiElements.Add(header2);
 
