@@ -29,6 +29,7 @@ namespace LD50
         DRIVING_BG,
         // Enemies
         DRAGON,
+        FISHBOWL_IDLE,
     }
     public class TextureList
     {
@@ -59,6 +60,7 @@ namespace LD50
             LoadTexture("Sprites/CarBase.png", TexName.CAR_BASE);
             LoadTexture("Sprites/Backgrounds/DrivingSceneBG.png", TexName.DRIVING_BG);
             LoadTexture("Sprites/Enemies/DragonBW.png", TexName.DRAGON);
+            LoadTexture("Sprites/Enemies/FishbowlIdleTwoFrames.png", TexName.FISHBOWL_IDLE);
         }
 
         /// <summary>
