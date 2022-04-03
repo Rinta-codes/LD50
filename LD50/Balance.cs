@@ -36,13 +36,13 @@ namespace LD50
         public const int foodStorageCap = 10;
         public const int fuelStorageCap = 10;
 
-        public const int minRoomCost = 4;
-        public const int maxRoomCost = 25;
+        public const int minRoomCost = 3;
+        public const int maxRoomCost = 15;
 
         // Moving
         public static int FuelCost()
         {
-            return Globals.player.car.TotalRooms;
+            return (int)(Globals.player.car.TotalRooms*0.25f + 1);
         }
         public static int FoodCost()
         {
