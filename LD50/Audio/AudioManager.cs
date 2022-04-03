@@ -22,6 +22,7 @@ namespace LD50.Audio
         /// <param name="file">Path to music file</param>
         public static void PlayMusic(string file)
         {
+            if (file == filePath) return;
             filePath = file;
             WaveFileReader reader = new WaveFileReader(filePath);
             LoopStream m = new LoopStream(reader);
