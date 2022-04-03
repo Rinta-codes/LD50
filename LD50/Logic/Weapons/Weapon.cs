@@ -16,7 +16,7 @@ namespace LD50.Logic
         public abstract int ProjectileSize { get; }
         public abstract float Cooldown { get; }
 
-        public string FullDescription => $"{Name}.Damage: {Damage}, Range: {ProjectileRange}, Cooldown: {Cooldown}";
+        public string FullDescription => $"{Name}.Dmg: {Damage} Range: {ProjectileRange} CD: {Cooldown}";
 
         public Weapon(TexName texture, Vector2 size) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
         {

@@ -94,6 +94,8 @@ namespace LD50.Logic
 
         public Person[] GetOccupantList() => _rooms.OfType<Bedroom>().SelectMany(bedroom => bedroom.Persons).ToArray();
 
+        public Weapon[] GetWeaponsList() => _rooms.OfType<WeaponStorage>().SelectMany(weapon => weapon._weapons).ToArray();
+
         public void ChangeRoom(Vector2 roomPosition, Room room)
         {
             int index = _carPositions.IndexOf(roomPosition);
@@ -263,6 +265,19 @@ namespace LD50.Logic
             }
         }
 
+        public void RemoveWeapon(Weapon weapon)
+        {
+            var weaponRooms = _rooms.OfType<WeaponStorage>();
+            foreach(WeaponStorage room in weaponRooms)
+            {
+                if(room._weapons.Contains(weapon))
+                {
+                    room._weapons.Remove(weapon);
+                    return;
+                } 
+            }
+        }
+
 
         public override bool Update()
         {
@@ -318,5 +333,6 @@ namespace LD50.Logic
             }
             base.Draw();
         }
+    
     }
 }

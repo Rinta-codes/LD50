@@ -41,6 +41,12 @@ namespace LD50.Logic
             };
         }
 
+        public Weapon TakeWeapon()
+        {
+            Weapon temp = _weapon;
+            _weapon = null;
+            return temp;
+        }
         public void Attack(Vector2 direction)
         {
             _weapon.Attack(this, direction, Position);
@@ -97,7 +103,7 @@ namespace LD50.Logic
                         _target = potentialTargets.Count > 0 ? (Enemy)potentialTargets[0].Item2 : null;
                     }
 
-                    else if ((_target.Position - Position).Length - _target.Size.X*0.4 <= _weapon.ProjectileRange)
+                    else if ((_target.Position - Position).Length - _target.Size.X * 0.4 <= _weapon.ProjectileRange)
                     {
                         Attack(_target.Position - Position);
                     }
