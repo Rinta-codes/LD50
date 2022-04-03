@@ -10,10 +10,8 @@ namespace LD50.Logic.PickupItems
     {
 
 
-        public FuelItem(Vector2 position, int amount) : base(new Sprite(TexName.PIXEL, position, new Vector2(32, 32), Graphics.DrawLayer.GROUNDITEM, false), amount)
-        {
-            _sprite.SetColour(new Vector4(0, 0, 1, 1));
-        }
+        public FuelItem(Vector2 position, int amount) : base(new Sprite(TexName.FUEL, position, new Vector2(100, 100), Graphics.DrawLayer.GROUNDITEM, false), amount)
+        { }
 
         public override bool OnPickup()
         {
