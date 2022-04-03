@@ -6,14 +6,14 @@ namespace LD50.Scenes.Events
 {
     public class BlueprintTradeEvent : Scene
     {
-        private Blueprint _blueprintToTrade;
-        private int _cost;
-        private bool _costsFuel;
-        private bool _canAffordToBuy;
+        private readonly Blueprint _blueprintToTrade;
+        private readonly int _cost;
+        private readonly bool _costsFuel;
+        private readonly bool _canAffordToBuy;
 
-        private const int _tileWidth = 250;
+        private const int _tileWidth = 300;
         private const int _tileHeight = 150;
-        private const int _tileMargin = 0;
+        private const int _tileMargin = 10;
         private const int _tilesInARow = 4;
         private const int _tilesInAColumn = 4;
         private const int _tilesTopOffset = 350;

@@ -1,41 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 
 namespace LD50.Logic
 {
-    public class Weapon : GameObject
+    public abstract class Weapon : GameObject
     {
+        private float remainingCooldown;
 
-        protected int _damage, _projectileSpeed, _projectileSize;
-        public float projectileRange;
-        protected float _cooldown, _baseCooldown;
+        public abstract string Name { get; }
+        public abstract int Damage { get; }
+        public abstract float ProjectileRange { get; }
+        public abstract int ProjectileSpeed { get; }
+        public abstract int ProjectileSize { get; }
+        public abstract float Cooldown { get; }
 
-        public string Name { get; }
-        public string FullDescription => $"{Name}.Damage: {_damage}, Range: {projectileRange}, Cooldown: {_cooldown}";
+        public string FullDescription => $"{Name}.Damage: {Damage}, Range: {ProjectileRange}, Cooldown: {Cooldown}";
 
-        public Weapon(TexName texture, Vector2 size, int damage, string name, int projectileSpeed, int projectileSize, float projectileRange) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
+        public Weapon(TexName texture, Vector2 size) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
         {
-            _damage = damage;
-            Name = name;
-            _projectileSpeed = projectileSpeed;
-            _projectileSize = projectileSize;
-            this.projectileRange = projectileRange;
         }
 
-        public virtual void Attack(GameObject shooter, Vector2 direction, Vector2 position)
+        public void Attack(GameObject shooter, Vector2 direction, Vector2 position)
         {
-            if (_cooldown <= 0)
+            if (remainingCooldown <= 0)
             {
-                Globals.CurrentScene.gameObjects.Add(new Projectile(shooter, position, new Vector2(_projectileSize, _projectileSize), direction, _projectileSpeed, _damage, projectileRange));
-                _cooldown = _baseCooldown;
+                Globals.CurrentScene.gameObjects.Add(new Projectile(shooter, position, new Vector2(ProjectileSize, ProjectileSize), direction, ProjectileSpeed, Damage, ProjectileRange));
+                remainingCooldown = Cooldown;
             }
         }
 
         public override bool Update()
         {
-            _cooldown -= (float)Globals.deltaTime;
+            remainingCooldown -= (float)Globals.deltaTime;
             return base.Update();
         }
     }
