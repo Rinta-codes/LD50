@@ -8,23 +8,22 @@ namespace LD50.Scenes
 {
     class WeaponAssignment : Scene
     {
-        private const int _fontSize = 12;
         private static readonly Vector4 _fontColour = new Vector4(0, 0, 0, 1);
 
-        private const int _buttonWidth = 300;
-        private const int _buttonHeight = 100;
-        private const int _buttonMargin = 10;
-        private const int _buttonsInARow = 5;
-        private const int _buttonsInAColumn = 5;
+        private const int _tileWidth = 300;
+        private const int _tileHeight = 100;
+        private const int _tileMargin = 10;
+        private const int _tilesInARow = 5;
+        private const int _tilesInAColumn = 5;
         private const int _topOffset = 250;
         private const int _bottomOffset = 50;
-        private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _buttonWidth * _buttonsInARow - _buttonMargin * (_buttonsInARow - 1)) / 2;
-        private static readonly Vector2 buttonSize = new Vector2(_buttonWidth, _buttonHeight);
+        private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _tileWidth * _tilesInARow - _tileMargin * (_tilesInARow - 1)) / 2;
+        private const int _buttonWith = 50;
 
         private readonly Weapon _weapon;
         private readonly GameObject _source;
         private int _previousScene;
-        private int _buttonsAdded = 0;
+        private int _tilesAdded = 0;
 
         private bool _completedSuccessfully;
 
@@ -43,21 +42,35 @@ namespace LD50.Scenes
             var storageIsAnOption = !(_source is WeaponStorage) && car.HasAFreeWeaponSlot;
             var occupants = car.GetOccupantList();
 
-            uiElements.Add(new Label("Assign: ", TextAlignment.LEFT, new Vector4(1, 1, 1, 1), new Vector2(5, 120), 25, true, Graphics.DrawLayer.BACKGROUND));
+            uiElements.Add(new Label("Weapon: ", TextAlignment.LEFT, new Vector4(1, 1, 1, 1), new Vector2(5, 120), 25, true, Graphics.DrawLayer.BACKGROUND));
             uiElements.Add(_weapon.GetFullDescriptionUI(new Vector2(450, 150), new Vector2(600, 80)));
+
+            var tileSize = new Vector2(_tileWidth, _tileHeight);
 
             if (storageIsAnOption)
             {
-                var addToStorageButton = AddButton($"Storage | {car.TotalWeaponsStored} / {car.TotalWeaponsCapacity}");
+                var storageButtonPosition = GetNextTilePosition() + tileSize / 2;
+                var addToStorageButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, storageButtonPosition, tileSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+                addToStorageButton.SetText($"Storage | {car.TotalWeaponsStored} / {car.TotalWeaponsCapacity}", TextAlignment.CENTER, _fontColour);
                 addToStorageButton.OnClickAction = () => AddToStorage();
+                uiElements.Add(addToStorageButton);
+                _tilesAdded++;
             }
 
             if (source != Globals.player)
             {
                 var playerPerson = Globals.player.person;
-                var addToStorageButton = AddButton($"{playerPerson.Name}");
-                //var addToStorageButton = AddButton($"{playerPerson.Name} | {playerPerson.WeaponDescription}");
-                addToStorageButton.OnClickAction = () => GiveToPerson(playerPerson);
+                var playerInfoSize = new Vector2(_tileWidth - _buttonWith, _tileHeight);
+                var tilePosition = GetNextTilePosition();
+                uiElements.Add(playerPerson.GetFullDescriptionUI(tilePosition + playerInfoSize / 2, playerInfoSize));
+
+                var giveToPlayerButtonSize = new Vector2(_buttonWith, _tileHeight);
+                var giveToPlayerButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(_tileWidth - _buttonWith, 0) + giveToPlayerButtonSize / 2, giveToPlayerButtonSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+                giveToPlayerButton.SetText("Give", TextAlignment.CENTER, _fontColour);
+                giveToPlayerButton.OnClickAction = () => GiveToPerson(playerPerson);
+                uiElements.Add(giveToPlayerButton);
+
+                _tilesAdded++;
             }
 
             foreach (var person in occupants)
@@ -65,40 +78,37 @@ namespace LD50.Scenes
                 if (person == source)
                     continue;
 
-                var giveToPersonButton = AddButton($"{person.Name}");
-                //var giveToPersonButton = AddButton($"{person.Name} | {person.WeaponDescription}");
+                var personInfoSize = new Vector2(_tileWidth - _buttonWith, _tileHeight);
+                var tilePosition = GetNextTilePosition();
+                uiElements.Add(person.GetFullDescriptionUI(tilePosition + personInfoSize / 2, personInfoSize));
+
+                var giveToPersonButtonSize = new Vector2(_buttonWith, _tileHeight);
+                var giveToPersonButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(_tileWidth - _buttonWith, 0) + giveToPersonButtonSize / 2, giveToPersonButtonSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+                giveToPersonButton.SetText("Give", TextAlignment.CENTER, _fontColour);
                 var personCopy = person;
                 giveToPersonButton.OnClickAction = () => GiveToPerson(personCopy);
+                uiElements.Add(giveToPersonButton);
+
+                _tilesAdded++;
             }
 
-            var throwAwayButton = AddButton("Throw away", new Vector2(_horizontalOffset, Globals.ScreenResolutionY - _bottomOffset - _buttonHeight) + buttonSize / 2);
-            throwAwayButton.OnClickAction = () => ThrowAway();
 
-            var cancelButton = AddButton("Cancel", new Vector2(Globals.ScreenResolutionX - _horizontalOffset - _buttonWidth, Globals.ScreenResolutionY - _bottomOffset - _buttonHeight) + buttonSize / 2);
+            var throwAwayButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(_horizontalOffset, Globals.ScreenResolutionY - _bottomOffset - _tileHeight) + tileSize / 2, tileSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+            throwAwayButton.SetText("Throw away", TextAlignment.CENTER, _fontColour);
+            throwAwayButton.OnClickAction = () => ThrowAway();
+            uiElements.Add(throwAwayButton);
+
+            var cancelButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX - _horizontalOffset - _tileWidth, Globals.ScreenResolutionY - _bottomOffset - _tileHeight) + tileSize / 2, tileSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+            cancelButton.SetText("Cancel", TextAlignment.CENTER, _fontColour);
+            uiElements.Add(cancelButton);
             cancelButton.OnClickAction = () => Close();
         }
 
-        private Button AddButton(string text, Vector2? position = null)
-        {
-            if (!position.HasValue)
-            {
-                position = GetNextButtonPosition();
-                _buttonsAdded++;
-            }
-
-            var button = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, position.Value, buttonSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
-            button.SetText(text, TextAlignment.CENTER, _fontColour);
-            uiElements.Add(button);
-
-            return button;
-        }
-
-        private Vector2 GetNextButtonPosition()
+        private Vector2 GetNextTilePosition()
         {
             return new Vector2(
-                _horizontalOffset + (_buttonWidth + _buttonMargin) * (_buttonsAdded / _buttonsInAColumn),
-                _topOffset + (_buttonHeight + _buttonMargin) * (_buttonsAdded % _buttonsInAColumn))
-                + buttonSize / 2;
+                _horizontalOffset + (_tileWidth + _tileMargin) * (_tilesAdded / _tilesInAColumn),
+                _topOffset + (_tileHeight + _tileMargin) * (_tilesAdded % _tilesInAColumn));
         }
 
         private void AddToStorage()

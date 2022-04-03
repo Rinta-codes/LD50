@@ -23,9 +23,8 @@ namespace LD50.Logic
 
         public Vector2 Size { get { return _sprite.size; } }
         public string Name { get; }
+        public string WeaponName => _weapon.Name;
         public bool HasWeapon => _weapon != null;
-        public string WeaponName => _weapon == null ? "no weapon" : _weapon.Name;
-        public string WeaponDescription => _weapon == null ? "no weapon" : _weapon.FullDescription;
 
         public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
@@ -145,6 +144,33 @@ namespace LD50.Logic
         {
             _health = _maxHealth;
             _hpBar.Value = (float)_health / _maxHealth;
+        }
+
+        public UIElements GetFullDescriptionUI(Vector2 position, Vector2 size)
+        {
+            var ui = new UIElements();
+
+            var basePosition = position - size / 2;
+
+            //TODO draw person & weapon
+            var personIconSize = new Vector2(size.Y, size.Y);
+            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, TexName.PLAYER_IDLE));
+
+            var weaponIconSize = new Vector2(size.Y / 3, size.Y / 3);
+            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, TexName.TEST));
+
+            var hpLabelSize = new Vector2(50, size.Y / 3);
+            var personLabelSize = new Vector2(size.X - size.Y - hpLabelSize.X, size.Y / 3);
+            var weaponNameLabelSize = new Vector2(size.X - size.Y, size.Y / 3);
+            var weaponStatsLabelSize = weaponNameLabelSize;
+
+            ui.Add(new Label(Name, TextAlignment.LEFT, (Vector4)Color4.White, basePosition + new Vector2(size.Y, 0) + personLabelSize / 2, personLabelSize, true));
+            ui.Add(new Label($"{_health} / {_maxHealth}", TextAlignment.CENTER, (Vector4)Color4.White, basePosition + new Vector2(size.X - hpLabelSize.X, 0) + hpLabelSize / 2, hpLabelSize, (Vector4)Color4.DarkRed, TexName.PIXEL, true));
+            ui.Add(new Label(_weapon == null ? "no weapon" : _weapon.Name, TextAlignment.LEFT, (Vector4)Color4.White, basePosition + new Vector2(size.Y, size.Y / 3) + weaponNameLabelSize / 2, weaponNameLabelSize, true));
+            if (_weapon != null)
+                ui.Add(new Label($"DMG: {_weapon.Damage} | RNG: {_weapon.ProjectileRange} | CLD: {_weapon.Cooldown} ", TextAlignment.LEFT, (Vector4)Color4.White, basePosition + new Vector2(size.Y, size.Y * 2 / 3) + weaponStatsLabelSize / 2, weaponStatsLabelSize, true));
+
+            return ui;
         }
 
     }

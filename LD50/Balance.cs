@@ -22,11 +22,11 @@ namespace LD50
         public const int minFuelInFuelItem = 1;
         public const int maxFuelInFuelItem = 10;
 
-        public const int minFoodAmbushReward = 5;
-        public const int maxFoodAmbushReward = 20;
+        public const int minFoodAmbushReward = 0;
+        public const int maxFoodAmbushReward = 3;
 
-        public const int minFuelAmbushReward = 5;
-        public const int maxFuelAmbushReward = 20;
+        public const int minFuelAmbushReward = 0;
+        public const int maxFuelAmbushReward = 3;
 
         public const int maxPickupSpawnRadius = 350;
 

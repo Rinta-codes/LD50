@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using LD50.UI;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,13 @@ namespace LD50.Logic.PickupItems
 
         public override bool OnPickup()
         {
+            int startAmount = _amount;
             _amount = Globals.player.car.AddFuel(_amount);
+            if (startAmount - _amount > 0)
+            {
+                Globals.CurrentScene.AddUIElement(new PopupLabel($"+ {startAmount - _amount} Fuel", Position + new Vector2(0, 50)));
+            }
+            
             return _amount > 0;
         }
     }
