@@ -10,9 +10,9 @@ namespace LD50.Logic.Enemies
 {
     public class Slime : Enemy
     {
-        public Slime() : base(TexName.PIXEL, new Vector2(32, 32), Balance.SlimeMaxHP, new BaseGun())
+        public Slime() : base(TexName.SLIME_IDLE, new Vector2(32, 32), Balance.SlimeMaxHP, new BaseGun())
         {
-            _sprite.SetColour(new Vector4(0, 1, 0, 1));
+            _sprite = new Sprite(TexName.SLIME_IDLE, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
         }
 
         public override bool Update()
