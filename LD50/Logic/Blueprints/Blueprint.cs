@@ -6,13 +6,12 @@ namespace LD50.Logic.Blueprints
     public abstract class Blueprint
     {
         public int Cost { get; }
-        public string Name { get; }
+        public abstract string Name { get; }
         public abstract int CraftTime { get; }
 
-        public Blueprint(int cost, Weapon templateWeapon)
+        public Blueprint(int cost)
         {
             Cost = cost;
-            Name = templateWeapon.Name;
         }
 
         public abstract Weapon CreateWeapon();
