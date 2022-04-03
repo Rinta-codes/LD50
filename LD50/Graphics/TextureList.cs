@@ -11,17 +11,24 @@ namespace LD50
     /// </summary>
     public enum TexName
     {
+        // Test
         TEST,
         PIXEL,
         PLAYER_IDLE,
+        // UI
+        BUTTON,
+        // Car
+        CAR_BASE,
+        // Rooms
         ROOM_FOODSTORAGE,
         ROOM_BEDROOM,
         ROOM_FUELSTORAGE,
         ROOM_WEAPONSTORAGE,
         ROOM_WORKSHOP,
-        CAR_BASE,
-        BUTTON,
+        // Backgrounds
         DRIVING_BG,
+        // Enemies
+        DRAGON,
     }
     public class TextureList
     {
@@ -51,6 +58,7 @@ namespace LD50
             LoadTexture("Sprites/Rooms/Workshop.png", TexName.ROOM_WORKSHOP);
             LoadTexture("Sprites/CarBase.png", TexName.CAR_BASE);
             LoadTexture("Sprites/Backgrounds/DrivingSceneBG.png", TexName.DRIVING_BG);
+            LoadTexture("Sprites/Enemies/DragonBW.png", TexName.DRAGON);
         }
 
         /// <summary>

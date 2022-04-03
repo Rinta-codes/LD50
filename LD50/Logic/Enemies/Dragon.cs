@@ -11,9 +11,19 @@ namespace LD50.Logic.Enemies
     public class Dragon : Enemy
     {
 
-        public Dragon() : base(TexName.PIXEL, new Vector2(640, 640), Balance.DragonMaxHP, new DragonWeapon())
+        public Dragon() : base(TexName.DRAGON, new Vector2(640, 640), Balance.DragonMaxHP, new DragonWeapon())
         {
-            _sprite.SetColour(new Vector4(1, 0, 0, 1));
+            List<Vector4> possibleDragonColours = new List<Vector4>
+            {
+                Globals.red,
+                Globals.green,
+                Globals.blue,
+                Globals.yellow,
+                Globals.cyan,
+                Globals.magenta,
+            };
+
+            _sprite.SetColour(possibleDragonColours[Globals.rng.Next(possibleDragonColours.Count)]);
         }
 
         public override bool Update()

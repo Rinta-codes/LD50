@@ -33,6 +33,13 @@ namespace LD50
         public static Vector2 menuButtonSize = new Vector2(80, HUDLabelSize.Y);
         public static Vector2 HUDButtonSize = new Vector2(300, HUDLabelSize.Y);
 
+        // Colours
+        public static Vector4 red = new Vector4(1, 0, 0, 1);
+        public static Vector4 green = new Vector4(0, 1, 0, 1);
+        public static Vector4 blue = new Vector4(0, 0, 1, 1);
+        public static Vector4 yellow = new Vector4(1, 1, 0, 1);
+        public static Vector4 cyan = new Vector4(0, 1, 1, 1);
+        public static Vector4 magenta = new Vector4(1, 0, 1, 1);
 
         public static Random rng = new Random();
         public static HUD hud;
