@@ -74,12 +74,14 @@ namespace LD50.Scenes.Events
         private static string GenerateName()
         {
             var nameLength = Globals.rng.Next(10);
-            string name = $"{consonants[Globals.rng.Next(consonants.Length)].ToUpper()}{vowels[Globals.rng.Next(vowels.Length)]}";
+            string name = $"{consonants[Globals.rng.Next(consonants.Length)]}{vowels[Globals.rng.Next(vowels.Length)]}";
             while (name.Length < nameLength)
             {
                 name += consonants[Globals.rng.Next(consonants.Length)];
                 name += vowels[Globals.rng.Next(vowels.Length)];
             }
+
+            name = name.Substring(0, 1).ToUpper() + name.Substring(1);
 
             return name;
         }
