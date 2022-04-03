@@ -14,6 +14,7 @@ namespace LD50.Scenes.Events
         private int _cost;
         private bool _costsFuel;
         private UIElements _blockingBackground = null;
+        Button lookAtCarButton;
 
         public TradeEvent() : base(Vector2.Zero)
         {
@@ -52,7 +53,7 @@ namespace LD50.Scenes.Events
             moveOnButton.OnClickAction = () => MoveOn();
             uiElements.Add(moveOnButton);
 
-            Button lookAtCarButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(1650, 200), new Vector2(300, 100), 10, Graphics.DrawLayer.BACKGROUND, true);
+            lookAtCarButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(1650, 200), new Vector2(300, 100), 10, Graphics.DrawLayer.BACKGROUND, true);
             lookAtCarButton.SetText("Look at car", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
             lookAtCarButton.OnClickAction = () => LookAtCar();
             uiElements.Add(lookAtCarButton);
@@ -97,6 +98,7 @@ namespace LD50.Scenes.Events
             _blockingBackground = new UIElements();
             _blockingBackground.Add(blockingBackground);
             _blockingBackground.Add(backToTrade);
+            lookAtCarButton.IsHidden = true;
 
             uiElements.Add(_blockingBackground);
         }
@@ -104,6 +106,7 @@ namespace LD50.Scenes.Events
         private void BackToTrade()
         {
             uiElements.Remove(_blockingBackground);
+            lookAtCarButton.IsHidden = false;
             _blockingBackground = null;
         }
 
