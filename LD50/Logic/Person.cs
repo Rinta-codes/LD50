@@ -29,7 +29,7 @@ namespace LD50.Logic
         public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
             Name = name;
-            _weapon = new DebugGun();
+            _weapon = null;
             _health = health;
             _amIPlayer = player;
             _maxHealth = health;
