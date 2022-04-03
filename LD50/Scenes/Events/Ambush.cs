@@ -17,7 +17,6 @@ namespace LD50.Scenes.Events
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
-            uiElements.Add(new Resources());
             var occupants = Globals.player.car.MoveOutOccupants();
 
             _isDragon = isDragon;
@@ -34,8 +33,10 @@ namespace LD50.Scenes.Events
                 Dragon dragon = new Dragon();
                 dragon.Position = new Vector2(Globals.windowSize.X * 0.75f, Globals.windowSize.Y * 0.5f);
                 gameObjects.Add(dragon);
+                uiElements.Remove(exitEventButton);
                 return;
             }
+            uiElements.Add(new Resources());
 
             // Randomize enemy type
             switch ((EnemyList)Globals.rng.Next((int)EnemyList.last))

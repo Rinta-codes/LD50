@@ -20,13 +20,16 @@ namespace LD50.Scenes.Events
     public class Event : Scene
     {
         private Sprite _background;
+
+        protected Button exitEventButton;
+
         public Event(Vector2 playerStartPosition, Sprite background) : base(Vector2.Zero)
         {
             Globals.player.Position = playerStartPosition;
             gameObjects.Add(Globals.player);
             _background = background;
 
-            var exitEventButton = new Button(new Vector4(.8f, .8f, .8f, 1), new Vector4(.5f, .5f, .5f, 1), new Vector2(Globals.windowSize.X - 220, 110), new Vector2(400, 200), 5, Graphics.DrawLayer.UI, true);
+            exitEventButton = new Button(new Vector4(.8f, .8f, .8f, 1), new Vector4(.5f, .5f, .5f, 1), new Vector2(Globals.windowSize.X - 220, 110), new Vector2(400, 200), 5, Graphics.DrawLayer.UI, true);
             exitEventButton.SetText("Exit", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
             exitEventButton.OnClickAction = () => { Globals.currentScene = (int)Scenes.DRIVING; OnExit(); };
 
