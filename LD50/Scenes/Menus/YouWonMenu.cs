@@ -1,4 +1,5 @@
-﻿using LD50.UI;
+﻿using LD50.Audio;
+using LD50.UI;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace LD50.Scenes
 
         public YouWonMenu() : base(Vector2.Zero)
         {
+
+            BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
             Button backToMain = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(960, 300), new Vector2(400, 150), Globals.buttonBorderMedium, Graphics.DrawLayer.UI, false);
             backToMain.OnClickAction = BackToMain;
             backToMain.SetText("Back to Main menu", TextAlignment.CENTER, new Vector4(1, 1, 1, 1));

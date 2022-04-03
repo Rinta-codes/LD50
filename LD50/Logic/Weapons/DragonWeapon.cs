@@ -4,7 +4,8 @@ namespace LD50.Logic.Weapons
 {
     public class DragonWeapon : Weapon
     {
-        public override string Name => "Dragon Weapon";
+        public const string NAME = "Dragon Weapon";
+        public override string Name => NAME;
         public override int Damage => Balance.DragonDamage;
         public override float ProjectileRange => Balance.DragonAttackRange;
         public override int ProjectileSpeed => Balance.DragonProjectileSpeed;

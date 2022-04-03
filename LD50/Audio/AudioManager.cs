@@ -27,7 +27,7 @@ namespace LD50.Audio
             LoopStream m = new LoopStream(reader);
             ch = new SampleChannel(m)
             {
-                Volume = 1.0f
+                Volume = 0.1f
             };
 
             if (music != null)

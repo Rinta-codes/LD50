@@ -108,6 +108,17 @@ namespace LD50.Logic
 
         public void RemoveRoom(Vector2 roomPosition)
         {
+            bool roomPresent = false;
+            foreach (Room room in _rooms)
+            {
+                if (room.OnCarPosition == roomPosition)
+                {
+                    roomPresent = true;
+                    break;
+                }
+            }
+            if (!roomPresent) return;
+
             int index = _carPositions.IndexOf(roomPosition);
             int lastRoomIndex = _rooms.Count - 1;
 

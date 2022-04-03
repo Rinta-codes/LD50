@@ -5,31 +5,21 @@ namespace LD50.Logic.Blueprints
 {
     public abstract class Blueprint
     {
-        private readonly Label _label;
-
         public int Cost { get; }
-        public string Name { get; }
-        public string Description { get; }
-        public int CraftTime { get; }
+        public abstract string Name { get; }
+        public abstract int CraftTime { get; }
 
-        public Blueprint(int cost, string name, string description, int craftTime)
+        public Blueprint(int cost)
         {
             Cost = cost;
-            Name = name;
-            Description = description;
-            CraftTime = craftTime;
-
-            _label = new Label(description, TextAlignment.LEFT, new Vector4(1, 1, 1, 1), Vector2.Zero, 25, true);
-
         }
 
         public abstract Weapon CreateWeapon();
 
-        public Label GetLabel(Vector2 position)
+        public UIElements GetFullDescriptionUI(Vector2 position, Vector2 size)
         {
-            _label.SetPosition(position);
-            return _label;
+            var tempWeapon = CreateWeapon();
+            return tempWeapon.GetFullDescriptionUI(position, size);
         }
-
     }
 }

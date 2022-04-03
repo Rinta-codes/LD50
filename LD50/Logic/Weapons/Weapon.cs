@@ -1,10 +1,13 @@
-﻿using OpenTK.Mathematics;
+﻿using LD50.UI;
+using OpenTK.Mathematics;
 
 namespace LD50.Logic
 {
     public abstract class Weapon : GameObject
     {
-        private float remainingCooldown;
+        private const float _titleRelativeHeight = 0.6f;
+
+        private float _remainingCooldown;
 
         public abstract string Name { get; }
         public abstract int Damage { get; }
@@ -21,17 +24,36 @@ namespace LD50.Logic
 
         public void Attack(GameObject shooter, Vector2 direction, Vector2 position)
         {
-            if (remainingCooldown <= 0)
+            if (_remainingCooldown <= 0)
             {
                 Globals.CurrentScene.gameObjects.Add(new Projectile(shooter, position, new Vector2(ProjectileSize, ProjectileSize), direction, ProjectileSpeed, Damage, ProjectileRange));
-                remainingCooldown = Cooldown;
+                _remainingCooldown = Cooldown;
             }
         }
 
         public override bool Update()
         {
-            remainingCooldown -= (float)Globals.deltaTime;
+            _remainingCooldown -= (float)Globals.deltaTime;
             return base.Update();
+        }
+
+        public UIElements GetFullDescriptionUI(Vector2 position, Vector2 size)
+        {
+            var ui = new UIElements();
+
+            var basePosition = position - size / 2;
+
+            //TODO draw weapon
+            var weaponIconSize = new Vector2(size.Y, size.Y);
+            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + weaponIconSize / 2, weaponIconSize, true, TexName.TEST));
+
+            var nameLabelSize = new Vector2(size.X - size.Y, size.Y * _titleRelativeHeight);
+            var statsLabelSize = new Vector2(size.X - size.Y, size.Y * (1 - _titleRelativeHeight));
+
+            ui.Add(new Label(Name, TextAlignment.LEFT, (Vector4)Color4.White, basePosition + new Vector2(size.Y, 0) + nameLabelSize / 2, nameLabelSize, true));            
+            ui.Add(new Label($"DMG: {Damage} | RNG: {ProjectileRange} | CLD: {Cooldown} ", TextAlignment.LEFT, (Vector4)Color4.White, basePosition + new Vector2(size.Y, size.Y * _titleRelativeHeight) + statsLabelSize / 2, statsLabelSize, true));
+
+            return ui;
         }
     }
 }

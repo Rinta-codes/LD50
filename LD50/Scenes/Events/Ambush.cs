@@ -1,4 +1,5 @@
-﻿using LD50.Logic;
+using LD50.Audio;
+using LD50.Logic;
 using LD50.Logic.Enemies;
 using LD50.UI;
 using OpenTK.Mathematics;
@@ -15,6 +16,7 @@ namespace LD50.Scenes.Events
 
         private bool _rewarded = false, _isDragon;
         private Vector2 _playerStartPosition;
+        private int _foodLoot, _fuelLoot;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
@@ -61,7 +63,6 @@ namespace LD50.Scenes.Events
                     _selectAmbushCrew.Add(new Label($"{person.Name} is now part of your crew", TextAlignment.LEFT, Globals.genericLabelTextColour, crewmateButtonWithLabel.Item1.GetPosition(), Globals.genericLabelFontSize, true));
                 };
             }
-
            
             uiElements.Add(_selectAmbushCrew);
 
@@ -117,6 +118,16 @@ namespace LD50.Scenes.Events
         private void StartFight(List<Person> crew)
         {
             foreach (Person person in crew)
+            if (_isDragon)
+            {
+                BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Dragon.wav");
+            }
+            else
+            {
+                BackgroundMusicManager.PlayMusic("Audio/Music/LD50.wav");
+            }
+
+            foreach (Person person in occupants)
             {
                 person.Position = new Vector2(Globals.rng.Next(100, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(100, (int)Globals.windowSize.Y / 2 - (int)Globals.HUDLabelSize.Y));
             }
@@ -162,6 +173,7 @@ namespace LD50.Scenes.Events
 
         public override void OnExit()
         {
+            BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
             Globals.hud.ToggleButtons();
             foreach (Person p in gameObjects.OfType<Person>())
             {
@@ -172,12 +184,7 @@ namespace LD50.Scenes.Events
         public override void Update()
         {
             base.Update();
-            if (!_rewarded && gameObjects.OfType<Enemy>().Count() <= 0)
-            {
-                _rewarded = true;
-                Globals.player.car.AddFood(Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward));
-                Globals.player.car.AddFuel(Globals.rng.Next(Balance.minFuelAmbushReward, Balance.maxFuelAmbushReward));
-            }
+
             if (_isDragon && gameObjects.OfType<Dragon>().Count() == 0)
             {
                 Globals.currentScene = (int)Scenes.YOUWON;
@@ -186,12 +193,23 @@ namespace LD50.Scenes.Events
 
         private void CreateEnemy<T>() where T : Enemy, new()
         {
-            for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+            int enemySpawns = Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns);
+            for (int i = 0; i < enemySpawns; i++)
             {
                 T enemy = new T()
                 {
                     Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
                 };
+
+                if (Globals.rng.Next(0, 100) >= 50)
+                {
+                    enemy.FuelLoot = Globals.rng.Next(Balance.minFuelAmbushReward, Balance.maxFuelAmbushReward);
+                }
+                else
+                {
+                    enemy.FoodLoot = Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward);
+                }
+                
                 gameObjects.Add(enemy);
             }
         }
