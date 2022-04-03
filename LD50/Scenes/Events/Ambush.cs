@@ -14,9 +14,8 @@ namespace LD50.Scenes.Events
     public class Ambush : Event
     {
 
-        private bool _rewarded = false, _isDragon;
+        private bool _isDragon;
         private Vector2 _playerStartPosition;
-        private int _foodLoot, _fuelLoot;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
@@ -33,7 +32,10 @@ namespace LD50.Scenes.Events
 
             // If it is the Dragon fight - use full crew regardless
             if (_isDragon)
+            {
                 StartFight(occupants);
+                return;
+            }
 
             // HACKING WAY to hide the player from the screen; can still move but why?
             Globals.player.Position = new Vector2(-1000, -1000);
@@ -117,7 +119,6 @@ namespace LD50.Scenes.Events
 
         private void StartFight(List<Person> crew)
         {
-            foreach (Person person in crew)
             if (_isDragon)
             {
                 BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Dragon.wav");

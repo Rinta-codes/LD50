@@ -38,7 +38,7 @@ namespace LD50.Logic
             {
                 if (p != shooter && utils.Utility.Collides(_position, _size, p.Position, p.Size))
                 {
-                    Globals.Logger.Log($"{p} took {_damage} damage!", utils.LogType.INFO);
+                    Globals.Logger.Log($"{p} took {_damage} damage from  {shooter}!", utils.LogType.INFO);
                     p.TakeDamage(_damage);
                     return false;
                 }
@@ -46,7 +46,7 @@ namespace LD50.Logic
 
             if (Globals.player.person != shooter && utils.Utility.Collides(_position, _size, Globals.player.Position, Globals.player.Size))
             {
-                Globals.Logger.Log($"{Globals.player} took {_damage} damage!", utils.LogType.INFO);
+                Globals.Logger.Log($"{Globals.player} took {_damage} damage from {shooter}!", utils.LogType.INFO);
                 Globals.player.TakeDamage(_damage);
                 return false;
             }
@@ -55,7 +55,7 @@ namespace LD50.Logic
             {
                 if (e != shooter && utils.Utility.Collides(_position, _size, e.Position, e.Size))
                 {
-                    Globals.Logger.Log($"{e} took {_damage} damage!", utils.LogType.INFO);
+                    Globals.Logger.Log($"{e} took {_damage} damage from {shooter}!", utils.LogType.INFO);
                     e.TakeDamage(_damage);
                     return false;
                 }
