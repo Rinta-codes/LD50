@@ -11,12 +11,13 @@ namespace LD50.Scenes
         private const int _fontSize = 12;
         private static readonly Vector4 _fontColour = new Vector4(0, 0, 0, 1);
 
-        private const int _buttonWidth = 250;
+        private const int _buttonWidth = 300;
         private const int _buttonHeight = 50;
-        private const int _buttonMargin = 20;
+        private const int _buttonMargin = 10;
         private const int _buttonsInARow = 5;
         private const int _buttonsInAColumn = 5;
-        private const int _verticalOffset = 50;
+        private const int _topOffset = 150;
+        private const int _bottomOffset = 50;
         private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _buttonWidth * _buttonsInARow - _buttonMargin * (_buttonsInARow - 1)) / 2;
 
         private readonly Weapon _weapon;
@@ -38,10 +39,11 @@ namespace LD50.Scenes
             Globals.currentScene = Globals.scenes.Count - 1;
 
             var car = Globals.player.car;
-
             var storageIsAnOption = !(_source is WeaponStorage) && car.HasAFreeWeaponSlot;
-
             var occupants = car.GetOccupantList();
+
+            var weaponLabel = new Label($"{_weapon.FullDescription}", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(_horizontalOffset, 50), new Vector2(Globals.ScreenResolutionX - 2 * _horizontalOffset, 50), new Vector4(1, 1, 1, .5f), TexName.PIXEL, true);
+            uiElements.Add(weaponLabel);
 
             if (storageIsAnOption)
             {
@@ -64,13 +66,14 @@ namespace LD50.Scenes
 
                 var giveToPersonButton = AddButton($"{person.Name}");
                 //var giveToPersonButton = AddButton($"{person.Name} | {person.WeaponDescription}");
-                giveToPersonButton.OnClickAction = () => GiveToPerson(person);
+                var personCopy = person;
+                giveToPersonButton.OnClickAction = () => GiveToPerson(personCopy);
             }
 
-            var throwAwayButton = AddButton("Throw away", new Vector2(_horizontalOffset, Globals.ScreenResolutionY - _verticalOffset - _buttonHeight));
+            var throwAwayButton = AddButton("Throw away", new Vector2(_horizontalOffset, Globals.ScreenResolutionY - _bottomOffset - _buttonHeight));
             throwAwayButton.OnClickAction = () => ThrowAway();
 
-            var cancelButton = AddButton("Cancel", new Vector2(Globals.ScreenResolutionX - _horizontalOffset - _buttonWidth, Globals.ScreenResolutionY - _verticalOffset - _buttonHeight));
+            var cancelButton = AddButton("Cancel", new Vector2(Globals.ScreenResolutionX - _horizontalOffset - _buttonWidth, Globals.ScreenResolutionY - _bottomOffset - _buttonHeight));
             cancelButton.OnClickAction = () => Close();
         }
 
@@ -93,7 +96,7 @@ namespace LD50.Scenes
         {
             return new Vector2(
                 _horizontalOffset + (_buttonWidth + _buttonMargin) * (_buttonsAdded / _buttonsInAColumn),
-                _verticalOffset + (_buttonHeight + _buttonMargin) * (_buttonsAdded % _buttonsInAColumn));
+                _topOffset + (_buttonHeight + _buttonMargin) * (_buttonsAdded % _buttonsInAColumn));
         }
 
         private void AddToStorage()

@@ -17,6 +17,7 @@ namespace LD50.Logic.Rooms
     public class Workshop : Room
     {
         private Weapon _craftedWeapon = null;
+        private int? _assignedBlueprintSlot = null;
 
         protected List<UIElement> workshopUiElements = new List<UIElement>();
 
@@ -29,23 +30,21 @@ namespace LD50.Logic.Rooms
             SetState(WorkshopState.Idle);
         }
 
-        public void StartCrafting()
+        public void InitiateBlueprintSelection()
         {
             if (State != WorkshopState.Idle)
                 return;
 
-            if (!AssignBlueprint())
-                return;
-
-            SetState(WorkshopState.Crafting);
+            new BlueprintSelector(this);
         }
 
-        public bool AssignBlueprint()
+        public void OnBueprintSelected(int blueprintSlot)
         {
-            //TODO: Open blueprint selection
-            AssignedBlueprint = new BaseGunBlueprint();
-
-            return true;
+            _assignedBlueprintSlot = blueprintSlot;
+            var blueprintStorage = Globals.player.BlueprintStorage;
+            AssignedBlueprint = blueprintStorage[blueprintSlot];
+            blueprintStorage.LockBlueprint(blueprintSlot);
+            SetState(WorkshopState.Crafting);
         }
 
         public void OnNextTurn()
@@ -59,6 +58,9 @@ namespace LD50.Logic.Rooms
             {
                 SetState(WorkshopState.WeaponReady);
                 _craftedWeapon = AssignedBlueprint.CreateWeapon();
+                Globals.player.BlueprintStorage.UnlockBlueprint(_assignedBlueprintSlot.Value);
+                AssignedBlueprint = null;
+                _assignedBlueprintSlot = null;
                 CraftTurnsCompleted = 0;
             }
         }
@@ -68,8 +70,7 @@ namespace LD50.Logic.Rooms
             if (State != WorkshopState.WeaponReady)
                 return;
 
-            _ = new WeaponAssignment(_craftedWeapon, this);
-
+            new WeaponAssignment(_craftedWeapon, this);
         }
 
         public void OnWeaponAssigned()
@@ -89,7 +90,7 @@ namespace LD50.Logic.Rooms
                 case WorkshopState.Idle:
                     var craftButton = new Button(new Vector4(0.8f, 0.8f, 0.8f, 1), new Vector4(0.5f, 0.5f, 0.5f, 1), new Vector2(0, 0), new Vector2(100, 50), 10, Graphics.DrawLayer.UI, true);
                     craftButton.SetText("Craft", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-                    craftButton.OnClickAction = () => StartCrafting();
+                    craftButton.OnClickAction = () => InitiateBlueprintSelection();
                     workshopUiElements.Add(craftButton);
                     break;
                 case WorkshopState.Crafting:
@@ -127,6 +128,5 @@ namespace LD50.Logic.Rooms
                 }
             }
         }
-
     }
 }
