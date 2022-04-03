@@ -32,8 +32,11 @@ namespace LD50.Scenes.Events
             List<Person> crew = new List<Person>();
 
             // If it is the Dragon fight - use full crew regardless
-            if (_isDragon)
+            if (_isDragon || occupants.Count == 0)
+            {
                 StartFight(occupants);
+                return;
+            }
 
             // HACKING WAY to hide the player from the screen; can still move but why?
             Globals.player.Position = new Vector2(-1000, -1000);
