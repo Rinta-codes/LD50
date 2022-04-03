@@ -31,7 +31,7 @@ namespace LD50.Scenes.Events
             List<Person> crew = new List<Person>();
 
             // If it is the Dragon fight - use full crew regardless
-            if (_isDragon)
+            if (_isDragon || occupants.Count == 0)
             {
                 StartFight(occupants);
                 return;
