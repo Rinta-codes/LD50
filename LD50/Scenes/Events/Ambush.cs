@@ -1,4 +1,5 @@
-﻿using LD50.Logic;
+﻿using LD50.Audio;
+using LD50.Logic;
 using LD50.Logic.Enemies;
 using LD50.UI;
 using OpenTK.Mathematics;
@@ -20,6 +21,15 @@ namespace LD50.Scenes.Events
             var occupants = Globals.player.car.MoveOutOccupants();
 
             _isDragon = isDragon;
+
+            if (_isDragon)
+            {
+                BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Dragon.wav");
+            }
+            else
+            {
+                BackgroundMusicManager.PlayMusic("Audio/Music/LD50.wav");
+            }
 
             foreach (Person person in occupants)
             {
