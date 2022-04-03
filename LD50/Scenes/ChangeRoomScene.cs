@@ -27,7 +27,7 @@ namespace LD50.Scenes
             gameObjects.Add(car);
             gameObjects.Add(adding);
 
-            uiElements.Add(new Label("New Room:", TextAlignment.LEFT, Vector4.One, new Vector2(320, 120), 20, true));
+            uiElements.Add(new Label("New Room:", TextAlignment.LEFT, Vector4.One, new Vector2(255, 20), 20, true));
 
             for (int i = 0; i < 4; i++)
             {
