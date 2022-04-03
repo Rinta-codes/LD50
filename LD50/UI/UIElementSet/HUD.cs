@@ -1,14 +1,11 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LD50.UI
 {
     public class HUD : UIElements
     {
         Label foodCount, fuelCount, popCount, dragonDistance;
-        Button manageCrewButton, manageRoomsButton, showBlueprintsButton;
+        Button manageCrewButton, manageRoomsButton, showBlueprintsButton, backToRoadButton;
 
         public HUD()
         {
@@ -46,7 +43,7 @@ namespace LD50.UI
             // Remove Rooms
             manageRoomsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageRoomsButton.SetText("Manage Rooms", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            manageRoomsButton.OnClickAction = () => { /*Do something*/ };
+            manageRoomsButton.OnClickAction = () => { Globals.currentScene = (int)LD50.Scenes.Scenes.MANAGEROOMS; ToggleButtons(); };
             elements.Add(manageRoomsButton);
 
             // Show Blueprint
@@ -54,6 +51,15 @@ namespace LD50.UI
             showBlueprintsButton.SetText("Show Blueprints", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
             showBlueprintsButton.OnClickAction = () => { /*Do something*/ };
             elements.Add(showBlueprintsButton);
+
+            // Back
+            // To return back to the Driving Scene for when in one of the Manage scenes above
+            // Replaces Crew/Weapons btn as that will be hidden
+            backToRoadButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            backToRoadButton.SetText("Back to the road!", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
+            backToRoadButton.OnClickAction = () => { Globals.currentScene = (int)LD50.Scenes.Scenes.DRIVING; ToggleButtons(); };
+            backToRoadButton.IsHidden = true;
+            elements.Add(backToRoadButton);
         }
 
         public void ToggleButtons()
@@ -61,6 +67,8 @@ namespace LD50.UI
             manageCrewButton.IsHidden = !manageCrewButton.IsHidden;
             manageRoomsButton.IsHidden = !manageRoomsButton.IsHidden;
             showBlueprintsButton.IsHidden = !showBlueprintsButton.IsHidden;
+
+            backToRoadButton.IsHidden = !backToRoadButton.IsHidden;
         }
 
         public override void Draw()

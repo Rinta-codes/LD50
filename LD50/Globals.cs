@@ -19,6 +19,9 @@ namespace LD50
         public static readonly int ScreenResolutionX = 1920;
         public static readonly int ScreenResolutionY = 1080;
 
+        public static Vector4 genericLabelTextColour = (.5f, .5f, 0, .5f);
+        public static int genericLabelFontSize = 20;
+
         public static Vector4 buttonFillColour = new Vector4(0.8f, 0.8f, 0.8f, 1);
         public static Vector4 buttonBorderColour = new Vector4(0.5f, 0.5f, 0.5f, 1);
         public static Vector2 buttonSizeMedium = new Vector2(300, 100);
