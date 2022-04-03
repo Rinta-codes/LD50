@@ -50,8 +50,8 @@ namespace LD50.Logic
             _hkRoom.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Space);
 
             // Add base rooms
-            _rooms.Add(new FuelTank(_carPositions[_rooms.Count], 10));
-            _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], 10));
+            _rooms.Add(new FuelTank(_carPositions[_rooms.Count], Balance.initialFuel));
+            _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], Balance.initialFood));
 
             // Add base resources
             AddFood(Balance.initialFood);

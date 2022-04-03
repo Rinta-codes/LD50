@@ -6,8 +6,8 @@ namespace LD50
 {
     public static class Balance
     {
-        public const int initialFuel = 10;
-        public const int initialFood = 10;
+        public const int initialFuel = 20;
+        public const int initialFood = 20;
 
         public const int playerHealth = 100;
         public const float playerMovementSpeed = 250.0f;
