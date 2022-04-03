@@ -23,7 +23,7 @@ namespace LD50.Scenes.Events
 
         public BlueprintTradeEvent() : base(Vector2.Zero)
         {
-            int randNum = Globals.rng.Next(2);
+            int randNum = Globals.rng.Next(5);
             switch (randNum)
             {
                 case 0:
@@ -31,6 +31,15 @@ namespace LD50.Scenes.Events
                     break;
                 case 1:
                     _blueprintToTrade = new BetterGunBlueprint();
+                    break;
+                case 2:
+                    _blueprintToTrade = new SniperBlueprint();
+                    break;
+                case 3:
+                    _blueprintToTrade = new RocketLauncherBlueprint();
+                    break;
+                case 4:
+                    _blueprintToTrade = new FastGunBlueprint();
                     break;
                 default:
                     _blueprintToTrade = new BaseGunBlueprint();
