@@ -1,5 +1,6 @@
 ﻿using LD50.IO;
 using LD50.Logic.Blueprints;
+using LD50.Logic.Weapons;
 using LD50.Scenes.Events;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -22,6 +23,8 @@ namespace LD50.Logic
         {
             car = new Car(DefaultCarPosition, new Vector2(800, 200));
             person = new Person(TexName.PLAYER_IDLE, "Me", Balance.playerHealth, true);
+
+            person.GiveWeapon(new BaseGun());
 
             _hkUp = new Hotkey(true).AddKeys(Keys.W, Keys.Up);
             _hkDown = new Hotkey(true).AddKeys(Keys.S, Keys.Down);
