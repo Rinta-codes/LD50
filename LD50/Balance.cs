@@ -68,6 +68,30 @@ namespace LD50
         public const int betterGunMaxCost = 10;
         public const int betterGunCraftTime = 2;
 
+        public const int sniperDamage = 25;
+        public const float sniperRange = 2000.0f;
+        public const float sniperCooldown = 2f;
+
+        public const int sniperMinCost = 10;
+        public const int sniperMaxCost = 25;
+        public const int sniperCraftTime = 3;
+
+        public const int fastGunDamage = 2;
+        public const float fastGunRange = 450.0f;
+        public const float fastGunCooldown = 0.1f;
+
+        public const int fastGunMinCost = 1;
+        public const int fastGunMaxCost = 7;
+        public const int fastGunCraftTime = 3;
+
+        public const int rocketLauncherDamage = 50;
+        public const float rocketLauncherRange = 1000.0f;
+        public const float rocketLauncherCooldown = 5f;
+
+        public const int rocketLauncherMinCost = 20;
+        public const int rocketLauncherMaxCost = 35;
+        public const int rocketLauncherCraftTime = 5;
+
         // Enemies
         public const int SlimeAggroRange = 500;
         public const float SlimeMovementSpeed = 100.0f;
