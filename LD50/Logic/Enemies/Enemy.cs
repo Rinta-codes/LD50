@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using LD50.Logic.PickupItems;
 using LD50.UI;
 using OpenTK.Mathematics;
 
@@ -25,6 +26,9 @@ namespace LD50.Logic
 
         private Slider _hpBar;
 
+        public int FoodLoot { get; set; }
+        public int FuelLoot { get; set; }
+
         public Vector2 Size { get { return _sprite.size; } }
 
         public Enemy(TexName texture, Vector2 size, int health, Weapon weapon) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.ENEMY, false))
@@ -45,6 +49,16 @@ namespace LD50.Logic
             _hpBar.Value = (float)_health / _maxHealth;
             if (!IsAlive())
             {
+                // Spawn loot
+                if (FoodLoot > 0)
+                {
+                    Globals.CurrentScene.gameObjects.Add(new FoodItem(Position, FoodLoot));
+                }
+                if (FuelLoot > 0)
+                {
+                    Globals.CurrentScene.gameObjects.Add(new FuelItem(Position, FuelLoot));
+                }
+                
                 Globals.Logger.Log($"{this} died!", utils.LogType.WARNING);
             }
         }

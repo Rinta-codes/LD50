@@ -15,6 +15,7 @@ namespace LD50.Scenes.Events
     {
 
         private bool _rewarded = false, _isDragon;
+        private int _foodLoot, _fuelLoot;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
@@ -88,12 +89,7 @@ namespace LD50.Scenes.Events
         public override void Update()
         {
             base.Update();
-            if (!_rewarded && gameObjects.OfType<Enemy>().Count() <= 0)
-            {
-                _rewarded = true;
-                Globals.player.car.AddFood(Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward));
-                Globals.player.car.AddFuel(Globals.rng.Next(Balance.minFuelAmbushReward, Balance.maxFuelAmbushReward));
-            }
+
             if (_isDragon && gameObjects.OfType<Dragon>().Count() == 0)
             {
                 Globals.currentScene = (int)Scenes.YOUWON;
@@ -102,12 +98,23 @@ namespace LD50.Scenes.Events
 
         private void CreateEnemy<T>() where T : Enemy, new()
         {
-            for (int i = 0; i < Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns); i++)
+            int enemySpawns = Globals.rng.Next(Balance.minEnemySpawns, Balance.maxEnemySpawns);
+            for (int i = 0; i < enemySpawns; i++)
             {
                 T enemy = new T()
                 {
                     Position = new Vector2(Globals.rng.Next((int)Globals.windowSize.X / 2 + 100, (int)Globals.windowSize.X), Globals.rng.Next((int)Globals.windowSize.Y / 2, (int)Globals.windowSize.Y))
                 };
+
+                if (Globals.rng.Next(0, 100) >= 50)
+                {
+                    enemy.FuelLoot = Globals.rng.Next(Balance.minFuelAmbushReward, Balance.maxFuelAmbushReward);
+                }
+                else
+                {
+                    enemy.FoodLoot = Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward);
+                }
+                
                 gameObjects.Add(enemy);
             }
         }
