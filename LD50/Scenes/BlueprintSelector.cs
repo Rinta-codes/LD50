@@ -15,7 +15,7 @@ namespace LD50.Scenes
         private const int _tileMargin = 10;
         private const int _tilesInARow = 4;
         private const int _tilesInAColumn = 4;
-        private const int _tilesTopOffset = 150;
+        private const int _tilesTopOffset = 350;
         private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _tileWidth * _tilesInARow - _tileMargin * (_tilesInARow - 1)) / 2;
         private const int _tile1stElementHeight = 100;
         private const int _buttonVerticalMargin = 5;
@@ -44,10 +44,13 @@ namespace LD50.Scenes
                     _horizontalOffset + (_tileWidth + _tileMargin) * (slot % _tilesInAColumn),
                     _tilesTopOffset + (_tileHeight + _tileMargin) * (slot / _tilesInAColumn));
 
-                uiElements.Add(blueprintStorage[slot].GetFullDescriptionUI(tilePosition, new Vector2(_tileWidth, _tile1stElementHeight)));
+                var blueprintDescriptionSize = new Vector2(_tileWidth, _tile1stElementHeight);
 
-                var selectBlueprintButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(0, _tile1stElementHeight + _buttonVerticalMargin), new Vector2(_tileWidth, _tileHeight - _tile1stElementHeight - _buttonVerticalMargin), Globals.buttonBorderSmall, Graphics.DrawLayer.UI, false);
-                selectBlueprintButton.SetText("Pick", TextAlignment.CENTER, _fontColour, _fontSize);
+                uiElements.Add(blueprintStorage[slot].GetFullDescriptionUI(tilePosition + blueprintDescriptionSize / 2, blueprintDescriptionSize));
+
+                var selectButtonSize = new Vector2(_tileWidth, _tileHeight - _tile1stElementHeight - _buttonVerticalMargin);
+                var selectBlueprintButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(0, _tile1stElementHeight + _buttonVerticalMargin) + selectButtonSize / 2, selectButtonSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, false);
+                selectBlueprintButton.SetText("Select", TextAlignment.CENTER, _fontColour, _fontSize);
                 var slotCopy = slot;
                 selectBlueprintButton.OnClickAction = () => SelectBlueprint(slotCopy);
                 uiElements.Add(selectBlueprintButton);
