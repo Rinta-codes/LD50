@@ -40,6 +40,12 @@ namespace LD50.Logic
             };
         }
 
+        public Weapon TakeWeapon()
+        {
+            Weapon temp = _weapon;
+            _weapon = null;
+            return temp;
+        }
         public void Attack(Vector2 direction)
         {
             _weapon.Attack(this, direction, Position);
