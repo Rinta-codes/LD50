@@ -50,7 +50,7 @@ namespace LD50.Logic
         {
             _health -= damage;
             _hpBar.Value = (float)_health / _maxHealth;
-            if (_health < 0 && _amIPlayer)
+            if (_health <= 0 && _amIPlayer)
             {
                 Globals.currentScene = (int)Scenes.Scenes.GAMEOVER;
             }
