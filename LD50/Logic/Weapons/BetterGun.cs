@@ -4,7 +4,8 @@ namespace LD50.Logic.Weapons
 {
     public class BetterGun : Weapon
     {
-        public override string Name => "Better Gun";
+        internal const string NAME = "Better Gun";
+        public override string Name => NAME;
         public override int Damage => Balance.betterGunDamage;
         public override float ProjectileRange => Balance.betterGunRange;
         public override int ProjectileSpeed => 1000;
