@@ -36,7 +36,6 @@ namespace LD50.Scenes.Events
                 uiElements.Remove(exitEventButton);
                 return;
             }
-            uiElements.Add(new Resources());
 
             // Randomize enemy type
             switch ((EnemyList)Globals.rng.Next((int)EnemyList.last))
