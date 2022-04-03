@@ -63,6 +63,16 @@ namespace LD50.Scenes
             }
         }
 
+        public void RemoveUIElement(UIElement element)
+        {
+            uiElements.Remove(element);
+        }
+
+        public void AddUIElement(UIElement element)
+        {
+            uiElements.Add(element);
+        }
+
         /// <summary>
         /// Draw all objects in the scene
         /// </summary>
