@@ -35,6 +35,11 @@ namespace LD50.Logic
             }
         }
 
+        public void ResetCooldown()
+        {
+            _remainingCooldown = Cooldown;
+        }
+
         public override bool Update()
         {
             _remainingCooldown -= (float)Globals.deltaTime;
