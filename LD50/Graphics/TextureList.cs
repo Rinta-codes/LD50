@@ -41,6 +41,8 @@ namespace LD50
         PERSON_PORTRAIT,
         PERSON_IDLE,
         PERSON_WALK,
+        // Guns
+        BETTER_GUN,
     }
     public class TextureList
     {
@@ -81,6 +83,7 @@ namespace LD50
             LoadTexture("Sprites/Persons/PersonWalkTwoFrames.png", TexName.PERSON_WALK);
             LoadTexture("Sprites/Persons/PersonPortrait.png", TexName.PERSON_PORTRAIT);
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
+            LoadTexture("Sprites/Guns/BetterGun.png", TexName.BETTER_GUN);
         }
 
         /// <summary>
