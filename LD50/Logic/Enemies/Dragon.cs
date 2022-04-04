@@ -24,8 +24,9 @@ namespace LD50.Logic.Enemies
 
         private Weapon _weapon2 = null;
 
-        public Dragon() : base(TexName.DRAGON, new Vector2(640, 640), Balance.DragonMaxHP, new DragonWeapon())
+        public Dragon() : base(TexName.DRAGON_IDLE, new Vector2(640, 640), Balance.DragonMaxHP, new DragonWeapon())
         {
+            _sprite = new Sprite(TexName.DRAGON_IDLE, Vector2.Zero, new Vector2(640, 640), Graphics.DrawLayer.ENEMY, false, 2, .5f);
             ChangeForm();
         }
 

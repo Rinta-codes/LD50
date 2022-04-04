@@ -38,6 +38,7 @@ namespace LD50
         DRAGON_BG,
         // Enemies
         DRAGON,
+        DRAGON_IDLE,
         FISHBOWL_IDLE,
         FISHBOWL_WALK,
         SLIME_IDLE,
@@ -96,6 +97,7 @@ namespace LD50
             LoadTexture("Sprites/CarBase.png", TexName.CAR_BASE);
             LoadTexture("Sprites/Backgrounds/DrivingSceneBG.png", TexName.DRIVING_BG);
             LoadTexture("Sprites/Enemies/DragonBW.png", TexName.DRAGON);
+            LoadTexture("Sprites/Enemies/DragonIdleTwoFrames.png", TexName.DRAGON_IDLE);
             LoadTexture("Sprites/Enemies/FishbowlIdleTwoFrames.png", TexName.FISHBOWL_IDLE);
             LoadTexture("Sprites/Enemies/FishbowlWalkTwoFrames.png", TexName.FISHBOWL_WALK_FLIPPED);
             LoadTexture("Sprites/Enemies/SheepWalkTwoFrames.png", TexName.SHEEP_WALK_FLIPPED);
