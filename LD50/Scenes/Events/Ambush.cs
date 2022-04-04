@@ -14,12 +14,13 @@ namespace LD50.Scenes.Events
     public class Ambush : Event
     {
 
-        private bool _isDragon;
-        private Vector2 _playerStartPosition;
+        private bool _isDragon, _isAttacking;
+        private Vector2 _playerStartPosition, _mousePos;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.AMBUSH_BG1, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
             _isDragon = isDragon;
+            _isAttacking = false;
             _playerStartPosition = Globals.player.Position;
 
             SelectCrew();
@@ -195,9 +196,21 @@ namespace LD50.Scenes.Events
 
         public override void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
         {
-
+            _isAttacking = true;
             Globals.player.Attack(mousePosition - Globals.player.Position);
             base.OnClick(e, mousePosition);
+        }
+
+        public override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            _isAttacking = false;
+            base.OnMouseUp(e);
+        }
+
+        public override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            _mousePos = e.Position / Window.screenScale;
+            base.OnMouseMove(e);
         }
 
         public void OnExit()
@@ -212,6 +225,11 @@ namespace LD50.Scenes.Events
 
         public override void Update()
         {
+            if (_isAttacking)
+            {
+                Globals.player.Attack(_mousePos - Globals.player.Position);
+            }
+
             base.Update();
 
             if (_isDragon && gameObjects.OfType<Dragon>().Count() == 0)
