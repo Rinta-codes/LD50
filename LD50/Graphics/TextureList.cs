@@ -94,6 +94,13 @@ namespace LD50
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
             LoadTexture("Sprites/Guns/BaseGun.png", TexName.BASE_GUN);
             LoadTexture("Sprites/Guns/BetterGun.png", TexName.BETTER_GUN);
+            LoadTexture("Sprites/Guns/FasterGun.png", TexName.FASTER_GUN);
+            LoadTexture("Sprites/Guns/SniperGun.png", TexName.SNIPER_GUN);
+            LoadTexture("Sprites/Guns/RocketGun.png", TexName.ROCKET_GUN);
+            LoadTexture("Sprites/UI/Exitbutton.png", TexName.EXIT_BUTTON);
+            LoadTexture("Sprites/UI/HUDButton.png", TexName.HUD_BUTTON);
+            LoadTexture("Sprites/Guns/Bullet.png", TexName.BULLET);
+
         }
 
         /// <summary>
