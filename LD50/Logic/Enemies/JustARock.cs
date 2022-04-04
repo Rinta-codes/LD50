@@ -13,7 +13,7 @@ namespace LD50.Logic.Enemies
         public JustARock() : base(TexName.PIXEL, new Vector2(32, 32), Balance.RockMaxHP, new BetterGun())
         {
             _sprite = new Sprite(TexName.ROCK_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
-            _flippedSprite = new Sprite(TexName.ROCK_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, 1);
+            _flippedSprite = new Sprite(TexName.ROCK_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
         }
 
         public override bool Update()

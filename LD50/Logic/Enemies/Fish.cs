@@ -13,8 +13,8 @@ namespace LD50.Logic.Enemies
         
         public Fish() : base(TexName.FISHBOWL_IDLE, new Vector2(32, 32), Balance.FishMaxHP, new BetterGun())
         {
-            _sprite = new Sprite(TexName.FISHBOWL_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, 1);
-            _flippedSprite = new Sprite(TexName.FISHBOWL_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, 1);
+            _sprite = new Sprite(TexName.FISHBOWL_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .5f);
+            _flippedSprite = new Sprite(TexName.FISHBOWL_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .5f);
         }
 
         public override bool Update()

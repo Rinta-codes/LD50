@@ -124,6 +124,12 @@
     <None Update="Sprites\Enemies\FishbowlWalkTwoFramesFlipped.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Sprites\Enemies\HedgehogWalkTwoFrames.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\Enemies\HedgehogWalkTwoFramesFlipped.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\Enemies\RockWalkTwoFrames.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

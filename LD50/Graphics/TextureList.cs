@@ -47,6 +47,8 @@ namespace LD50
         SLIME_IDLE_FLIPPED,
         SHEEP_WALK_FLIPPED,
         ROCK_WALK_FLIPPED,
+        BIKER_WALK,
+        BIKER_WALK_FLIPPED,
         // Persons
         PERSON_PORTRAIT,
         PERSON_IDLE,
@@ -103,6 +105,8 @@ namespace LD50
             LoadTexture("Sprites/Enemies/SheepWalkTwoFramesFlipped.png", TexName.SHEEP_WALK);
             LoadTexture("Sprites/Enemies/RockWalkTwoFramesFlipped.png", TexName.ROCK_WALK);
             LoadTexture("Sprites/Enemies/SlimeIdleTwoFramesFlipped.png", TexName.SLIME_IDLE);
+            LoadTexture("Sprites/Enemies/HedgehogWalkTwoFrames.png", TexName.BIKER_WALK);
+            LoadTexture("Sprites/Enemies/HedgehogWalkTwoFramesFlipped.png", TexName.BIKER_WALK_FLIPPED);
             LoadTexture("Sprites/Loot/Fuel.png", TexName.FUEL);
             LoadTexture("Sprites/Loot/Food.png", TexName.FOOD);
             LoadTexture("Sprites/Persons/PersonIdleTwoFrames.png", TexName.PERSON_IDLE);
