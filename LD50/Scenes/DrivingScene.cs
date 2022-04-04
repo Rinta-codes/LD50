@@ -22,7 +22,7 @@ namespace LD50.Scenes
             uiElements.Add(nextEventButton);
 
             _player = new Player();
-            
+
             Globals.player = _player;
             gameObjects.Add(_player);
         }
@@ -31,13 +31,12 @@ namespace LD50.Scenes
         {
             if (!_isDriving)
             {
-                Globals.player.HealToFull();
+                Globals.player.car.OnNextTurn();
                 if (!Globals.player.car.ConsumeFuel(Balance.FuelCost()) || !Globals.player.car.ConsumeFood(Balance.FoodCost()))
                 {
                     // Out of fuel, dragon time
                     Scene dragon = new Ambush(true);
                     Globals.scenes[(int)Scenes.EVENT] = dragon;
-                    Globals.player.car.OnNextTurn();
                     Globals.currentScene = (int)Scenes.EVENT;
                     return;
                 }
@@ -59,9 +58,8 @@ namespace LD50.Scenes
                 {
                     _isDriving = false;
                     _player.CarPosition = _player.DefaultCarPosition;
-                    Globals.player.car.OnNextTurn();
                     Globals.hud.HideButtons(true);
-                    Globals.currentScene = (int) Scenes.EVENT;
+                    Globals.currentScene = (int)Scenes.EVENT;
                 }
             }
             base.Update();
