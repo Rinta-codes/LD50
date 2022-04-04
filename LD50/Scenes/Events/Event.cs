@@ -120,7 +120,7 @@ namespace LD50.Scenes.Events
 
         public static Scene GetRandomEvent()
         {
-            int rand = Globals.rng.Next(events.Count);
+            int rand = Globals.rng.Next(events[0].Count);
             Events e = events[0][rand];
             events[0].RemoveAt(rand);
             if(events[0].Count <= 0)
