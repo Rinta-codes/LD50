@@ -279,7 +279,7 @@ namespace LD50.Logic
         public void HealParty()
         {
             Globals.player.person.HealPercentage(Balance.healthPercentageHealedPerTurn);
-            foreach (Person person in _rooms.OfType<Person>())
+            foreach (var person in GetOccupantList())
             {
                 person.HealPercentage(Balance.healthPercentageHealedPerTurn);
             }
