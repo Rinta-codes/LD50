@@ -14,7 +14,7 @@ namespace LD50.Logic
         private int _damage;
         private GameObject shooter;
 
-        public Projectile(GameObject shooter, Vector2 position, Vector2 size, Vector2 direction, float speed, int damage, float maxDistance) : base(new Sprite(TexName.PIXEL, position, size, Graphics.DrawLayer.PROJECTILE, false))
+        public Projectile(GameObject shooter, Vector2 position, Vector2 size, Vector2 direction, float speed, int damage, float maxDistance) : base(new Sprite(TexName.BULLET, position, size, Graphics.DrawLayer.PROJECTILE, false))
         {
             this.shooter = shooter;
             this._position = position;

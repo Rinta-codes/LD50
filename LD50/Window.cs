@@ -168,13 +168,6 @@ namespace LD50
             // Update the InputHandler
             Globals.inputHandler.Update(KeyboardState.GetSnapshot(), MouseState.GetSnapshot());
 
-            // Check if the Escape button is pressed
-            if (Globals.inputHandler.IsKeyPressed(Keys.Escape))
-            {
-                // Close the window
-                Close();
-            }
-
             // Call Globals' update, this updates the active Buttons as well as the AudioManager
             Globals.Update();
 
