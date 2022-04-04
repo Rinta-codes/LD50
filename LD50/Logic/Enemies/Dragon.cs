@@ -35,10 +35,12 @@ namespace LD50.Logic.Enemies
                 case 0:
                     _sprite.SetColour(possibleDragonColours[0]);
                     _weapon = new BaseGun();
+                    _weapon.ProjectileRange = 3000;
                     break;
                 case 1:
                     _sprite.SetColour(possibleDragonColours[1]);
                     _weapon = new BetterGun();
+                    _weapon.ProjectileRange = 3000;
                     break;
                 case 2:
                     _sprite.SetColour(possibleDragonColours[2]);
@@ -51,10 +53,12 @@ namespace LD50.Logic.Enemies
                 case 4:
                     _sprite.SetColour(possibleDragonColours[4]);
                     _weapon = new FastGun();
+                    _weapon.ProjectileRange = 3000;
                     break;
                 case 5:
                     _sprite.SetColour(possibleDragonColours[5]);
                     _weapon = new RocketLauncher();
+                    _weapon.ProjectileRange = 3000;
                     break;
             }
         }

@@ -12,7 +12,7 @@ namespace LD50.Logic
 
         public abstract string Name { get; }
         public abstract int Damage { get; }
-        public abstract float ProjectileRange { get; }
+        public abstract float ProjectileRange { get; set; }
         public abstract int ProjectileSpeed { get; }
         public abstract int ProjectileSize { get; }
         public abstract float Cooldown { get; }
