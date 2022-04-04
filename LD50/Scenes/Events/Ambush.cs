@@ -80,7 +80,8 @@ namespace LD50.Scenes.Events
                 int tilesAdded = 0;
                 foreach (var person in occupants)
                 {
-                    if (person.Health > minHealthToGetSelectedForBattle)
+                    var fightsByDefault = person.Health > minHealthToGetSelectedForBattle;
+                    if (fightsByDefault)
                         crew.Add(person);
 
                     var personInfoSize = new Vector2(_tileWidth - _buttonWidth, _tileHeight);
@@ -89,19 +90,19 @@ namespace LD50.Scenes.Events
 
                     var pickPersonButtonSize = new Vector2(_buttonWidth, _tileHeight);
                     var pickPersonButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(_tileWidth - _buttonWidth, 0) + pickPersonButtonSize / 2, pickPersonButtonSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
-                    pickPersonButton.SetText(crew.Contains(person) ? "Stay" : "Fight", TextAlignment.CENTER, Globals.black);
+                    pickPersonButton.SetText(fightsByDefault ? "Fights" : "Stays", TextAlignment.CENTER, Globals.black);
                     var personCopy = person;
                     pickPersonButton.OnClickAction = () =>
                     {
                         if (crew.Contains(personCopy))
                         {
                             crew.Remove(personCopy);
-                            pickPersonButton.SetText("Fight", TextAlignment.CENTER, Globals.genericLabelTextColour);
+                            pickPersonButton.SetText("Stays", TextAlignment.CENTER, Globals.black);
                         }
                         else
                         {
                             crew.Add(personCopy);
-                            pickPersonButton.SetText("Stay", TextAlignment.CENTER, Globals.genericLabelTextColour);
+                            pickPersonButton.SetText("Fights", TextAlignment.CENTER, Globals.black);
                         }
                     };
                     _selectAmbushCrew.Add(pickPersonButton);
