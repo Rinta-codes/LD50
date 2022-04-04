@@ -85,7 +85,7 @@ namespace LD50
 
         public const int rocketLauncherDamage = 100;
         public const float rocketLauncherRange = 1000.0f;
-        public const float rocketLauncherCooldown = 5f;
+        public const float rocketLauncherCooldown = 4f;
 
         public const int rocketLauncherMinCost = 20;
         public const int rocketLauncherMaxCost = 35;
@@ -117,10 +117,10 @@ namespace LD50
         public const float BikeGuyWanderRadius = 200.0f;
         public const int BikeGuyMaxHP = 25;
 
-        public const int DragonMaxHP = 2000;
+        public const int DragonMaxHP = 1500;
         public const int DragonDamage = 25;
-        public const float DragonCooldown = 1f;
-        public const int DragonProjectileSpeed = 2000;
+        public const float DragonCooldown = 1.5f;
+        public const int DragonProjectileSpeed = 1500;
         public const int DragonAttackRange = 2000;
 
         // Person encounter

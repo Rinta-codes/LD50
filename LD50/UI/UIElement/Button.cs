@@ -70,6 +70,11 @@ namespace LD50.UI
             }
         }
 
+        public void SetColour(Vector4 colour)
+        {
+            _backgroundRect.SetColour(colour);
+        }
+
         /// <summary>
         /// Is called when the button is clicked
         /// </summary>

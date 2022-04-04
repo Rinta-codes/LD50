@@ -117,7 +117,7 @@ namespace LD50.Scenes.Events
             {
                 uiElements.Remove(_selectAmbushCrew);
                 Globals.player.Position = _playerStartPosition; // Return player to the screen
-                Globals.player.Move(new Vector2(0, 0));
+                Globals.player.person.Move(new Vector2(0, 0));
                 foreach (var person in occupants)
                 {
                     if (!crew.Contains(person))
@@ -238,6 +238,7 @@ namespace LD50.Scenes.Events
             if (_isDragon && gameObjects.OfType<Dragon>().Count() == 0)
             {
                 Globals.currentScene = (int)Scenes.YOUWON;
+                Globals.hud.IsHidden = true;
             }
         }
 

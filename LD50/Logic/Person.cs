@@ -88,6 +88,7 @@ namespace LD50.Logic
             if (_health <= 0 && _amIPlayer)
             {
                 Globals.currentScene = (int)Scenes.Scenes.GAMEOVER;
+                Globals.hud.IsHidden = true;
             }
         }
 

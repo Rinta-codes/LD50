@@ -35,6 +35,7 @@ namespace LD50.UI
             // Menu/Pause
             Button menuButton = new Button(TexName.EXIT_BUTTON, Globals.menuButtonSize / 2, Globals.menuButtonSize, Graphics.DrawLayer.UI, true);
             menuButton.OnClickAction = () => { Game.gameWindow.Close(); };
+            menuButton.SetColour(new Vector4(1, 0, 0, 1));
             elements.Add(menuButton);
 
             // Manage Crew / Weapons

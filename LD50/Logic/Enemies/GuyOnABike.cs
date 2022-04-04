@@ -13,7 +13,8 @@ namespace LD50.Logic.Enemies
 
         public GuyOnABike() : base(TexName.PIXEL, new Vector2(32, 32), Balance.BikeGuyMaxHP, new BaseGun())
         {
-            _sprite.SetColour(new Vector4(0, 1, 1, 1));
+            _sprite = new Sprite(TexName.BIKER_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .1f);
+            _flippedSprite = new Sprite(TexName.BIKER_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .1f);
         }
 
         public override bool Update()
