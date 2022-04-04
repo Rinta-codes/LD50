@@ -238,6 +238,7 @@ namespace LD50.Scenes.Events
             if (_isDragon && gameObjects.OfType<Dragon>().Count() == 0)
             {
                 Globals.currentScene = (int)Scenes.YOUWON;
+                Globals.hud.IsHidden = true;
             }
         }
 
