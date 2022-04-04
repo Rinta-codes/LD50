@@ -86,6 +86,8 @@ namespace LD50
             spriteRenderer = new SpriteRenderer(_shader);
 
             // Create a Scene
+            Event.FilEventLists();
+
             Globals.player = new Player();
             Globals.hud = new UI.HUD();
             Globals.scenes.Add(new MainMenu());

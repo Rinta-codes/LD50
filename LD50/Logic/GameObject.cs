@@ -23,7 +23,7 @@ namespace LD50.Logic
         public virtual void Move(Vector2 movement)
         {
             _sprite.Position += movement;
-            Vector2 newPos = new Vector2((float)Math.Clamp(_sprite.Position.X, _sprite.size.X / 2, Globals.windowSize.X - _sprite.size.X / 2), (float)Math.Clamp(_sprite.Position.Y, _sprite.size.Y / 2, Globals.windowSize.Y - _sprite.size.Y / 2));
+            Vector2 newPos = new Vector2((float)Math.Clamp(_sprite.Position.X, _sprite.size.X / 2, Globals.windowSize.X - _sprite.size.X / 2), (float)Math.Clamp(_sprite.Position.Y, _sprite.size.Y / 2 + Globals.HUDLabelSize.Y, Globals.windowSize.Y - _sprite.size.Y / 2));
             _sprite.Position = newPos;
         }
 
