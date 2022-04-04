@@ -175,7 +175,10 @@ namespace LD50.Logic
         public override void Move(Vector2 movement)
         {
             base.Move(movement);
-            _weapon.Flip(_flipped);
+            if (_weapon != null)
+            {
+                _weapon.Flip(_flipped);
+            }
         }
 
         public override void Draw()
