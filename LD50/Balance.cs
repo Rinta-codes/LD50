@@ -85,7 +85,7 @@ namespace LD50
 
         public const int rocketLauncherDamage = 100;
         public const float rocketLauncherRange = 1000.0f;
-        public const float rocketLauncherCooldown = 5f;
+        public const float rocketLauncherCooldown = 4f;
 
         public const int rocketLauncherMinCost = 20;
         public const int rocketLauncherMaxCost = 35;

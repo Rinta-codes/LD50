@@ -13,7 +13,7 @@ namespace LD50.Logic.Enemies
         public Slime() : base(TexName.SLIME_IDLE, new Vector2(32, 32), Balance.SlimeMaxHP, new BaseGun())
         {
             _sprite = new Sprite(TexName.SLIME_IDLE, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
-            _flippedSprite = new Sprite(TexName.SLIME_IDLE_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, 1);
+            _flippedSprite = new Sprite(TexName.SLIME_IDLE_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
         }
 
         public override bool Update()
