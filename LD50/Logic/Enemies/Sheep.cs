@@ -13,7 +13,7 @@ namespace LD50.Logic.Enemies
         public Sheep() : base(TexName.SHEEP_WALK, new Vector2(32, 32), Balance.SheepMaxHP, new BaseGun())
         {
             _sprite = new Sprite(TexName.SHEEP_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
-            _flippedSprite = new Sprite(TexName.SHEEP_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, 1);
+            _flippedSprite = new Sprite(TexName.SHEEP_WALK_FLIPPED, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
         }
 
         public override bool Update()
