@@ -268,6 +268,11 @@ namespace LD50.Logic
             return false;
         }
 
+        public override void Move(Vector2 move)
+        {
+            Position += move;
+        }
+
 
         public void HealParty()
         {
