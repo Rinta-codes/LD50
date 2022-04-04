@@ -8,7 +8,7 @@ namespace LD50.Scenes.Events
 {
     public class FuelPile : Event
     {
-        public FuelPile() : base(new Vector2(Globals.windowSize.X / 2, Globals.windowSize.Y - 200), new Sprite(TexName.TEST, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
+        public FuelPile() : base(new Vector2(Globals.windowSize.X / 2, Globals.windowSize.Y - 200), new Sprite(TexName.LOOT_BG, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
 
             for (int i = 0; i < Globals.rng.Next(Balance.minFuelInFuelPile, Balance.maxFuelInFuelPile); i++)
