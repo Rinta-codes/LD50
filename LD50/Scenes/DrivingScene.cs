@@ -60,7 +60,7 @@ namespace LD50.Scenes
                     _isDriving = false;
                     _player.CarPosition = _player.DefaultCarPosition;
                     Globals.player.car.OnNextTurn();
-                    Globals.hud.ToggleButtons();
+                    Globals.hud.HideButtons(true);
                     Globals.currentScene = (int) Scenes.EVENT;
                 }
             }

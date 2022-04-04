@@ -25,6 +25,7 @@ namespace LD50.Scenes
 
         private void BackToMain()
         {
+            Globals.hud.IsHidden = true;
             Globals.currentScene = (int)Scenes.MAINMENU;
             Globals.player = new Logic.Player();
             Globals.scenes[(int)Scenes.DRIVING] = new DrivingScene(Vector2.Zero);

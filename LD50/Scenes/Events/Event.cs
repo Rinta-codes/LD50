@@ -21,24 +21,11 @@ namespace LD50.Scenes.Events
     {
         private Sprite _background;
 
-        protected Button exitEventButton;
-
         public Event(Vector2 playerStartPosition, Sprite background) : base(Vector2.Zero)
         {
             Globals.player.Position = playerStartPosition;
             gameObjects.Add(Globals.player);
             _background = background;
-
-            exitEventButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.windowSize.X - 220, 140), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
-            exitEventButton.SetText("Exit", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-            exitEventButton.OnClickAction = () => { Globals.currentScene = (int)Scenes.DRIVING; OnExit(); };
-
-            uiElements.Add(exitEventButton);
-        }
-
-        public virtual void OnExit()
-        {
-            Globals.hud.ToggleButtons();
         }
 
         public override void Update()

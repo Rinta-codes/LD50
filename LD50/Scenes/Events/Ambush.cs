@@ -140,7 +140,6 @@ namespace LD50.Scenes.Events
                 Dragon dragon = new Dragon();
                 dragon.Position = new Vector2(Globals.windowSize.X * 0.75f, Globals.windowSize.Y * 0.5f);
                 gameObjects.Add(dragon);
-                uiElements.Remove(exitEventButton);
                 return;
             }
 
@@ -172,10 +171,10 @@ namespace LD50.Scenes.Events
             base.OnClick(e, mousePosition);
         }
 
-        public override void OnExit()
+        public void OnExit()
         {
             BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
-            Globals.hud.ToggleButtons();
+            Globals.hud.HideButtons(false);
             foreach (Person p in gameObjects.OfType<Person>())
             {
                 Globals.player.car.AddOccupant(p);
