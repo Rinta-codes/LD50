@@ -41,7 +41,7 @@ namespace LD50
         /// <param name="title">Title of the window</param>
         public Window(int width, int height, string title) : base(
             new GameWindowSettings { RenderFrequency = 60, UpdateFrequency = 60 },
-            new NativeWindowSettings { Size = new Vector2i(width, height), Title = title, WindowState = WindowState.Fullscreen, WindowBorder = WindowBorder.Hidden })
+            new NativeWindowSettings { Size = new Vector2i(width, height), Title = title, WindowState = WindowState.Normal, WindowBorder = WindowBorder.Hidden })
         {
             // Create InputHandler
             Globals.inputHandler = new InputHandler();

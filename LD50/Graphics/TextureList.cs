@@ -33,6 +33,7 @@ namespace LD50
         // Backgrounds
         DRIVING_BG,
         AMBUSH_BG1,
+        LOOT_BG,
         // Enemies
         DRAGON,
         FISHBOWL_IDLE,
@@ -107,6 +108,7 @@ namespace LD50
             LoadTexture("Sprites/Persons/PersonWalkTwoFramesFlipped.png", TexName.PERSON_WALK_FLIPPED);
             LoadTexture("Sprites/Persons/PersonPortrait.png", TexName.PERSON_PORTRAIT);
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
+            LoadTexture("Sprites/Backgrounds/LootBG.png", TexName.LOOT_BG);
             LoadTexture("Sprites/Guns/BaseGun.png", TexName.BASE_GUN);
             LoadTexture("Sprites/Guns/BetterGun.png", TexName.BETTER_GUN);
             LoadTexture("Sprites/Guns/FasterGun.png", TexName.FASTER_GUN);

@@ -1,5 +1,4 @@
-﻿using LD50.Logic.Weapons;
-using LD50.UI;
+﻿using LD50.UI;
 using LD50.utils;
 using OpenTK.Mathematics;
 using System;
@@ -14,6 +13,16 @@ namespace LD50.Logic
         private Weapon _weapon;
         private int _health, _maxHealth;
 
+        private int Health
+        {
+            get { return _health; }
+            set
+            {
+                _health = value;
+                _hpBar.Value = (float)_health / _maxHealth;
+            }
+        }
+
         private Slider _hpBar;
         private Label _nameplate;
         private int _nameplateFont = 10;
@@ -26,13 +35,13 @@ namespace LD50.Logic
         private TexName _portraitTexture;
 
         public Vector2 Size { get { return _sprite.size; } }
-        
+
         private string _name;
         public string Name
         {
             get => _name;
 
-            set 
+            set
             {
                 _name = value;
 
@@ -75,8 +84,7 @@ namespace LD50.Logic
 
         public void TakeDamage(int damage)
         {
-            _health -= damage;
-            _hpBar.Value = (float)_health / _maxHealth;
+            Health -= Math.Max(damage, 0);
             if (_health <= 0 && _amIPlayer)
             {
                 Globals.currentScene = (int)Scenes.Scenes.GAMEOVER;
@@ -102,7 +110,7 @@ namespace LD50.Logic
                 _weapon.Update();
                 _weapon.Position = Position;
             }
-            
+
             _hpBar.SetPosition(Position + new Vector2(0, -Size.Y / 2 - 10));
             _hpBar.Update();
 
@@ -127,7 +135,7 @@ namespace LD50.Logic
                             potentialTargets.Add(new Tuple<float, GameObject>((enemy.Position - _sprite.Position).Length, enemy));
                         }
 
-                        potentialTargets.Sort((Tuple<float, GameObject>a, Tuple<float, GameObject>b) => (a.Item1.CompareTo(b.Item1)));
+                        potentialTargets.Sort((Tuple<float, GameObject> a, Tuple<float, GameObject> b) => (a.Item1.CompareTo(b.Item1)));
 
                         _target = potentialTargets.Count > 0 ? (Enemy)potentialTargets[0].Item2 : null;
                     }
@@ -175,13 +183,25 @@ namespace LD50.Logic
             _hpBar.Draw();
             _nameplate.Draw();
             base.Draw();
-            _weapon.Draw();
+            if (_weapon != null)
+            {
+                _weapon.Draw();
+            }
+        }
+
+        public void Heal(int healthHealed)
+        {
+            Health = Math.Min(_health + healthHealed, _maxHealth);
+        }
+
+        public void HealPercentage(int healthPercentageHealed)
+        {
+            Health = Math.Min(_health + (_maxHealth * healthPercentageHealed / 100), _maxHealth);
         }
 
         public void HealToFull()
         {
-            _health = _maxHealth;
-            _hpBar.Value = (float)_health / _maxHealth;
+            Health = _maxHealth;
         }
 
         public UIElements GetFullDescriptionUI(Vector2 position, Vector2 size)
@@ -198,7 +218,13 @@ namespace LD50.Logic
             ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, _portraitTexture));
 
             var weaponIconSize = new Vector2(size.Y / 3, size.Y / 3);
-            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, TexName.TEST));
+            if (_weapon != null)
+            {
+                // Little black frame around weapon
+                ui.Add(new Rectangle((Vector4)Color4.Black, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize + Vector2.One, true, TexName.PIXEL));
+                ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, TexName.PIXEL));
+                ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, _weapon.Texture));
+            }
 
             var hpLabelSize = new Vector2(50, size.Y / 3);
             var personLabelSize = new Vector2(size.X - size.Y - hpLabelSize.X, size.Y / 3);

@@ -87,12 +87,5 @@ namespace LD50.Logic
             }
             return true;
         }
-
-        public void HealToFull()
-        {
-            person.HealToFull();
-            car.HealParty();
-        }
-
     }
 }
