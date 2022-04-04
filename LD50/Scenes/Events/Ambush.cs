@@ -4,10 +4,8 @@ using LD50.Logic.Enemies;
 using LD50.UI;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LD50.Scenes.Events
 {
@@ -16,6 +14,16 @@ namespace LD50.Scenes.Events
 
         private bool _isDragon, _isAttacking;
         private Vector2 _playerStartPosition, _mousePos;
+
+        private const int minHealthToGetSelectedForBattle = 30;
+        private const int _tileWidth = 300;
+        private const int _tileHeight = 100;
+        private const int _tileMargin = 10;
+        private const int _tilesInARow = 5;
+        private const int _tilesInAColumn = 5;
+        private const int _topOffset = 250;
+        private static readonly int _horizontalOffset = (Globals.ScreenResolutionX - _tileWidth * _tilesInARow - _tileMargin * (_tilesInARow - 1)) / 2;
+        private const int _buttonWidth = 50;
 
         public Ambush(bool isDragon) : base(new Vector2(Globals.rng.Next(0, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(0, (int)Globals.windowSize.Y / 2)), new Sprite(TexName.AMBUSH_BG1, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true))
         {
@@ -44,7 +52,7 @@ namespace LD50.Scenes.Events
                 StartFight(occupants);
                 return;
             }
-            else  if(occupants.Count == 0)
+            else if (occupants.Count == 0)
             {
                 ambushInfo = new Label($"You've been ambushed!", TextAlignment.CENTER, (Vector4)Color4.Black, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
 
@@ -69,17 +77,37 @@ namespace LD50.Scenes.Events
                 _selectAmbushCrew.Add(enterAmbush);
                 _selectAmbushCrew.Add(ambushInfo);
 
-                int buttonsAdded = 0;
+                int tilesAdded = 0;
                 foreach (var person in occupants)
                 {
-                    var crewmateButtonWithLabel = AddCrewmemberButtonWithLabel(person, _selectAmbushCrew, ref buttonsAdded);
-                    crewmateButtonWithLabel.Button.OnClickAction = () =>
-                    {
+                    var fightsByDefault = person.Health > minHealthToGetSelectedForBattle;
+                    if (fightsByDefault)
                         crew.Add(person);
-                        crewmateButtonWithLabel.Button.IsHidden = true;
-                        crewmateButtonWithLabel.Label.IsHidden = true;
-                        _selectAmbushCrew.Add(new Label($"{person.Name} is now part of your crew", TextAlignment.LEFT, Globals.genericLabelTextColour, crewmateButtonWithLabel.Item1.GetPosition(), Globals.genericLabelFontSize, true));
+
+                    var personInfoSize = new Vector2(_tileWidth - _buttonWidth, _tileHeight);
+                    var tilePosition = GetNextTilePosition(tilesAdded);
+                    _selectAmbushCrew.Add(person.GetFullDescriptionUI(tilePosition + personInfoSize / 2, personInfoSize));
+
+                    var pickPersonButtonSize = new Vector2(_buttonWidth, _tileHeight);
+                    var pickPersonButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, tilePosition + new Vector2(_tileWidth - _buttonWidth, 0) + pickPersonButtonSize / 2, pickPersonButtonSize, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
+                    pickPersonButton.SetText(fightsByDefault ? "Fights" : "Stays", TextAlignment.CENTER, Globals.black);
+                    var personCopy = person;
+                    pickPersonButton.OnClickAction = () =>
+                    {
+                        if (crew.Contains(personCopy))
+                        {
+                            crew.Remove(personCopy);
+                            pickPersonButton.SetText("Stays", TextAlignment.CENTER, Globals.black);
+                        }
+                        else
+                        {
+                            crew.Add(personCopy);
+                            pickPersonButton.SetText("Fights", TextAlignment.CENTER, Globals.black);
+                        }
                     };
+                    _selectAmbushCrew.Add(pickPersonButton);
+
+                    tilesAdded++;
                 }
             }
 
@@ -99,41 +127,12 @@ namespace LD50.Scenes.Events
             };
         }
 
-        /// <summary>
-        ///  Stolen from WeaponAssignment
-        /// </summary>
-        /// <returns></returns>
-        private (Button Button, Label Label) AddCrewmemberButtonWithLabel(Person person, UIElements addButtonToHere, ref int buttonsAdded)
+        private Vector2 GetNextTilePosition(int tilesAdded)
         {
-            var position = GetNextButtonPosition(buttonsAdded);
-            var button = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, position, Globals.buttonSizeSmall, Globals.buttonBorderSmall, Graphics.DrawLayer.UI, true);
-            button.SetText($"{person.Name}", TextAlignment.CENTER, new Vector4(0,0,0,1), 12);
-            var label = new Label($"Weapon: {person.WeaponName}; Health: Who even knows", TextAlignment.LEFT, Globals.genericLabelTextColour, button.GetPosition() + new Vector2(100, 0), Globals.genericLabelFontSize, true);
-            addButtonToHere.Add(button);
-            addButtonToHere.Add(label);
-
-            buttonsAdded++;
-
-            return (button, label);
-        }
-
-        /// <summary>
-        ///  Stolen from WeaponAssignment
-        /// </summary>
-        private Vector2 GetNextButtonPosition(int buttonsAdded)
-        {
-            int buttonWidth = (int)Globals.buttonSizeSmall.Y;
-            int buttonHeight = (int)Globals.buttonSizeSmall.X;
-            int buttonMargin = (int)Globals.buttonBorderSmall;
-            int buttonsInAColumn = 15;
-            int topOffset = 250;
-            int horizontalOffset = 250;
-
             return new Vector2(
-                horizontalOffset + (buttonWidth + buttonMargin) * (buttonsAdded / buttonsInAColumn),
-                topOffset + (buttonHeight + buttonMargin) * (buttonsAdded % buttonsInAColumn));
+                _horizontalOffset + (_tileWidth + _tileMargin) * (tilesAdded / _tilesInAColumn),
+                _topOffset + (_tileHeight + _tileMargin) * (tilesAdded % _tilesInAColumn));
         }
-
 
         private void StartFight(List<Person> crew)
         {
@@ -151,7 +150,7 @@ namespace LD50.Scenes.Events
             Vector2 distanceBetweenCrew = Vector2.Zero;
             Vector2 start = Vector2.Zero;
 
-            if(crew.Count == 1)
+            if (crew.Count == 1)
             {
                 start = new Vector2(100, 500);
             }
@@ -260,7 +259,7 @@ namespace LD50.Scenes.Events
                 {
                     enemy.FoodLoot = Globals.rng.Next(Balance.minFoodAmbushReward, Balance.maxFoodAmbushReward);
                 }
-                
+
                 gameObjects.Add(enemy);
             }
         }

@@ -12,8 +12,6 @@ namespace LD50.Logic.Weapons
 
         public override int Damage => 999999;
 
-        public override float ProjectileRange => 2000;
-
         public override int ProjectileSpeed => 1500;
 
         public override int ProjectileSize => 8;
@@ -22,7 +20,7 @@ namespace LD50.Logic.Weapons
 
         public DebugGun() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
         {
-
+            ProjectileRange = 2000;
         }
     }
 }

@@ -10,14 +10,13 @@ namespace LD50.Logic.Weapons
         public Sniper() : base(TexName.SNIPER_GUN, new Vector2(71, 71), new Vector2(20, 6))
         {
             _flippedSprite = new Sprite(TexName.SNIPER_GUN_FLIPPED, Vector2.Zero, new Vector2(71, 71), Graphics.DrawLayer.WEAPON, false);
+            ProjectileRange = Balance.sniperRange;
         }
 
         internal const string NAME = "Sniper Rifle";
         public override string Name => NAME;
 
         public override int Damage => Balance.sniperDamage;
-
-        public override float ProjectileRange => Balance.sniperRange;
 
         public override int ProjectileSpeed => 1500;
 

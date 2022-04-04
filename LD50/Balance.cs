@@ -117,10 +117,10 @@ namespace LD50
         public const float BikeGuyWanderRadius = 200.0f;
         public const int BikeGuyMaxHP = 25;
 
-        public const int DragonMaxHP = 500;
+        public const int DragonMaxHP = 2000;
         public const int DragonDamage = 25;
-        public const float DragonCooldown = 1.5f;
-        public const int DragonProjectileSpeed = 1500;
+        public const float DragonCooldown = 1f;
+        public const int DragonProjectileSpeed = 2000;
         public const int DragonAttackRange = 2000;
 
         // Person encounter
