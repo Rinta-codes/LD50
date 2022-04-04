@@ -19,8 +19,9 @@ namespace LD50
         BUTTON,
         EXIT_BUTTON,
         HUD_BUTTON,
-        // Car
+        // Car and other random stuff
         CAR_BASE,
+        ROADSIGN,
         // Loot
         FUEL,
         FOOD,
@@ -124,6 +125,7 @@ namespace LD50
             LoadTexture("Sprites/UI/Exitbutton.png", TexName.EXIT_BUTTON);
             LoadTexture("Sprites/UI/HUDButton.png", TexName.HUD_BUTTON);
             LoadTexture("Sprites/Guns/Bullet.png", TexName.BULLET);
+            LoadTexture("Sprites/Roadsign.png", TexName.ROADSIGN);
         }
 
         /// <summary>

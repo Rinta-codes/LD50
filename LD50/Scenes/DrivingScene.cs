@@ -15,10 +15,9 @@ namespace LD50.Scenes
         {
             uiElements.Add(new Rectangle(Vector4.One, new Vector2(Globals.ScreenResolutionX / 2, Globals.ScreenResolutionY / 2), new Vector2(Globals.ScreenResolutionX, Globals.ScreenResolutionY), true, TexName.DRIVING_BG, Graphics.DrawLayer.BACKGROUND));
 
-            var nextEventButton = new Button(new Vector4(.8f, .8f, .8f, 1), new Vector4(.5f, .5f, .5f, 1), new Vector2(Globals.windowSize.X - 220, 500), new Vector2(400, 200), 5, Graphics.DrawLayer.UI, true);
-            nextEventButton.SetText("=>", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
+            
+            var nextEventButton = new Button(TexName.ROADSIGN, new Vector2(Globals.windowSize.X - 220, 600), new Vector2(400, 400), Graphics.DrawLayer.GROUNDITEM, true);
             nextEventButton.OnClickAction = () => GoToEvent();
-
             uiElements.Add(nextEventButton);
 
             _player = new Player();
