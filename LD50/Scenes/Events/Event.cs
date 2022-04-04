@@ -19,13 +19,13 @@ namespace LD50.Scenes.Events
 
     public class Event : Scene
     {
-        private Sprite _background;
+        public Sprite Background { get; set; }
 
         public Event(Vector2 playerStartPosition, Sprite background) : base(Vector2.Zero)
         {
             Globals.player.Position = playerStartPosition;
             gameObjects.Add(Globals.player);
-            _background = background;
+            Background = background;
         }
 
         public override void Update()
@@ -35,7 +35,7 @@ namespace LD50.Scenes.Events
 
         public override void Draw()
         {
-            _background.Draw();
+            Background.Draw();
             base.Draw();
         }
 
