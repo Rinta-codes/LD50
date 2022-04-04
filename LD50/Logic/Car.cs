@@ -137,11 +137,12 @@ namespace LD50.Logic
                 _rooms[i].OnCarPosition = _carPositions[i];
             }
 
-            // Redistribute resources from removed room that's now at the end of the list across earlier rooms
-            RedistributeResources(_rooms[lastRoomIndex]);
-
+            Room r = _rooms[lastRoomIndex];
             // Delete removed room from the list
             _rooms.RemoveAt(lastRoomIndex);
+            // Redistribute resources from removed room that's now at the end of the list across earlier rooms
+            RedistributeResources(r);
+
         }
 
         private void RedistributeResources(Room removedRoom)

@@ -13,7 +13,7 @@ namespace LD50.Logic.Rooms
 
         public List<Weapon> _weapons = new List<Weapon>();
 
-        public WeaponStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.ROOM_WEAPONSTORAGE, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), Vector2.Zero, "Weapon Storage: can store {capacity} weapon(s).")
+        public WeaponStorage(Vector2 onCarPosition, int capacity) : base(new Sprite(TexName.ROOM_WEAPONSTORAGE, Vector2.Zero, new Vector2(300, 150), Graphics.DrawLayer.ROOMS, false), onCarPosition, "Weapon Storage: can store {capacity} weapon(s).")
         {
             Capacity = capacity;
             label.SetText($"Weapons: 0 / {Capacity}", TextAlignment.CENTER, _fontSize);
