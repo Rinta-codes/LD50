@@ -41,7 +41,7 @@ namespace LD50
         /// <param name="title">Title of the window</param>
         public Window(int width, int height, string title) : base(
             new GameWindowSettings { RenderFrequency = 60, UpdateFrequency = 60 },
-            new NativeWindowSettings { Size = new Vector2i(width, height), Title = title })
+            new NativeWindowSettings { Size = new Vector2i(width, height), Title = title, WindowState = WindowState.Fullscreen, WindowBorder = WindowBorder.Hidden })
         {
             // Create InputHandler
             Globals.inputHandler = new InputHandler();
@@ -52,8 +52,8 @@ namespace LD50
             WindowSize = Size;
 
             // Determine Screen Scale
-            screenScale = new Vector2(width / Globals.ScreenResolutionX, height / Globals.ScreenResolutionY);
-            Globals.windowSize = Size;
+            screenScale = new Vector2(Size.X / Globals.ScreenResolutionX, Size.Y / Globals.ScreenResolutionY);
+            Globals.windowSize = new Vector2(width, height);
         }
 
         /// <summary>
@@ -167,13 +167,6 @@ namespace LD50
 
             // Update the InputHandler
             Globals.inputHandler.Update(KeyboardState.GetSnapshot(), MouseState.GetSnapshot());
-
-            // Check if the Escape button is pressed
-            if (Globals.inputHandler.IsKeyPressed(Keys.Escape))
-            {
-                // Close the window
-                Close();
-            }
 
             // Call Globals' update, this updates the active Buttons as well as the AudioManager
             Globals.Update();

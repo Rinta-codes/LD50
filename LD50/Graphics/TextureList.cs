@@ -17,6 +17,8 @@ namespace LD50
         PLAYER_IDLE,
         // UI
         BUTTON,
+        EXIT_BUTTON,
+        HUD_BUTTON,
         // Car
         CAR_BASE,
         // Loot
@@ -43,6 +45,7 @@ namespace LD50
         PERSON_IDLE,
         PERSON_WALK,
         // Guns
+        BULLET,
         BASE_GUN,
         BETTER_GUN,
         FASTER_GUN,
@@ -91,9 +94,6 @@ namespace LD50
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
             LoadTexture("Sprites/Guns/BaseGun.png", TexName.BASE_GUN);
             LoadTexture("Sprites/Guns/BetterGun.png", TexName.BETTER_GUN);
-            LoadTexture("Sprites/Guns/FasterGun.png", TexName.FASTER_GUN);
-            LoadTexture("Sprites/Guns/SniperGun.png", TexName.SNIPER_GUN);
-            LoadTexture("Sprites/Guns/RocketGun.png", TexName.ROCKET_GUN);
         }
 
         /// <summary>

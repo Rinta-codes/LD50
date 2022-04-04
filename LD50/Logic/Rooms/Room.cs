@@ -7,8 +7,8 @@ namespace LD50.Logic.Rooms
     public class Room : GameObject
     {
         private readonly Vector4 _labelTextColour = new Vector4(0, 0, 0, 1);
-        private readonly Vector4 _labelBGColour = new Vector4(1, 1, 1, .5f);
-        private readonly Vector2 _labelBGSize = new Vector2(200, 50);
+        private readonly Vector4 _labelBGColour = new Vector4(1, 1, 1, .2f);
+        private readonly Vector2 _labelBGSize = new Vector2(150, 50);
 
         public Vector2 OnCarPosition { get; set; }
 

@@ -25,37 +25,33 @@ namespace LD50.UI
             // Pop Count
             popCount = new Label("Pop: {0/0}", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
             elements.Add(popCount);
-            // Dragon Distance
-            dragonDistance = new Label("Dragon: 1337km", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(Globals.HUDLabelSize.X / 2 + Globals.menuButtonSize.X, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
-            elements.Add(dragonDistance);
 
             // Buttons:
             // Menu/Pause
-            Button menuButton = new Button(Globals.buttonBorderColour, Globals.menuButtonSize / 2, Globals.menuButtonSize, Graphics.DrawLayer.UI, true);
-            menuButton.SetText("Menu", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            menuButton.OnClickAction = () => { /*Do something*/ };
+            Button menuButton = new Button(TexName.EXIT_BUTTON, Globals.menuButtonSize / 2, Globals.menuButtonSize, Graphics.DrawLayer.UI, true);
+            menuButton.OnClickAction = () => { Game.gameWindow.Close(); };
             elements.Add(menuButton);
 
             // Manage Crew / Weapons
-            manageCrewButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            manageCrewButton = new Button(TexName.HUD_BUTTON, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageCrewButton.SetText("Manage Crew", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
             manageCrewButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGECREW] = new CrewManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGECREW; Globals.hud.HideButtons(true); };
             elements.Add(manageCrewButton);
 
             // Remove Rooms
-            manageRoomsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            manageRoomsButton = new Button(TexName.HUD_BUTTON, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDButtonSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageRoomsButton.SetText("Manage Rooms", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
             manageRoomsButton.OnClickAction = () => { Globals.currentScene = (int)LD50.Scenes.Scenes.MANAGEROOMS; ToggleButtons(); };
             elements.Add(manageRoomsButton);
 
             // Show Blueprint
-            showBlueprintsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X * 2, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            showBlueprintsButton = new Button(TexName.HUD_BUTTON, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDButtonSize.X * 2, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             showBlueprintsButton.SetText("Show Blueprints", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
             showBlueprintsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.SHOWBLUE] = new ShowBlueprints(); Globals.currentScene = (int)Scenes.Scenes.SHOWBLUE; Globals.hud.HideButtons(true); };
             elements.Add(showBlueprintsButton);
 
             // Manage weapons
-            manageWeaponsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X * 3, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            manageWeaponsButton = new Button(TexName.HUD_BUTTON, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDButtonSize.X * 3, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageWeaponsButton.SetText("Manage Weapons", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
             manageWeaponsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGEWEAPONS] = new WeaponManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGEWEAPONS; Globals.hud.HideButtons(true); };
             elements.Add(manageWeaponsButton);
@@ -63,7 +59,7 @@ namespace LD50.UI
             // Back
             // To return back to the Driving Scene for when in one of the Manage scenes above
             // Replaces Crew/Weapons btn as that will be hidden
-            backToRoadButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
+            backToRoadButton = new Button(TexName.HUD_BUTTON, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             backToRoadButton.SetText("Back to the road!", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
             backToRoadButton.OnClickAction = () => 
             {
