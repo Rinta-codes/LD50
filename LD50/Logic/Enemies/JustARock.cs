@@ -12,7 +12,7 @@ namespace LD50.Logic.Enemies
     {
         public JustARock() : base(TexName.PIXEL, new Vector2(32, 32), Balance.RockMaxHP, new BetterGun())
         {
-            _sprite.SetColour(new Vector4(0.6f, 0.6f, 0.6f, 1));
+            _sprite = new Sprite(TexName.ROCK_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
         }
 
         public override bool Update()

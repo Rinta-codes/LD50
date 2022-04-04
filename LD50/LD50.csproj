@@ -115,6 +115,9 @@
     <None Update="Sprites\Enemies\FishbowlWalkTwoFrames.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Sprites\Enemies\RockWalkTwoFrames.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\Enemies\SheepWalkTwoFrames.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
