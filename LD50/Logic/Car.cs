@@ -290,6 +290,19 @@ namespace LD50.Logic
             }
         }
 
+        public void RemovePerson(Person weapon)
+        {
+            var bedrooms = _rooms.OfType<Bedroom>();
+            foreach (Bedroom room in bedrooms)
+            {
+                if (room.Persons.Contains(weapon))
+                {
+                    room.Persons.Remove(weapon);
+                    return;
+                }
+            }
+        }
+
 
         public override bool Update()
         {

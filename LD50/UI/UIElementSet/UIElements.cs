@@ -60,6 +60,7 @@ namespace LD50.UI
                 if (elements[i].IsInElement(mousePosition))
                 {
                     elements[i].OnClick(e, mousePosition);
+                    return;
                 }
             }
         }

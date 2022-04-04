@@ -38,7 +38,7 @@ namespace LD50.UI
             // Manage Crew / Weapons
             manageCrewButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageCrewButton.SetText("Manage Crew", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            manageCrewButton.OnClickAction = () => { /*Do something*/ };
+            manageCrewButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGECREW] = new CrewManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGECREW; Globals.hud.SetButtons(true); };
             elements.Add(manageCrewButton);
 
             // Remove Rooms
