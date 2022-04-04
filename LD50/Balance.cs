@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace LD50
 {
     public static class Balance
@@ -11,6 +7,8 @@ namespace LD50
 
         public const int playerHealth = 100;
         public const float playerMovementSpeed = 250.0f;
+
+        public const int healthPercentageHealedPerTurn = 25;
 
         public const int minFoodInFoodPile = 5;
         public const int maxFoodInFoodPile = 10;

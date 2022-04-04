@@ -61,6 +61,7 @@ namespace LD50.Logic
 
         public void OnNextTurn()
         {
+            HealParty();
             foreach (var workshop in _rooms.OfType<Workshop>())
             {
                 workshop.OnNextTurn();
@@ -157,7 +158,7 @@ namespace LD50.Logic
             }
             else if (removedRoom is Bedroom bedroom)
             {
-                foreach(Person person in bedroom.Persons)
+                foreach (Person person in bedroom.Persons)
                 {
                     AddOccupant(person);
                 }
@@ -277,22 +278,23 @@ namespace LD50.Logic
 
         public void HealParty()
         {
+            Globals.player.person.HealPercentage(Balance.healthPercentageHealedPerTurn);
             foreach (Person person in _rooms.OfType<Person>())
             {
-                person.HealToFull();
+                person.HealPercentage(Balance.healthPercentageHealedPerTurn);
             }
         }
 
         public void RemoveWeapon(Weapon weapon)
         {
             var weaponRooms = _rooms.OfType<WeaponStorage>();
-            foreach(WeaponStorage room in weaponRooms)
+            foreach (WeaponStorage room in weaponRooms)
             {
-                if(room._weapons.Contains(weapon))
+                if (room._weapons.Contains(weapon))
                 {
                     room._weapons.Remove(weapon);
                     return;
-                } 
+                }
             }
         }
 
@@ -364,6 +366,6 @@ namespace LD50.Logic
             }
             base.Draw();
         }
-    
+
     }
 }
