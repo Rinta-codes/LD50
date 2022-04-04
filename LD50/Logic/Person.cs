@@ -175,7 +175,10 @@ namespace LD50.Logic
             _hpBar.Draw();
             _nameplate.Draw();
             base.Draw();
-            _weapon.Draw();
+            if (_weapon != null)
+            {
+                _weapon.Draw();
+            }
         }
 
         public void Heal(int healthHealed)
@@ -207,7 +210,13 @@ namespace LD50.Logic
             ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, _portraitTexture));
 
             var weaponIconSize = new Vector2(size.Y / 3, size.Y / 3);
-            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, TexName.TEST));
+            if (_weapon != null)
+            {
+                // Little black frame around weapon
+                ui.Add(new Rectangle((Vector4)Color4.Black, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize + Vector2.One, true, TexName.PIXEL));
+                ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, TexName.PIXEL));
+                ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, _weapon.Texture));
+            }
 
             var hpLabelSize = new Vector2(50, size.Y / 3);
             var personLabelSize = new Vector2(size.X - size.Y - hpLabelSize.X, size.Y / 3);

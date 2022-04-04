@@ -8,6 +8,7 @@ namespace LD50.Logic
         private const float _titleRelativeHeight = 0.6f;
 
         private float _remainingCooldown;
+        public TexName Texture {get;}
 
         public abstract string Name { get; }
         public abstract int Damage { get; }
@@ -24,6 +25,7 @@ namespace LD50.Logic
         public Weapon(TexName texture, Vector2 size, Vector2 positionOffset) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
         {
             _positionOffset = positionOffset;
+            Texture = texture;
         }
 
         public void Attack(GameObject shooter, Vector2 direction, Vector2 position)
@@ -54,7 +56,9 @@ namespace LD50.Logic
 
             //TODO draw weapon
             var weaponIconSize = new Vector2(size.Y, size.Y);
-            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + weaponIconSize / 2, weaponIconSize, true, TexName.TEST));
+            // White background
+            ui.Add(new Rectangle(new Vector4(1,1,1,.1f), basePosition + weaponIconSize / 2, weaponIconSize, true, TexName.PIXEL));
+            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + weaponIconSize / 2, weaponIconSize, true, Texture));
 
             var nameLabelSize = new Vector2(size.X - size.Y, size.Y * _titleRelativeHeight);
             var statsLabelSize = new Vector2(size.X - size.Y, size.Y * (1 - _titleRelativeHeight));
