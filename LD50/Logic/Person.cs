@@ -95,7 +95,12 @@ namespace LD50.Logic
 
         public override bool Update()
         {
-            _weapon?.Update();
+            if (_weapon != null)
+            {
+                _weapon.Update();
+                _weapon.Position = Position;
+            }
+            
             _hpBar.SetPosition(Position + new Vector2(0, -Size.Y / 2 - 10));
             _hpBar.Update();
 
@@ -162,6 +167,7 @@ namespace LD50.Logic
             _hpBar.Draw();
             _nameplate.Draw();
             base.Draw();
+            _weapon.Draw();
         }
 
         public void HealToFull()

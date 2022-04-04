@@ -7,7 +7,7 @@ namespace LD50.Logic.Weapons
 {
     public class Sniper : Weapon
     {
-        public Sniper() : base(TexName.PIXEL, new Vector2(50, 50))
+        public Sniper() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
         {
 
         }

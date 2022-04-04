@@ -20,7 +20,7 @@ namespace LD50.Logic.Weapons
 
         public override float Cooldown => 0.2f;
 
-        public DebugGun() : base(TexName.PIXEL, new Vector2(50, 50))
+        public DebugGun() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
         {
 
         }

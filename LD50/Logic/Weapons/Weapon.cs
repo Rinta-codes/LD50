@@ -17,9 +17,13 @@ namespace LD50.Logic
         public abstract float Cooldown { get; }
 
         public string FullDescription => $"{Name}.Dmg: {Damage} Range: {ProjectileRange} CD: {Cooldown}";
+        private Vector2 _positionOffset;
 
-        public Weapon(TexName texture, Vector2 size) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
+        public override Vector2 Position { get => base.Position; set => base.Position = value + _positionOffset; }
+
+        public Weapon(TexName texture, Vector2 size, Vector2 positionOffset) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
         {
+            _positionOffset = positionOffset;
         }
 
         public void Attack(GameObject shooter, Vector2 direction, Vector2 position)

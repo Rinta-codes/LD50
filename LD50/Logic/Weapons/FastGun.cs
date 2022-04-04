@@ -7,7 +7,7 @@ namespace LD50.Logic.Weapons
 {
     public class FastGun : Weapon
     {
-        public FastGun() : base(TexName.PIXEL, new Vector2(50, 50))
+        public FastGun() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
         {
         }
         internal const string NAME = "Fast Gun";

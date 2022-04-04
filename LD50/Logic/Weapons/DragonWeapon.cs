@@ -11,7 +11,7 @@ namespace LD50.Logic.Weapons
         public override int ProjectileSpeed => Balance.DragonProjectileSpeed;
         public override int ProjectileSize => 64;
         public override float Cooldown => Balance.DragonCooldown;
-        public DragonWeapon() : base(TexName.PIXEL, new Vector2(50, 50))
+        public DragonWeapon() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
         {
         }
     }
