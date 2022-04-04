@@ -1,5 +1,6 @@
 ﻿using LD50.Scenes;
 using OpenTK.Mathematics;
+using System.Linq;
 
 namespace LD50.UI
 {
@@ -38,7 +39,7 @@ namespace LD50.UI
             // Manage Crew / Weapons
             manageCrewButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageCrewButton.SetText("Manage Crew", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            manageCrewButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGECREW] = new CrewManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGECREW; Globals.hud.SetButtons(true); };
+            manageCrewButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGECREW] = new CrewManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGECREW; Globals.hud.HideButtons(true); };
             elements.Add(manageCrewButton);
 
             // Remove Rooms
@@ -50,13 +51,13 @@ namespace LD50.UI
             // Show Blueprint
             showBlueprintsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X * 2, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             showBlueprintsButton.SetText("Show Blueprints", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            showBlueprintsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.SHOWBLUE] = new ShowBlueprints(); Globals.currentScene = (int)Scenes.Scenes.SHOWBLUE; Globals.hud.SetButtons(true); };
+            showBlueprintsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.SHOWBLUE] = new ShowBlueprints(); Globals.currentScene = (int)Scenes.Scenes.SHOWBLUE; Globals.hud.HideButtons(true); };
             elements.Add(showBlueprintsButton);
 
             // Manage weapons
             manageWeaponsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X * 3, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             manageWeaponsButton.SetText("Manage Weapons", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            manageWeaponsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGEWEAPONS] = new WeaponManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGEWEAPONS; Globals.hud.SetButtons(true); };
+            manageWeaponsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.MANAGEWEAPONS] = new WeaponManagment(); Globals.currentScene = (int)Scenes.Scenes.MANAGEWEAPONS; Globals.hud.HideButtons(true); };
             elements.Add(manageWeaponsButton);
 
             // Back
@@ -64,7 +65,19 @@ namespace LD50.UI
             // Replaces Crew/Weapons btn as that will be hidden
             backToRoadButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             backToRoadButton.SetText("Back to the road!", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            backToRoadButton.OnClickAction = () => { Globals.currentScene = (int)LD50.Scenes.Scenes.DRIVING; ToggleButtons(); };
+            backToRoadButton.OnClickAction = () => 
+            {
+                if (Globals.currentScene == (int)Scenes.Scenes.EVENT && Globals.scenes[(int)Scenes.Scenes.EVENT] is Scenes.Events.Ambush)
+                {
+                    foreach (Logic.Person p in Globals.CurrentScene.gameObjects.OfType<Logic.Person>())
+                    {
+                        Globals.player.car.AddOccupant(p);
+                    }
+                }
+                Globals.currentScene = (int)LD50.Scenes.Scenes.DRIVING; 
+                ToggleButtons();
+                LD50.Audio.BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
+            };
             backToRoadButton.IsHidden = true;
             elements.Add(backToRoadButton);
         }
@@ -79,7 +92,12 @@ namespace LD50.UI
             backToRoadButton.IsHidden = !backToRoadButton.IsHidden;
         }
 
-        public void SetButtons(bool hidden)
+        /// <summary>
+        /// If true: Hides top menu buttons and displays "Back To Road"
+        /// If false: Shows top menu buttons and hides "Back To Road"
+        /// </summary>
+        /// <param name="hidden"></param>
+        public void HideButtons(bool hidden)
         {
             manageCrewButton.IsHidden = hidden;
             manageRoomsButton.IsHidden = hidden;
