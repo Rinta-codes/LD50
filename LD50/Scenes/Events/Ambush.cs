@@ -88,6 +88,7 @@ namespace LD50.Scenes.Events
             {
                 uiElements.Remove(_selectAmbushCrew);
                 Globals.player.Position = _playerStartPosition; // Return player to the screen
+                Globals.player.Move(new Vector2(0, 0));
                 foreach (var person in occupants)
                 {
                     if (!crew.Contains(person))
