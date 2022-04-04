@@ -30,45 +30,56 @@ namespace LD50.Scenes.Events
             var occupants = Globals.player.car.MoveOutOccupants();
             List<Person> crew = new List<Person>();
 
-            // If it is the Dragon fight - use full crew regardless
-            if (_isDragon || occupants.Count == 0)
-            {
-                StartFight(occupants);
-                return;
-            }
+            UIElements _selectAmbushCrew = new UIElements();
+            Label ambushInfo = null;
+            Button enterAmbush = null;
 
             // HACKING WAY to hide the player from the screen; can still move but why?
             Globals.player.Position = new Vector2(-1000, -1000);
-            
-            Rectangle blockingBackground = new Rectangle(new Vector4(0, 0, 0, 0.9f), new Vector2(960, 540), new Vector2(1920, 1080), true, TexName.PIXEL, Graphics.DrawLayer.BACKGROUND);
 
-            Label ambushInfo = new Label($"You've been ambushed! Select your crew.", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
-
-            Button backToAmbush = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX - 220, 300), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
-            backToAmbush.SetText("Back to the fight", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-
-
-            var _selectAmbushCrew = new UIElements();
-            _selectAmbushCrew.Add(blockingBackground);
-            _selectAmbushCrew.Add(backToAmbush);
-            _selectAmbushCrew.Add(ambushInfo);
-
-            int buttonsAdded = 0;
-            foreach (var person in occupants)
+            // If it is the Dragon fight - use full crew regardless
+            if (_isDragon || occupants.Count == 0)
             {
-                var crewmateButtonWithLabel = AddCrewmemberButtonWithLabel(person, _selectAmbushCrew, ref buttonsAdded);
-                crewmateButtonWithLabel.Button.OnClickAction = () =>
-                {
-                    crew.Add(person);
-                    crewmateButtonWithLabel.Button.IsHidden = true;
-                    crewmateButtonWithLabel.Label.IsHidden = true;
-                    _selectAmbushCrew.Add(new Label($"{person.Name} is now part of your crew", TextAlignment.LEFT, Globals.genericLabelTextColour, crewmateButtonWithLabel.Item1.GetPosition(), Globals.genericLabelFontSize, true));
-                };
+                ambushInfo = new Label($"You've been ambushed!", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
+
+                enterAmbush = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX / 2, 300), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
+                enterAmbush.SetText("Begin the fight", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
+
+                _selectAmbushCrew.Add(ambushInfo);
+                _selectAmbushCrew.Add(enterAmbush);
             }
-           
+            else
+            {
+
+                Rectangle blockingBackground = new Rectangle(new Vector4(0, 0, 0, 0.9f), new Vector2(960, 540), new Vector2(1920, 1080), true, TexName.PIXEL, Graphics.DrawLayer.BACKGROUND);
+
+                ambushInfo = new Label($"You've been ambushed! Select your crew.", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
+
+                enterAmbush = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX - 220, 300), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
+                enterAmbush.SetText("Begin the fight", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
+
+
+                _selectAmbushCrew.Add(blockingBackground);
+                _selectAmbushCrew.Add(enterAmbush);
+                _selectAmbushCrew.Add(ambushInfo);
+
+                int buttonsAdded = 0;
+                foreach (var person in occupants)
+                {
+                    var crewmateButtonWithLabel = AddCrewmemberButtonWithLabel(person, _selectAmbushCrew, ref buttonsAdded);
+                    crewmateButtonWithLabel.Button.OnClickAction = () =>
+                    {
+                        crew.Add(person);
+                        crewmateButtonWithLabel.Button.IsHidden = true;
+                        crewmateButtonWithLabel.Label.IsHidden = true;
+                        _selectAmbushCrew.Add(new Label($"{person.Name} is now part of your crew", TextAlignment.LEFT, Globals.genericLabelTextColour, crewmateButtonWithLabel.Item1.GetPosition(), Globals.genericLabelFontSize, true));
+                    };
+                }
+            }
+
             uiElements.Add(_selectAmbushCrew);
 
-            backToAmbush.OnClickAction = () =>
+            enterAmbush.OnClickAction = () =>
             {
                 uiElements.Remove(_selectAmbushCrew);
                 Globals.player.Position = _playerStartPosition; // Return player to the screen
