@@ -9,6 +9,7 @@ namespace LD50.Logic.Weapons
     {
         public RocketLauncher() : base(TexName.ROCKET_GUN, new Vector2(85, 85), new Vector2(7, 4))
         {
+            _flippedSprite = new Sprite(TexName.ROCKET_GUN_FLIPPED, Vector2.Zero, new Vector2(85, 85), Graphics.DrawLayer.WEAPON, false);
         }
 
         internal const string NAME = "Rocket Launcher";

@@ -1,4 +1,4 @@
-﻿using LD50.UI;
+using LD50.UI;
 using OpenTK.Mathematics;
 
 namespace LD50.Logic
@@ -18,13 +18,14 @@ namespace LD50.Logic
         public abstract float Cooldown { get; }
 
         public string FullDescription => $"{Name}.Dmg: {Damage} Range: {ProjectileRange} CD: {Cooldown}";
-        private Vector2 _positionOffset;
+        private Vector2 _positionOffset, _positionOffsetFlipped;
 
-        public override Vector2 Position { get => base.Position; set => base.Position = value + _positionOffset; }
+        public override Vector2 Position { get => base.Position; set => base.Position = _flipped ? value + _positionOffsetFlipped : value + _positionOffset; }
 
         public Weapon(TexName texture, Vector2 size, Vector2 positionOffset) : base(new Sprite(texture, Vector2.Zero, size, Graphics.DrawLayer.WEAPON, false))
         {
             _positionOffset = positionOffset;
+            _positionOffsetFlipped = new Vector2(-positionOffset.X, positionOffset.Y);
             Texture = texture;
         }
 
@@ -35,6 +36,11 @@ namespace LD50.Logic
                 Globals.CurrentScene.gameObjects.Add(new Projectile(shooter, position, new Vector2(ProjectileSize, ProjectileSize), direction, ProjectileSpeed, Damage, ProjectileRange));
                 _remainingCooldown = Cooldown;
             }
+        }
+
+        public void Flip(bool flip)
+        {
+            _flipped = flip;
         }
 
         public void ResetCooldown()

@@ -14,6 +14,7 @@ namespace LD50.Logic.Weapons
 
         public BaseGun() : base(TexName.BASE_GUN, new Vector2(37, 37), new Vector2(16, 10))
         {
+            _flippedSprite = new Sprite(TexName.BASE_GUN_FLIPPED, Vector2.Zero, new Vector2(37, 37), Graphics.DrawLayer.WEAPON, false);
         }
     }
 }
