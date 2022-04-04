@@ -16,6 +16,8 @@ namespace LD50.UI
         private float _fontSize = -1;
         private bool _isChanged = false;
 
+        public string GetText => _text;
+
         /// <summary>
         /// Create a textbox without background
         /// </summary>

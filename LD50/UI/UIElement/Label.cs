@@ -25,7 +25,7 @@ namespace LD50.UI
         public Label(string text, TextAlignment alignment, Vector4 textColour, Vector2 position, Vector2 size, Vector4 colour, TexName background, bool isStatic, DrawLayer layer = DrawLayer.UI) : base(colour, position, size, background, layer, isStatic)
         {
             _textColour = textColour;
-            _backgroundRect = new Rectangle(colour, position, size, isStatic, background);
+            _backgroundRect = new Rectangle(colour, position, size, isStatic, background, layer);
             SetText(text, alignment);
         }
 
@@ -36,7 +36,7 @@ namespace LD50.UI
         {
             _textColour = textColour;
             _borderWith = borderWith;
-            _backgroundRect = new Rectangle(colour, position, size, isStatic, borderColour, borderWith, background);
+            _backgroundRect = new Rectangle(colour, position, size, isStatic, borderColour, borderWith, background, layer);
             SetText(text, alignment);
         }
 
@@ -85,6 +85,9 @@ namespace LD50.UI
         public override void Update()
         {
             if (_hidden) return;
+
+            base.Update();
+            
             if (_backgroundRect != null)
             {
                 _backgroundRect.Update();
@@ -93,8 +96,6 @@ namespace LD50.UI
             {
                 _textRender.Position = _position;
             }
-            
-            base.Update();
         }
 
         public override void UnLoad()
@@ -106,6 +107,10 @@ namespace LD50.UI
         public override void SetPosition(Vector2 position)
         {
             base.SetPosition(position);
+
+            if (_backgroundRect != null)
+                _backgroundRect.SetPosition(position);
+            
             if (_textRender != null)
             {
                 Vector2 textPos = _position;
@@ -120,13 +125,12 @@ namespace LD50.UI
                 }
                 _textRender.Position = textPos;
             }
-            if (_backgroundRect != null)
-                _backgroundRect.SetPosition(position);
         }
 
         public override void SetSize(Vector2 size)
         {
             base.SetSize(size);
+
             SetText(_text, textAlignment);
         }
 
@@ -143,7 +147,13 @@ namespace LD50.UI
         public override bool IsInElement(Vector2 mousePosition)
         {
             if (_hidden) return false;
-            Vector2 currentPosition = _textRender.Position;
+
+            Vector2 currentPosition = new Vector2(0, 0); 
+            if (_textRender != null)
+            {
+                currentPosition = _textRender.Position;
+            }
+
             if (_isStatic)
             {
                 currentPosition += Globals.CurrentScene.Camera.Position.Xy;

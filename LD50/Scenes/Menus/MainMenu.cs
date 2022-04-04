@@ -23,17 +23,29 @@ namespace LD50.Scenes.Menus
 
             var startGameButton = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.windowSize.X / 2, 400), new Vector2(400, 200), 5, Graphics.DrawLayer.UI, true);
             startGameButton.SetText("Play", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
-            startGameButton.OnClickAction = () => { Globals.currentScene = (int)Scenes.DRIVING; Globals.hud.HideButtons(false); Globals.hud.IsHidden = false; BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav"); };
-
 
             int tutorialStartPositionY = 600;
-            
+
+            var nameInputPrompt = new Label($"Enter your name:   ", TextAlignment.RIGHT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, tutorialStartPositionY - textSpacing), Globals.genericLabelFontSize, true);
+            var nameInput = new Textbox("Player1", TextAlignment.RIGHT, Vector4.One, new Vector2(Globals.ScreenResolutionX / 2 + 100, tutorialStartPositionY - textSpacing), new Vector2(200, 50), new Vector4(0,0,0,1), TexName.PIXEL, Vector4.One, Globals.buttonBorderSmall, true, 20, false);
+            nameInput.SetText("Player1", TextAlignment.RIGHT, Globals.genericLabelFontSize);
+
             var tutorialLine1 = new Label($" - Collect resources", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY), Globals.genericLabelFontSize, true);
             var tutorialLine2 = new Label($" - Fight minor monsters and collect more resources", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing), Globals.genericLabelFontSize, true);
             var tutorialLine3 = new Label($" - Trade resources for additional rooms to throw on the back of your car", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 2), Globals.genericLabelFontSize, true);
             var tutorialLine4 = new Label($" - Accept refugees, and they might repay you with resources and help in fights", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 3), Globals.genericLabelFontSize, true);
             var tutorialLine5 = new Label($" - Weaponise yourself and your crew by obtaining weapon blueprints", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 4), Globals.genericLabelFontSize, true);
             var tutorialLine6 = new Label($"   and crafting weapons in Workshop", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 5), Globals.genericLabelFontSize, true);
+
+            /// Define OnClick here because it uses the nameInput textbox
+            startGameButton.OnClickAction = () =>
+            {
+                Globals.currentScene = (int)Scenes.DRIVING;
+                Globals.hud.HideButtons(false);
+                Globals.hud.IsHidden = false;
+                Globals.player.person.Name = nameInput.GetText;
+                BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Rustig.wav");
+            };
 
 
             uiElements.Add(startGameButton);
@@ -42,6 +54,9 @@ namespace LD50.Scenes.Menus
             uiElements.Add(headerLine2);
             uiElements.Add(headerLine3);
             uiElements.Add(headerLine4);
+
+            uiElements.Add(nameInputPrompt);
+            uiElements.Add(nameInput);
 
             uiElements.Add(tutorialLine1);
             uiElements.Add(tutorialLine2);

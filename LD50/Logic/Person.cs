@@ -15,6 +15,8 @@ namespace LD50.Logic
         private int _health, _maxHealth;
 
         private Slider _hpBar;
+        private Label _nameplate;
+        private int _nameplateFont = 10;
 
         private Enemy _target;
         private Vector2 _moveTarget;
@@ -22,13 +24,26 @@ namespace LD50.Logic
         private bool _amIPlayer;
 
         public Vector2 Size { get { return _sprite.size; } }
-        public string Name { get; }
+        
+        private string _name;
+        public string Name
+        {
+            get => _name;
+
+            set 
+            {
+                _name = value;
+
+                string _nameplateName = _amIPlayer ? "[" + _name + "]" : _name;
+                _nameplate = new Label(_nameplateName, TextAlignment.CENTER, new Vector4(0, 0, 0, 1), _hpBar.GetPosition() + new Vector2(0, -10), new Vector2(70, 15), new Vector4(1, 1, 1, .6f), TexName.PIXEL, false, Graphics.DrawLayer.PLAYER);
+                _nameplate.SetText($"{_nameplateName}", TextAlignment.CENTER, _nameplateFont);
+            }
+        }
         public string WeaponName => _weapon?.Name;
         public bool HasWeapon => _weapon != null;
 
         public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
         {
-            Name = name;
             _weapon = null;
             _health = health;
             _amIPlayer = player;
@@ -38,6 +53,8 @@ namespace LD50.Logic
             {
                 Value = (float)_health / _maxHealth
             };
+
+            Name = name;
         }
 
         public Weapon TakeWeapon()
@@ -78,6 +95,9 @@ namespace LD50.Logic
             _weapon?.Update();
             _hpBar.SetPosition(Position + new Vector2(0, -Size.Y / 2 - 10));
             _hpBar.Update();
+
+            _nameplate.SetPosition(_hpBar.GetPosition() + new Vector2(0, -10));
+            _nameplate.Update();
 
 
             if (!_amIPlayer)
@@ -137,6 +157,7 @@ namespace LD50.Logic
         public override void Draw()
         {
             _hpBar.Draw();
+            _nameplate.Draw();
             base.Draw();
         }
 
