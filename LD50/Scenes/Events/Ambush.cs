@@ -54,7 +54,7 @@ namespace LD50.Scenes.Events
             }
             else if (occupants.Count == 0)
             {
-                ambushInfo = new Label($"You've been ambushed!", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
+                ambushInfo = new Label($"You've been ambushed!", TextAlignment.CENTER, (Vector4)Color4.Black, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
 
                 enterAmbush = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(Globals.ScreenResolutionX / 2, 300), Globals.buttonSizeMedium, Globals.buttonBorderMedium, Graphics.DrawLayer.UI, true);
                 enterAmbush.SetText("Begin the fight", TextAlignment.CENTER, new Vector4(0, 0, 0, 1));
@@ -139,6 +139,7 @@ namespace LD50.Scenes.Events
             {
                 BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Dragon.wav");
                 BackgroundMusicManager.SetVolume(0.2f);
+                Background = new Sprite(TexName.DRAGON_BG, Globals.windowSize / 2, Globals.windowSize, Graphics.DrawLayer.BACKGROUND, true);
             }
             else
             {

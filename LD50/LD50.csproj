@@ -100,6 +100,9 @@
     <None Update="Sprites\Backgrounds\AmbushBG1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Sprites\Backgrounds\DragonFightBG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\Backgrounds\DrivingSceneBG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
