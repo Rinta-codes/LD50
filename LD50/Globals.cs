@@ -7,7 +7,6 @@ using LD50.utils;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LD50
 {
@@ -29,11 +28,14 @@ namespace LD50
         public static int buttonBorderMedium = 10;
         public static int buttonBorderSmall = 5;
         public static Vector2 HUDLabelSize = new Vector2(150, 80);
+        public static Vector2 HUDSublabelSize = new Vector2(150, 50);
         public static float HUDTextSize = 16.0f;
+        public static float HUDSubtextSize = 16.0f;
         public static Vector2 menuButtonSize = new Vector2(80, HUDLabelSize.Y);
         public static Vector2 HUDButtonSize = new Vector2(300, HUDLabelSize.Y);
 
         // Colours
+        public static Vector4 transparent = new Vector4(0, 0, 0, 0);
         public static Vector4 black = new Vector4(0, 0, 0, 1);
         public static Vector4 red = new Vector4(1, 0, 0, 1);
         public static Vector4 green = new Vector4(0, 1, 0, 1);

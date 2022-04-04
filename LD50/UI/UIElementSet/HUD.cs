@@ -6,7 +6,7 @@ namespace LD50.UI
 {
     public class HUD : UIElements
     {
-        Label foodCount, fuelCount, popCount, dragonDistance;
+        Label foodCount, foodPerTurn, fuelCount, fuelPerTurn, popCount, dragonDistance;
         Button manageCrewButton, manageRoomsButton, showBlueprintsButton, backToRoadButton, manageWeaponsButton;
 
         public HUD()
@@ -16,14 +16,19 @@ namespace LD50.UI
             _background.SetColour(Globals.buttonFillColour);
 
             // Food Count
-            foodCount = new Label("Food: {0/0}", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2 - 2 * Globals.HUDLabelSize.X, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
+            foodCount = new Label("Food: {0/0}", TextAlignment.CENTER, Globals.black, new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2 - 2 * Globals.HUDLabelSize.X, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
             elements.Add(foodCount);
+            foodPerTurn = new Label("-{0}/turn", TextAlignment.CENTER, Globals.black, new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2 - 2 * Globals.HUDLabelSize.X, Globals.HUDButtonSize.Y - Globals.HUDSublabelSize.Y / 3), Globals.HUDSublabelSize, Globals.transparent, TexName.PIXEL, true);
+            elements.Add(foodPerTurn);
 
             // Fuel Count
-            fuelCount = new Label("Fuel: {0/0}", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2 - Globals.HUDLabelSize.X, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
+            fuelCount = new Label("Fuel: {0/0}", TextAlignment.CENTER, Globals.black, new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2 - Globals.HUDLabelSize.X, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
             elements.Add(fuelCount);
+            fuelPerTurn = new Label("-{0}/turn", TextAlignment.CENTER, Globals.black, new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2 - Globals.HUDLabelSize.X, Globals.HUDButtonSize.Y - Globals.HUDSublabelSize.Y / 3), Globals.HUDSublabelSize, Globals.transparent, TexName.PIXEL, true);
+            elements.Add(fuelPerTurn);
+
             // Pop Count
-            popCount = new Label("Pop: {0/0}", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
+            popCount = new Label("Pop: {0/0}", TextAlignment.CENTER, Globals.black, new Vector2(Globals.windowSize.X - Globals.HUDLabelSize.X / 2, Globals.HUDLabelSize.Y / 2), Globals.HUDLabelSize, Globals.buttonBorderColour, TexName.PIXEL, true);
             elements.Add(popCount);
 
             // Buttons:
@@ -113,7 +118,11 @@ namespace LD50.UI
         public override void Update()
         {
             foodCount.SetText($"Food: {Globals.player.car.TotalFoodStored} / {Globals.player.car.TotalFoodCapacity}", TextAlignment.CENTER, Globals.HUDTextSize);
+            foodPerTurn.SetText($"-{Balance.FoodCost()}/turn", TextAlignment.CENTER, Globals.HUDSubtextSize);
+
             fuelCount.SetText($"Fuel: {Globals.player.car.TotalFuelStored} / {Globals.player.car.TotalFuelCapacity}", TextAlignment.CENTER, Globals.HUDTextSize);
+            fuelPerTurn.SetText($"-{Balance.FuelCost()}/turn", TextAlignment.CENTER, Globals.HUDSubtextSize);
+
             popCount.SetText($"Pops: {Globals.player.car.OccupiedBedroomSpace} / {Globals.player.car.TotalBedroomSpace}", TextAlignment.CENTER, Globals.HUDTextSize);
             base.Update();
         }
