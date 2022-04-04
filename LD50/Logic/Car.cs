@@ -268,6 +268,11 @@ namespace LD50.Logic
             return false;
         }
 
+        public override void Move(Vector2 move)
+        {
+            Position += move;
+        }
+
 
         public void HealParty()
         {
@@ -287,6 +292,19 @@ namespace LD50.Logic
                     room._weapons.Remove(weapon);
                     return;
                 } 
+            }
+        }
+
+        public void RemovePerson(Person weapon)
+        {
+            var bedrooms = _rooms.OfType<Bedroom>();
+            foreach (Bedroom room in bedrooms)
+            {
+                if (room.Persons.Contains(weapon))
+                {
+                    room.Persons.Remove(weapon);
+                    return;
+                }
             }
         }
 

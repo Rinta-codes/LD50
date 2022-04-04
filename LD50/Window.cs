@@ -95,6 +95,8 @@ namespace LD50
             Globals.scenes.Add(new MainMenu());
             Globals.scenes.Add(new RoomManagementScene());
             Globals.scenes.Add(new WeaponManagment());
+            Globals.scenes.Add(new CrewManagment());
+            Globals.scenes.Add(new ShowBlueprints());
 
             // Remove mouse from screen :)
             CursorGrabbed = false;
