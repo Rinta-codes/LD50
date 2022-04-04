@@ -12,7 +12,7 @@ namespace LD50.Logic.Weapons
         public override int ProjectileSize => 8;
         public override float Cooldown => Balance.betterGunCooldown;
 
-        public BetterGun() : base(TexName.BETTER_GUN, new Vector2(50, 50), new Vector2(25, 15))
+        public BetterGun() : base(TexName.BETTER_GUN, new Vector2(64, 64), new Vector2(16, 13))
         {
         }
     }

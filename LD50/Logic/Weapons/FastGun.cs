@@ -7,9 +7,10 @@ namespace LD50.Logic.Weapons
 {
     public class FastGun : Weapon
     {
-        public FastGun() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
+        public FastGun() : base(TexName.FASTER_GUN, new Vector2(51, 51), new Vector2(14, 17))
         {
         }
+
         internal const string NAME = "Fast Gun";
         public override string Name => NAME;
 

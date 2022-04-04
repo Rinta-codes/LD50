@@ -46,7 +46,11 @@ namespace LD50
         PERSON_WALK,
         // Guns
         BULLET,
+        BASE_GUN,
         BETTER_GUN,
+        FASTER_GUN,
+        SNIPER_GUN,
+        ROCKET_GUN,
     }
     public class TextureList
     {
@@ -88,10 +92,8 @@ namespace LD50
             LoadTexture("Sprites/Persons/PersonWalkTwoFrames.png", TexName.PERSON_WALK);
             LoadTexture("Sprites/Persons/PersonPortrait.png", TexName.PERSON_PORTRAIT);
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
+            LoadTexture("Sprites/Guns/BaseGun.png", TexName.BASE_GUN);
             LoadTexture("Sprites/Guns/BetterGun.png", TexName.BETTER_GUN);
-            LoadTexture("Sprites/UI/Exitbutton.png", TexName.EXIT_BUTTON);
-            LoadTexture("Sprites/UI/HUDButton.png", TexName.HUD_BUTTON);
-            LoadTexture("Sprites/Guns/Bullet.png", TexName.BULLET);
         }
 
         /// <summary>
