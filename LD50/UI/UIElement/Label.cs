@@ -164,7 +164,7 @@ namespace LD50.UI
         /// <summary>
         /// Set the text on the label
         /// </summary>
-        public void SetText(string text, TextAlignment alignment, float fontSize = -1)
+        public virtual void SetText(string text, TextAlignment alignment, float fontSize = -1)
         {
             textAlignment = alignment;
             _text = text;

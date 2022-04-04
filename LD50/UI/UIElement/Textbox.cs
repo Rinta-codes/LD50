@@ -149,5 +149,11 @@ namespace LD50.UI
             }
             return false;
         }
+
+        public override void SetText(string text, TextAlignment alignment, float fontSize = -1)
+        {
+            base.SetText(text, alignment, fontSize);
+            _fontSize = fontSize;
+        }
     }
 }

@@ -26,16 +26,16 @@ namespace LD50.Scenes.Menus
 
             int tutorialStartPositionY = 600;
 
-            var nameInputPrompt = new Label($"Enter your name:   ", TextAlignment.RIGHT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, tutorialStartPositionY - textSpacing), Globals.genericLabelFontSize, true);
-            var nameInput = new Textbox("Player1", TextAlignment.RIGHT, Vector4.One, new Vector2(Globals.ScreenResolutionX / 2 + 100, tutorialStartPositionY - textSpacing), new Vector2(200, 50), new Vector4(0,0,0,1), TexName.PIXEL, Vector4.One, Globals.buttonBorderSmall, true, 20, false);
-            nameInput.SetText("Player1", TextAlignment.RIGHT, Globals.genericLabelFontSize);
+            var nameInputPrompt = new Label($"Enter your name:   ", TextAlignment.RIGHT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 30, tutorialStartPositionY - textSpacing), Globals.genericLabelFontSize, true);
+            var nameInput = new Textbox("Bubbles", TextAlignment.CENTER, Vector4.One, new Vector2(Globals.ScreenResolutionX / 2 + 110, tutorialStartPositionY - textSpacing), new Vector2(300, 50), new Vector4(0,0,0,1), TexName.PIXEL, Vector4.One, Globals.buttonBorderSmall, true, 13, false);
+            nameInput.SetText("Bubbles", TextAlignment.CENTER, Globals.genericLabelFontSize);
 
-            var tutorialLine1 = new Label($" - Collect resources", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY), Globals.genericLabelFontSize, true);
-            var tutorialLine2 = new Label($" - Fight minor monsters and collect more resources", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing), Globals.genericLabelFontSize, true);
-            var tutorialLine3 = new Label($" - Trade resources for additional rooms to throw on the back of your car", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 2), Globals.genericLabelFontSize, true);
-            var tutorialLine4 = new Label($" - Accept refugees, and they might repay you with resources and help in fights", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 3), Globals.genericLabelFontSize, true);
-            var tutorialLine5 = new Label($" - Weaponise yourself and your crew by obtaining weapon blueprints", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 4), Globals.genericLabelFontSize, true);
-            var tutorialLine6 = new Label($"   and crafting weapons in Workshop", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 5), Globals.genericLabelFontSize, true);
+            var tutorialLine1 = new Label($" - Collect resources", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing), Globals.genericLabelFontSize, true);
+            var tutorialLine2 = new Label($" - Fight minor monsters and collect more resources", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 2), Globals.genericLabelFontSize, true);
+            var tutorialLine3 = new Label($" - Trade resources for additional rooms to throw on the back of your car", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 3), Globals.genericLabelFontSize, true);
+            var tutorialLine4 = new Label($" - Accept refugees, and they might repay you with resources and help in fights", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 4), Globals.genericLabelFontSize, true);
+            var tutorialLine5 = new Label($" - Weaponise yourself and your crew by obtaining weapon blueprints", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 5), Globals.genericLabelFontSize, true);
+            var tutorialLine6 = new Label($"   and crafting weapons in Workshop", TextAlignment.LEFT, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2 - 400, tutorialStartPositionY + textSpacing * 6), Globals.genericLabelFontSize, true);
 
             /// Define OnClick here because it uses the nameInput textbox
             startGameButton.OnClickAction = () =>
