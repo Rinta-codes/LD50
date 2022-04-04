@@ -7,7 +7,7 @@ namespace LD50.Logic.Weapons
 {
     public class RocketLauncher : Weapon
     {
-        public RocketLauncher() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
+        public RocketLauncher() : base(TexName.ROCKET_GUN, new Vector2(85, 85), new Vector2(7, 4))
         {
         }
 

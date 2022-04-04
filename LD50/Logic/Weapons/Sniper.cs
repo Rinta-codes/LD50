@@ -7,9 +7,8 @@ namespace LD50.Logic.Weapons
 {
     public class Sniper : Weapon
     {
-        public Sniper() : base(TexName.PIXEL, new Vector2(50, 50), new Vector2(0, 0))
+        public Sniper() : base(TexName.SNIPER_GUN, new Vector2(71, 71), new Vector2(20, 6))
         {
-
         }
 
         internal const string NAME = "Sniper Rifle";
