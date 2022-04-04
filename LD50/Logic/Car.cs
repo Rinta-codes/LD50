@@ -12,7 +12,6 @@ namespace LD50.Logic
     public class Car : GameObject
     {
         private List<Room> _rooms = new List<Room>();
-        private Hotkey _hkRoom = new Hotkey(false);
         private List<Vector2> _carPositions = new List<Vector2>(new Vector2[16]
         {
             new Vector2(3, 3),
@@ -47,8 +46,6 @@ namespace LD50.Logic
 
         public Car(Vector2 position, Vector2 size) : base(new Sprite(TexName.CAR_BASE, position, size, Graphics.DrawLayer.CAR, false))
         {
-            _hkRoom.AddKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Space);
-
             // Add base rooms
             _rooms.Add(new FuelTank(_carPositions[_rooms.Count], Balance.initialFuel));
             _rooms.Add(new FoodStorage(_carPositions[_rooms.Count], Balance.initialFood));
@@ -309,45 +306,6 @@ namespace LD50.Logic
                     return;
                 }
             }
-        }
-
-
-        public override bool Update()
-        {
-            if (_hkRoom.IsPressed())
-            {
-                Random rnd = new Random();
-                int randomizeRoom = rnd.Next(5);
-                switch (randomizeRoom)
-                {
-                    case 0:
-                        {
-                            AddRoom(new FoodStorage(Vector2.Zero, 10));
-                            break;
-                        }
-                    case 1:
-                        {
-                            AddRoom(new FuelTank(Vector2.Zero, 10));
-                            break;
-                        }
-                    case 2:
-                        {
-                            AddRoom(new Bedroom(Vector2.Zero));
-                            break;
-                        }
-                    case 3:
-                        {
-                            AddRoom(new WeaponStorage(Vector2.Zero, 5));
-                            break;
-                        }
-                    case 4:
-                        {
-                            AddRoom(new Workshop(Vector2.Zero));
-                            break;
-                        }
-                }
-            }
-            return base.Update();
         }
 
         public void OnClick(MouseButtonEventArgs e, Vector2 mousePosition)
