@@ -13,6 +13,7 @@ namespace LD50.Scenes
 
         public GameoverScene() : base(Vector2.Zero)
         {
+            Globals.hud.IsHidden = true;
 
             Button backToMain = new Button(Globals.buttonFillColour, Globals.buttonBorderColour, new Vector2(960, 300), new Vector2(400, 150), Globals.buttonBorderMedium, Graphics.DrawLayer.UI, false);
             backToMain.OnClickAction = BackToMain;

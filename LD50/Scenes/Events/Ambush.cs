@@ -146,8 +146,10 @@ namespace LD50.Scenes.Events
             {
                 BackgroundMusicManager.PlayMusic("Audio/Music/LD50.wav");
             }
+
             Vector2 distanceBetweenCrew = Vector2.Zero;
             Vector2 start = Vector2.Zero;
+
             if(crew.Count == 1)
             {
                 start = new Vector2(100, 500);
@@ -167,6 +169,7 @@ namespace LD50.Scenes.Events
 
             if (_isDragon)
             {
+                Globals.hud.IsHidden = true;
                 Dragon dragon = new Dragon();
                 dragon.Position = new Vector2(Globals.windowSize.X * 0.75f, Globals.windowSize.Y * 0.5f);
                 gameObjects.Add(dragon);
