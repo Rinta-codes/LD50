@@ -3,6 +3,7 @@ using LD50.UI;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LD50.Scenes
@@ -37,12 +38,10 @@ namespace LD50.Scenes
 
         public WeaponManagment() : base(Vector2.Zero)
         {
-            var occupants = new List<Person>(Globals.player.car.GetOccupantList());
-            occupants.Insert(0, Globals.player.person);
+            var people = (new[] { Globals.player.person }).Concat(Globals.player.car.GetOccupantList());
 
-            foreach (var person in occupants)
+            foreach (var person in people)
             {
-
                 var personInfoSize = new Vector2(_tileWidth - _buttonWith, _tileHeight);
                 var tilePosition = GetNextTilePosition();
                 uiElements.Add(person.GetFullDescriptionUI(tilePosition + personInfoSize / 2, personInfoSize));
