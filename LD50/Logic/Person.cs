@@ -23,6 +23,8 @@ namespace LD50.Logic
 
         private bool _amIPlayer;
 
+        private TexName _portraitTexture;
+
         public Vector2 Size { get { return _sprite.size; } }
         
         private string _name;
@@ -42,12 +44,13 @@ namespace LD50.Logic
         public string WeaponName => _weapon?.Name;
         public bool HasWeapon => _weapon != null;
 
-        public Person(TexName texture, string name, int health, bool player = false) : base(new Sprite(texture, Vector2.Zero, new Vector2(80, 80), Graphics.DrawLayer.PLAYER, false))
+        public Person(TexName portraitTexture, TexName animationTexture, int frames, double animationTime, string name, int health, bool player = false) : base(new Sprite(animationTexture, Vector2.Zero, new Vector2(120, 120), Graphics.DrawLayer.PLAYER, false, frames, animationTime))
         {
             _weapon = null;
             _health = health;
             _amIPlayer = player;
             _maxHealth = health;
+            _portraitTexture = portraitTexture;
 
             _hpBar = new Slider(new Vector4(1, 0, 0, 1), new Vector4(0, 1, 0, 1), Position + new Vector2(0, -Size.Y / 2 - 10), new Vector2(Size.X, 5), Graphics.DrawLayer.PLAYER, false, SliderLayout.LEFT)
             {
@@ -175,7 +178,7 @@ namespace LD50.Logic
 
             //TODO draw person & weapon
             var personIconSize = new Vector2(size.Y, size.Y);
-            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, TexName.PLAYER_IDLE));
+            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, _portraitTexture));
 
             var weaponIconSize = new Vector2(size.Y / 3, size.Y / 3);
             ui.Add(new Rectangle((Vector4)Color4.White, basePosition + new Vector2(size.Y) - weaponIconSize / 2, weaponIconSize, true, TexName.TEST));

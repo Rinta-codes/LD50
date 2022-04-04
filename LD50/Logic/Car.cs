@@ -230,7 +230,7 @@ namespace LD50.Logic
             {
                 if (bedroom.HasCapacity)
                 {
-                    bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, name, Balance.personHP));
+                    bedroom.AddPerson(new Person(TexName.PLAYER_IDLE, TexName.PERSON_IDLE, 2, .5f, name, Balance.personHP));
                     return true;
                 }
             }

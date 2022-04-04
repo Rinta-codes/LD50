@@ -22,7 +22,7 @@ namespace LD50.Logic
         public Player()
         {
             car = new Car(DefaultCarPosition, new Vector2(800, 200));
-            person = new Person(TexName.PLAYER_IDLE, "Me", Balance.playerHealth, true);
+            person = new Person(TexName.PLAYER_IDLE, TexName.PERSON_IDLE, 2, .5f, "Me", Balance.playerHealth, true);
 
             person.GiveWeapon(new BaseGun());
 

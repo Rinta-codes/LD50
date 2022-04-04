@@ -30,11 +30,14 @@ namespace LD50
         ROOM_WORKSHOP,
         // Backgrounds
         DRIVING_BG,
+        AMBUSH_BG1,
         // Enemies
         DRAGON,
         FISHBOWL_IDLE,
         FISHBOWL_WALK,
         SLIME_IDLE,
+        // Persons
+        PERSON_IDLE,
     }
     public class TextureList
     {
@@ -70,6 +73,8 @@ namespace LD50
             LoadTexture("Sprites/Enemies/SlimeIdleTwoFrames.png", TexName.SLIME_IDLE);
             LoadTexture("Sprites/Loot/Fuel.png", TexName.FUEL);
             LoadTexture("Sprites/Loot/Food.png", TexName.FOOD);
+            LoadTexture("Sprites/Persons/PersonIdleTwoFrames.png", TexName.PERSON_IDLE);
+            LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
         }
 
         /// <summary>
