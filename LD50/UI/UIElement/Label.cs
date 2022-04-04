@@ -1,4 +1,5 @@
 ﻿using LD50.Graphics;
+using LD50.utils;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -137,6 +138,17 @@ namespace LD50.UI
                 return true;
             }
             return false;
+        }
+
+        public override bool IsInElement(Vector2 mousePosition)
+        {
+            if (_hidden) return false;
+            Vector2 currentPosition = _textRender.Position;
+            if (_isStatic)
+            {
+                currentPosition += Globals.CurrentScene.Camera.Position.Xy;
+            }
+            return Utility.Collides(currentPosition, _size, mousePosition + Globals.CurrentScene.Camera.Position.Xy, Vector2.Zero);
         }
 
         /// <summary>
