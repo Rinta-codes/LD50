@@ -13,7 +13,7 @@ namespace LD50.Logic
         private Weapon _weapon;
         private int _health, _maxHealth;
 
-        private int Health
+        public int Health
         {
             get { return _health; }
             set
