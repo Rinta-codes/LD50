@@ -145,10 +145,21 @@ namespace LD50.Scenes.Events
             {
                 BackgroundMusicManager.PlayMusic("Audio/Music/LD50.wav");
             }
-
+            Vector2 distanceBetweenCrew = Vector2.Zero;
+            Vector2 start = Vector2.Zero;
+            if(crew.Count == 1)
+            {
+                start = new Vector2(100, 500);
+            }
+            else if (crew.Count > 1)
+            {
+                start = new Vector2(100, 100);
+                distanceBetweenCrew = new Vector2(0, 800 / (crew.Count - 1));
+            }
             foreach (Person person in crew)
             {
-                person.Position = new Vector2(Globals.rng.Next(100, (int)Globals.windowSize.X / 2 - 100), Globals.rng.Next(100, (int)Globals.windowSize.Y / 2 - (int)Globals.HUDLabelSize.Y));
+                person.Position = start;
+                start += distanceBetweenCrew;
             }
 
             gameObjects.AddRange(crew);

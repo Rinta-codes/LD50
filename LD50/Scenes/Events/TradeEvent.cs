@@ -18,7 +18,7 @@ namespace LD50.Scenes.Events
 
         public TradeEvent() : base(Vector2.Zero)
         {
-            int randNum = Globals.rng.Next(4);
+            int randNum = Globals.rng.Next(5);
 
             switch(randNum)
             {
@@ -30,6 +30,9 @@ namespace LD50.Scenes.Events
                     break;
                 case 2:
                     _toTrade = new FuelTank(new Vector2(-0.8f, -1.2f), Balance.fuelStorageCap);
+                    break;
+                case 3:
+                    _toTrade = new WeaponStorage(new Vector2(-0.8f, -1.2f), Balance.weaponStorageCap);
                     break;
                 default:
                     _toTrade = new Workshop(new Vector2(-0.8f, -1.2f));

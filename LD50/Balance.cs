@@ -35,6 +35,7 @@ namespace LD50
 
         public const int foodStorageCap = 10;
         public const int fuelStorageCap = 10;
+        public const int weaponStorageCap = 5;
 
         public const int minRoomCost = 3;
         public const int maxRoomCost = 15;
