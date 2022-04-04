@@ -38,7 +38,12 @@ namespace LD50.Scenes.Events
             Globals.player.Position = new Vector2(-1000, -1000);
 
             // If it is the Dragon fight - use full crew regardless
-            if (_isDragon || occupants.Count == 0)
+            if (_isDragon)
+            {
+                StartFight(occupants);
+                return;
+            }
+            else  if(occupants.Count == 0)
             {
                 ambushInfo = new Label($"You've been ambushed!", TextAlignment.CENTER, Globals.genericLabelTextColour, new Vector2(Globals.ScreenResolutionX / 2, 150), Globals.genericLabelFontSize, true);
 
