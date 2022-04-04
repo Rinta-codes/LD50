@@ -52,7 +52,7 @@ namespace LD50
             WindowSize = Size;
 
             // Determine Screen Scale
-            screenScale = new Vector2(Size.X / Globals.ScreenResolutionX, Size.Y / Globals.ScreenResolutionY);
+            screenScale = new Vector2((float)Size.X / Globals.ScreenResolutionX, (float)Size.Y / Globals.ScreenResolutionY);
             Globals.windowSize = new Vector2(width, height);
         }
 
