@@ -52,6 +52,8 @@ namespace LD50.Logic
             _maxHealth = health;
             _portraitTexture = portraitTexture;
 
+            _flippedSprite = new Sprite(TexName.PERSON_WALK_FLIPPED, Vector2.Zero, new Vector2(120, 120), Graphics.DrawLayer.PLAYER, false, frames, animationTime);
+
             _hpBar = new Slider(new Vector4(1, 0, 0, 1), new Vector4(0, 1, 0, 1), Position + new Vector2(0, -Size.Y / 2 - 10), new Vector2(Size.X, 5), Graphics.DrawLayer.PLAYER, false, SliderLayout.LEFT)
             {
                 Value = (float)_health / _maxHealth
@@ -160,6 +162,12 @@ namespace LD50.Logic
 
             base.Update();
             return IsAlive();
+        }
+
+        public override void Move(Vector2 movement)
+        {
+            base.Move(movement);
+            _weapon.Flip(_flipped);
         }
 
         public override void Draw()

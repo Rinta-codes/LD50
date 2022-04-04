@@ -14,6 +14,7 @@ namespace LD50.Logic.Weapons
 
         public BetterGun() : base(TexName.BETTER_GUN, new Vector2(64, 64), new Vector2(16, 13))
         {
+            _flippedSprite = new Sprite(TexName.BETTER_GUN_FLIPPED, Vector2.Zero, new Vector2(64, 64), Graphics.DrawLayer.WEAPON, false);
         }
     }
 }

@@ -40,10 +40,15 @@ namespace LD50
         SLIME_IDLE,
         SHEEP_WALK,
         ROCK_WALK,
+        FISHBOWL_WALK_FLIPPED,
+        SLIME_IDLE_FLIPPED,
+        SHEEP_WALK_FLIPPED,
+        ROCK_WALK_FLIPPED,
         // Persons
         PERSON_PORTRAIT,
         PERSON_IDLE,
         PERSON_WALK,
+        PERSON_WALK_FLIPPED,
         // Guns
         BULLET,
         BASE_GUN,
@@ -51,6 +56,11 @@ namespace LD50
         FASTER_GUN,
         SNIPER_GUN,
         ROCKET_GUN,
+        BASE_GUN_FLIPPED,
+        BETTER_GUN_FLIPPED,
+        FASTER_GUN_FLIPPED,
+        SNIPER_GUN_FLIPPED,
+        ROCKET_GUN_FLIPPED,
     }
     public class TextureList
     {
@@ -82,14 +92,19 @@ namespace LD50
             LoadTexture("Sprites/Backgrounds/DrivingSceneBG.png", TexName.DRIVING_BG);
             LoadTexture("Sprites/Enemies/DragonBW.png", TexName.DRAGON);
             LoadTexture("Sprites/Enemies/FishbowlIdleTwoFrames.png", TexName.FISHBOWL_IDLE);
-            LoadTexture("Sprites/Enemies/FishbowlWalkTwoFrames.png", TexName.FISHBOWL_WALK);
-            LoadTexture("Sprites/Enemies/SheepWalkTwoFrames.png", TexName.SHEEP_WALK);
-            LoadTexture("Sprites/Enemies/RockWalkTwoFrames.png", TexName.ROCK_WALK);
-            LoadTexture("Sprites/Enemies/SlimeIdleTwoFrames.png", TexName.SLIME_IDLE);
+            LoadTexture("Sprites/Enemies/FishbowlWalkTwoFrames.png", TexName.FISHBOWL_WALK_FLIPPED);
+            LoadTexture("Sprites/Enemies/SheepWalkTwoFrames.png", TexName.SHEEP_WALK_FLIPPED);
+            LoadTexture("Sprites/Enemies/RockWalkTwoFrames.png", TexName.ROCK_WALK_FLIPPED);
+            LoadTexture("Sprites/Enemies/SlimeIdleTwoFrames.png", TexName.SLIME_IDLE_FLIPPED);
+            LoadTexture("Sprites/Enemies/FishbowlWalkTwoFramesFlipped.png", TexName.FISHBOWL_WALK);
+            LoadTexture("Sprites/Enemies/SheepWalkTwoFramesFlipped.png", TexName.SHEEP_WALK);
+            LoadTexture("Sprites/Enemies/RockWalkTwoFramesFlipped.png", TexName.ROCK_WALK);
+            LoadTexture("Sprites/Enemies/SlimeIdleTwoFramesFlipped.png", TexName.SLIME_IDLE);
             LoadTexture("Sprites/Loot/Fuel.png", TexName.FUEL);
             LoadTexture("Sprites/Loot/Food.png", TexName.FOOD);
             LoadTexture("Sprites/Persons/PersonIdleTwoFrames.png", TexName.PERSON_IDLE);
             LoadTexture("Sprites/Persons/PersonWalkTwoFrames.png", TexName.PERSON_WALK);
+            LoadTexture("Sprites/Persons/PersonWalkTwoFramesFlipped.png", TexName.PERSON_WALK_FLIPPED);
             LoadTexture("Sprites/Persons/PersonPortrait.png", TexName.PERSON_PORTRAIT);
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
             LoadTexture("Sprites/Guns/BaseGun.png", TexName.BASE_GUN);
@@ -97,10 +112,14 @@ namespace LD50
             LoadTexture("Sprites/Guns/FasterGun.png", TexName.FASTER_GUN);
             LoadTexture("Sprites/Guns/SniperGun.png", TexName.SNIPER_GUN);
             LoadTexture("Sprites/Guns/RocketGun.png", TexName.ROCKET_GUN);
+            LoadTexture("Sprites/Guns/BaseGunFlipped.png", TexName.BASE_GUN_FLIPPED);
+            LoadTexture("Sprites/Guns/BetterGunFlipped.png", TexName.BETTER_GUN_FLIPPED);
+            LoadTexture("Sprites/Guns/FasterGunFlipped.png", TexName.FASTER_GUN_FLIPPED);
+            LoadTexture("Sprites/Guns/SniperGunFlipped.png", TexName.SNIPER_GUN_FLIPPED);
+            LoadTexture("Sprites/Guns/RocketGunFlipped.png", TexName.ROCKET_GUN_FLIPPED);
             LoadTexture("Sprites/UI/Exitbutton.png", TexName.EXIT_BUTTON);
             LoadTexture("Sprites/UI/HUDButton.png", TexName.HUD_BUTTON);
             LoadTexture("Sprites/Guns/Bullet.png", TexName.BULLET);
-
         }
 
         /// <summary>
@@ -124,7 +143,6 @@ namespace LD50
         /// Loads a texture from a Bitmap
         /// </summary>
         /// <param name="image">Bitmap</param>
-        /// <param name="name">Name of the texture</param>
         public Texture LoadTexture(Bitmap image)
         {
             Texture texture = Texture.LoadFromBmp(image, false);
