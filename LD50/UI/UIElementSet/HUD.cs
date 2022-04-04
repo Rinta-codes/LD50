@@ -50,7 +50,7 @@ namespace LD50.UI
             // Show Blueprint
             showBlueprintsButton = new Button(Globals.buttonBorderColour, Globals.HUDButtonSize / 2 + new Vector2(Globals.menuButtonSize.X + Globals.HUDLabelSize.X + Globals.HUDButtonSize.X * 2, 0), Globals.HUDButtonSize, Graphics.DrawLayer.UI, true);
             showBlueprintsButton.SetText("Show Blueprints", TextAlignment.CENTER, new Vector4(0, 0, 0, 1), Globals.HUDTextSize);
-            showBlueprintsButton.OnClickAction = () => { /*Do something*/ };
+            showBlueprintsButton.OnClickAction = () => { Globals.scenes[(int)Scenes.Scenes.SHOWBLUE] = new ShowBlueprints(); Globals.currentScene = (int)Scenes.Scenes.SHOWBLUE; Globals.hud.SetButtons(true); };
             elements.Add(showBlueprintsButton);
 
             // Manage weapons
