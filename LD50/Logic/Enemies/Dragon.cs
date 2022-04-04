@@ -10,10 +10,7 @@ namespace LD50.Logic.Enemies
 {
     public class Dragon : Enemy
     {
-
-        public Dragon() : base(TexName.DRAGON, new Vector2(640, 640), Balance.DragonMaxHP, new DragonWeapon())
-        {
-            List<Vector4> possibleDragonColours = new List<Vector4>
+        List<Vector4> possibleDragonColours = new List<Vector4>
             {
                 Globals.red,
                 Globals.green,
@@ -23,12 +20,49 @@ namespace LD50.Logic.Enemies
                 Globals.magenta,
             };
 
-            _sprite.SetColour(possibleDragonColours[Globals.rng.Next(possibleDragonColours.Count)]);
+        private float _formChangeTimer;
+
+        public Dragon() : base(TexName.DRAGON, new Vector2(640, 640), Balance.DragonMaxHP, new DragonWeapon())
+        {
+            ChangeForm();
+        }
+
+        private void ChangeForm()
+        {
+            _formChangeTimer = Globals.rng.Next(5, 15);
+            switch (Globals.rng.Next(possibleDragonColours.Count))
+            {
+                case 0:
+                    _sprite.SetColour(possibleDragonColours[0]);
+                    _weapon = new BaseGun();
+                    break;
+                case 1:
+                    _sprite.SetColour(possibleDragonColours[1]);
+                    _weapon = new BetterGun();
+                    break;
+                case 2:
+                    _sprite.SetColour(possibleDragonColours[2]);
+                    _weapon = new DragonWeapon();
+                    break;
+                case 3:
+                    _sprite.SetColour(possibleDragonColours[3]);
+                    _weapon = new Sniper();
+                    break;
+                case 4:
+                    _sprite.SetColour(possibleDragonColours[4]);
+                    _weapon = new FastGun();
+                    break;
+                case 5:
+                    _sprite.SetColour(possibleDragonColours[5]);
+                    _weapon = new RocketLauncher();
+                    break;
+            }
         }
 
         public override bool Update()
         {
             if (!Globals.CurrentScene.gameObjects.Contains(_target)) _target = null;
+            _formChangeTimer -= (float)Globals.deltaTime;
 
             var potentialTargets = Globals.CurrentScene.gameObjects.OfType<Person>().ToList();
             potentialTargets.Add(Globals.player.person);
@@ -36,6 +70,12 @@ namespace LD50.Logic.Enemies
             _target = potentialTargets[Globals.rng.Next(potentialTargets.Count)];
 
             _weapon.Attack(this, _target.Position - Position, Position);
+
+            if (_formChangeTimer < 0)
+            {
+                ChangeForm();
+                _weapon.ResetCooldown();
+            }
 
 
             return base.Update();
