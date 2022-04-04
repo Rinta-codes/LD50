@@ -122,6 +122,7 @@ namespace LD50.Scenes.Events
             if (_isDragon)
             {
                 BackgroundMusicManager.PlayMusic("Audio/Music/Ld50Dragon.wav");
+                BackgroundMusicManager.SetVolume(0.2f);
             }
             else
             {

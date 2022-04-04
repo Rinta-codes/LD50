@@ -102,7 +102,7 @@ namespace LD50.Logic
                         _target = potentialTargets.Count > 0 ? (Enemy)potentialTargets[0].Item2 : null;
                     }
 
-                    else if ((_target.Position - Position).Length - _target.Size.X * 0.4 <= _weapon.ProjectileRange)
+                    else if (_weapon != null && (_target.Position - Position).Length - _target.Size.X * 0.4 <= _weapon.ProjectileRange)
                     {
                         Attack(_target.Position - Position);
                     }
@@ -114,7 +114,7 @@ namespace LD50.Logic
                 }
                 else
                 {
-                    if ((_target.Position - Position).Length <= _weapon.ProjectileRange)
+                    if (_weapon != null && (_target.Position - Position).Length <= _weapon.ProjectileRange)
                     {
                         Attack(_target.Position - Position);
                     }
