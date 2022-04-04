@@ -36,8 +36,11 @@ namespace LD50
         FISHBOWL_IDLE,
         FISHBOWL_WALK,
         SLIME_IDLE,
+        SHEEP_WALK,
         // Persons
+        PERSON_PORTRAIT,
         PERSON_IDLE,
+        PERSON_WALK,
     }
     public class TextureList
     {
@@ -70,10 +73,13 @@ namespace LD50
             LoadTexture("Sprites/Enemies/DragonBW.png", TexName.DRAGON);
             LoadTexture("Sprites/Enemies/FishbowlIdleTwoFrames.png", TexName.FISHBOWL_IDLE);
             LoadTexture("Sprites/Enemies/FishbowlWalkTwoFrames.png", TexName.FISHBOWL_WALK);
+            LoadTexture("Sprites/Enemies/SheepWalkTwoFrames.png", TexName.SHEEP_WALK);
             LoadTexture("Sprites/Enemies/SlimeIdleTwoFrames.png", TexName.SLIME_IDLE);
             LoadTexture("Sprites/Loot/Fuel.png", TexName.FUEL);
             LoadTexture("Sprites/Loot/Food.png", TexName.FOOD);
             LoadTexture("Sprites/Persons/PersonIdleTwoFrames.png", TexName.PERSON_IDLE);
+            LoadTexture("Sprites/Persons/PersonWalkTwoFrames.png", TexName.PERSON_WALK);
+            LoadTexture("Sprites/Persons/PersonPortrait.png", TexName.PERSON_PORTRAIT);
             LoadTexture("Sprites/Backgrounds/AmbushBG1.png", TexName.AMBUSH_BG1);
         }
 

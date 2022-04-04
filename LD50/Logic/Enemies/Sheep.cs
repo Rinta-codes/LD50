@@ -10,9 +10,9 @@ namespace LD50.Logic.Enemies
 {
     public class Sheep : Enemy
     {
-        public Sheep() : base(TexName.PIXEL, new Vector2(32, 32), Balance.SheepMaxHP, new BaseGun())
+        public Sheep() : base(TexName.SHEEP_WALK, new Vector2(32, 32), Balance.SheepMaxHP, new BaseGun())
         {
-            _sprite.SetColour(new Vector4(0, 0, 0, 1));
+            _sprite = new Sprite(TexName.SHEEP_WALK, Vector2.Zero, new Vector2(100, 100), Graphics.DrawLayer.ENEMY, false, 2, .3f);
         }
 
         public override bool Update()

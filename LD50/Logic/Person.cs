@@ -178,6 +178,9 @@ namespace LD50.Logic
 
             //TODO draw person & weapon
             var personIconSize = new Vector2(size.Y, size.Y);
+            // White background for Person's portrait - because drawing outline is in black on transparent background, and it merges with default black background
+            ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, TexName.PIXEL));
+            // Person's portrait goes on top
             ui.Add(new Rectangle((Vector4)Color4.White, basePosition + personIconSize / 2, personIconSize, true, _portraitTexture));
 
             var weaponIconSize = new Vector2(size.Y / 3, size.Y / 3);
