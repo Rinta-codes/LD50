@@ -1,4 +1,5 @@
 ﻿using LD50.Audio;
+using LD50.Scenes.Events;
 using LD50.UI;
 using OpenTK.Mathematics;
 using System;
@@ -29,6 +30,7 @@ namespace LD50.Scenes
             Globals.currentScene = (int)Scenes.MAINMENU;
             Globals.player = new Logic.Player();
             Globals.scenes[(int)Scenes.DRIVING] = new DrivingScene(Vector2.Zero);
+            Event.FilEventLists();
         }
 
     }
