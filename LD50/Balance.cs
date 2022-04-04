@@ -54,7 +54,7 @@ namespace LD50
         public const int blueprintSlotCount = 16;
 
         public const int baseGunDamage = 5;
-        public const float baseGunRange = 300.0f;
+        public const float baseGunRange = 550.0f;
         public const float baseGunCooldown = 1.0f;
 
         public const int baseGunMinCost = 1;
@@ -62,7 +62,7 @@ namespace LD50
         public const int baseGunCraftTime = 1;
 
         public const int betterGunDamage = 8;
-        public const float betterGunRange = 400.0f;
+        public const float betterGunRange = 650.0f;
         public const float betterGunCooldown = 0.75f;
 
         public const int betterGunMinCost = 3;
@@ -78,7 +78,7 @@ namespace LD50
         public const int sniperCraftTime = 6;
 
         public const int fastGunDamage = 2;
-        public const float fastGunRange = 450.0f;
+        public const float fastGunRange = 650.0f;
         public const float fastGunCooldown = 0.2f;
 
         public const int fastGunMinCost = 3;
@@ -119,10 +119,10 @@ namespace LD50
         public const float BikeGuyWanderRadius = 200.0f;
         public const int BikeGuyMaxHP = 25;
 
-        public const int DragonMaxHP = 1500;
+        public const int DragonMaxHP = 500;
         public const int DragonDamage = 25;
         public const float DragonCooldown = 1.5f;
-        public const int DragonProjectileSpeed = 2500;
+        public const int DragonProjectileSpeed = 1500;
         public const int DragonAttackRange = 2000;
 
         // Person encounter
