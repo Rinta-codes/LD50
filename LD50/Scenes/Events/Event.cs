@@ -54,12 +54,13 @@ namespace LD50.Scenes.Events
 
 
 
-        private static List<List<Events>> events = new List<List<Events>>();
+        private static List<List<Events>> events;
 
         private static List<Events> standardList = new List<Events>();
 
         public static void FilEventLists()
         {
+            events = new List<List<Events>>();
             List<Events> firstWave = new List<Events>() 
             {
                 Events.TRADING,
