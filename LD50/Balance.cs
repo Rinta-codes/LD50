@@ -57,41 +57,41 @@ namespace LD50
         public const float baseGunRange = 300.0f;
         public const float baseGunCooldown = 1.0f;
 
-        public const int baseGunMinCost = 3;
-        public const int baseGunMaxCost = 7;
+        public const int baseGunMinCost = 1;
+        public const int baseGunMaxCost = 3;
         public const int baseGunCraftTime = 1;
 
         public const int betterGunDamage = 8;
         public const float betterGunRange = 400.0f;
         public const float betterGunCooldown = 0.75f;
 
-        public const int betterGunMinCost = 5;
-        public const int betterGunMaxCost = 10;
-        public const int betterGunCraftTime = 2;
+        public const int betterGunMinCost = 3;
+        public const int betterGunMaxCost = 7;
+        public const int betterGunCraftTime = 3;
 
         public const int sniperDamage = 25;
         public const float sniperRange = 2000.0f;
-        public const float sniperCooldown = 2f;
+        public const float sniperCooldown = 1.5f;
 
         public const int sniperMinCost = 10;
         public const int sniperMaxCost = 25;
-        public const int sniperCraftTime = 3;
+        public const int sniperCraftTime = 6;
 
         public const int fastGunDamage = 2;
         public const float fastGunRange = 450.0f;
-        public const float fastGunCooldown = 0.1f;
+        public const float fastGunCooldown = 0.2f;
 
-        public const int fastGunMinCost = 1;
-        public const int fastGunMaxCost = 7;
-        public const int fastGunCraftTime = 3;
+        public const int fastGunMinCost = 3;
+        public const int fastGunMaxCost = 8;
+        public const int fastGunCraftTime = 4;
 
-        public const int rocketLauncherDamage = 50;
+        public const int rocketLauncherDamage = 100;
         public const float rocketLauncherRange = 1000.0f;
         public const float rocketLauncherCooldown = 5f;
 
         public const int rocketLauncherMinCost = 20;
         public const int rocketLauncherMaxCost = 35;
-        public const int rocketLauncherCraftTime = 5;
+        public const int rocketLauncherCraftTime = 8;
 
         // Enemies
         public const int SlimeAggroRange = 500;

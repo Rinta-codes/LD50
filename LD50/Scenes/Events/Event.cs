@@ -68,7 +68,8 @@ namespace LD50.Scenes.Events
                 Events.FOODPILE,
                 Events.AMBUSH,
                 Events.AMBUSH,
-                Events.PERSON
+                Events.PERSON,
+                Events.BLUEPRINTTRADING
             };
             events.Add(secondWave);
 
