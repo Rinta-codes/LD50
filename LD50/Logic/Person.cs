@@ -97,7 +97,7 @@ namespace LD50.Logic
                             potentialTargets.Add(new Tuple<float, GameObject>((enemy.Position - _sprite.Position).Length, enemy));
                         }
 
-                        potentialTargets.Sort();
+                        potentialTargets.Sort((Tuple<float, GameObject>a, Tuple<float, GameObject>b) => (a.Item1.CompareTo(b.Item1)));
 
                         _target = potentialTargets.Count > 0 ? (Enemy)potentialTargets[0].Item2 : null;
                     }
